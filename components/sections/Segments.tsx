@@ -23,13 +23,13 @@ export function Segments() {
   return (
     <section className="border-t border-line bg-white">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-        <div className="max-w-2xl">
+        <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
-            Legal that starts with the outcome,
-            <br className="hidden sm:block" />{" "}
+            Legal that starts with the outcome,{" "}
+            <br />
             <span className="text-muted">not the legal lecture.</span>
           </h2>
-          <p className="mt-5 max-w-xl text-lg text-body">
+          <p className="mx-auto mt-5 max-w-xl text-lg text-body">
             We ask what you&apos;re trying to achieve, then work back to the
             cleanest legal path that gets you there. Whatever stage you&apos;re
             at, the advice connects to a business decision.

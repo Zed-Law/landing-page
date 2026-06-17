@@ -53,7 +53,7 @@ const tiers = [
 
 export function Pricing() {
   return (
-    <section id="zed-plus" className="border-t border-line bg-surface-alt">
+    <section id="zed-plus" className="bg-surface-alt">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">

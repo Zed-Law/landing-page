@@ -25,7 +25,7 @@ const columns = [
 
 export function Footer() {
   return (
-    <footer id="contact" className="border-t border-line bg-white">
+    <footer id="contact" className="bg-white">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div className="max-w-sm">

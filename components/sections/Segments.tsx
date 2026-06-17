@@ -21,7 +21,7 @@ const segments = [
 
 export function Segments() {
   return (
-    <section className="border-t border-line bg-white">
+    <section className="bg-white">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">

@@ -58,10 +58,10 @@ export function Hero() {
         </p>
 
         <div className="mt-7 flex flex-col items-center justify-center gap-2 sm:mt-9 sm:flex-row sm:gap-3">
-          <Button href="#book" size="md" variant="light">
+          <Button href="#book" size="md" variant="light" className="sm:pl-7 sm:pr-2.5 sm:py-2.5 sm:text-base">
             Book a discovery call
           </Button>
-          <Button href="#zed-plus" size="md" variant="outline-light">
+          <Button href="#zed-plus" size="md" variant="outline-light" className="sm:pl-7 sm:pr-2.5 sm:py-2.5 sm:text-base">
             Explore Zed Plus
           </Button>
         </div>

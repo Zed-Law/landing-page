@@ -37,7 +37,7 @@ export function Navbar() {
         }`}
       >
         <Link href="/" className="flex items-center" aria-label="Zed Law home">
-          <Logo className="h-5 w-auto sm:h-6" />
+          <Logo variant={scrolled ? "black" : "white"} className="h-5 w-auto sm:h-6" />
         </Link>
 
         {/* Links + CTA, aligned right */}
@@ -47,13 +47,17 @@ export function Navbar() {
               <Link
                 key={l.label}
                 href={l.href}
-                className="text-sm font-medium text-body transition-colors hover:text-ink"
+                className={`text-sm font-medium transition-colors ${
+                  scrolled
+                    ? "text-body hover:text-ink"
+                    : "text-white/70 hover:text-white"
+                }`}
               >
                 {l.label}
               </Link>
             ))}
           </div>
-          <Button href="#book" size="md">
+          <Button href="#book" size="md" variant={scrolled ? "primary" : "light"}>
             Book a call
           </Button>
         </div>

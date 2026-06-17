@@ -16,8 +16,8 @@ const variants: Record<Variant, string> = {
   primary: "relative overflow-hidden bg-ink text-white hover:text-ink btn-gold-fill",
   // The single gold moment — used very sparingly
   gold: "gold-gradient text-ink hover:brightness-105 shadow-[0_8px_30px_-8px_rgba(226,162,60,0.6)]",
-  // For dark backgrounds
-  light: "bg-white text-ink hover:bg-white/90",
+  // For dark backgrounds — gold gradient sweeps in left-to-right on hover
+  light: "relative overflow-hidden bg-white text-ink btn-gold-fill",
   // Quiet link-style button
   ghost: "text-ink hover:text-body pr-5",
   "outline-light": "border border-white/25 text-white hover:bg-white/10 pr-5",

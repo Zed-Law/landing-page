@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const FERN_BASE =
   "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/misc-ui";
@@ -33,7 +33,39 @@ const testimonials = [
 
 export function Testimonial() {
   const [active, setActive] = useState(0);
+  const [visible, setVisible] = useState(true);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+  const pendingRef = useRef<number | null>(null);
+
+  const navigate = (nextIndex: number, dir: "left" | "right") => {
+    setDirection(dir);
+    setVisible(false);
+    pendingRef.current = nextIndex;
+  };
+
+  useEffect(() => {
+    if (!visible && pendingRef.current !== null) {
+      const t = setTimeout(() => {
+        setActive(pendingRef.current!);
+        pendingRef.current = null;
+        setVisible(true);
+      }, 220);
+      return () => clearTimeout(t);
+    }
+  }, [visible]);
+
+  const prev = () =>
+    navigate((active - 1 + testimonials.length) % testimonials.length, "left");
+  const next = () =>
+    navigate((active + 1) % testimonials.length, "right");
+
   const current = testimonials[active];
+
+  const slideClass = visible
+    ? "opacity-100 translate-x-0 transition-all duration-300 ease-out"
+    : direction === "right"
+    ? "opacity-0 -translate-x-4 transition-all duration-200 ease-in"
+    : "opacity-0 translate-x-4 transition-all duration-200 ease-in";
 
   return (
     <section className="bg-white">
@@ -56,42 +88,65 @@ export function Testimonial() {
           />
         </div>
 
-        <div className="mt-12 overflow-hidden rounded-2xl bg-night">
-          <div className="grid lg:grid-cols-2">
-            {/* Copy */}
-            <div className="flex flex-col justify-between p-8 sm:p-12">
-              <blockquote className="text-xl font-medium leading-relaxed text-white sm:text-2xl">
-                &ldquo;{current.quote}&rdquo;
-              </blockquote>
-              <div className="mt-10">
-                <p className="text-sm font-semibold text-white">
-                  {current.name}
-                </p>
-                <p className="text-sm text-white/50">{current.title}</p>
-              </div>
-            </div>
+        <div className="mt-12 mx-auto max-w-3xl rounded-2xl bg-white px-8 py-10 sm:px-14 sm:py-14">
+          <div className={slideClass}>
+            {/* Quote */}
+            <blockquote className="text-2xl font-semibold leading-snug text-ink sm:text-3xl">
+              {current.quote}
+            </blockquote>
 
-            {/* Client photo */}
-            <div className="relative min-h-[260px] bg-night-soft lg:min-h-full">
-              <img
-                src={current.image}
-                alt={current.name}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+            {/* Divider + footer row */}
+            <div className="mt-10 border-t border-line pt-6 flex items-center justify-between gap-4">
+              {/* Avatar + name */}
+              <div className="flex items-center gap-4">
+                <img
+                  src={current.image}
+                  alt={current.name}
+                  className="h-12 w-12 rounded-full object-cover ring-2 ring-line"
+                />
+                <div>
+                  <p className="text-sm font-semibold text-ink">{current.name}</p>
+                  <p className="text-sm text-ink/50">{current.title}</p>
+                </div>
+              </div>
+
+              {/* Prev / next arrows */}
+              <div className="flex shrink-0 gap-2">
+                <button
+                  type="button"
+                  onClick={prev}
+                  aria-label="Previous testimonial"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition hover:bg-stone"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={next}
+                  aria-label="Next testimonial"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition hover:bg-stone"
+                >
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Carousel dots */}
+        {/* Dots */}
         <div className="mt-6 flex justify-center gap-2">
           {testimonials.map((t, i) => (
             <button
               key={t.name}
               type="button"
-              onClick={() => setActive(i)}
-              aria-label={`Show testimonial from ${t.name}`}
+              onClick={() => navigate(i, i > active ? "right" : "left")}
+              aria-label={`Go to testimonial from ${t.name}`}
               aria-current={i === active}
-              className={`h-1.5 rounded-full transition-all ${
+              className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === active ? "w-6 bg-ink" : "w-1.5 bg-line hover:bg-ink/40"
               }`}
             />

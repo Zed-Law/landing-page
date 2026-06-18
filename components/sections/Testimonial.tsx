@@ -1,6 +1,15 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import * as React from "react";
+import Autoplay from "embla-carousel-autoplay";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 const FERN_BASE =
   "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/misc-ui";
@@ -32,126 +41,81 @@ const testimonials = [
 ];
 
 export function Testimonial() {
-  const [active, setActive] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const [direction, setDirection] = useState<"left" | "right">("right");
-  const pendingRef = useRef<number | null>(null);
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const autoplay = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
 
-  const navigate = (nextIndex: number, dir: "left" | "right") => {
-    setDirection(dir);
-    setVisible(false);
-    pendingRef.current = nextIndex;
-  };
-
-  useEffect(() => {
-    if (!visible && pendingRef.current !== null) {
-      const t = setTimeout(() => {
-        setActive(pendingRef.current!);
-        pendingRef.current = null;
-        setVisible(true);
-      }, 220);
-      return () => clearTimeout(t);
-    }
-  }, [visible]);
-
-  const prev = () =>
-    navigate((active - 1 + testimonials.length) % testimonials.length, "left");
-  const next = () =>
-    navigate((active + 1) % testimonials.length, "right");
-
-  const current = testimonials[active];
-
-  const slideClass = visible
-    ? "opacity-100 translate-x-0 transition-all duration-300 ease-out"
-    : direction === "right"
-    ? "opacity-0 -translate-x-4 transition-all duration-200 ease-in"
-    : "opacity-0 translate-x-4 transition-all duration-200 ease-in";
+  React.useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
 
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
+        {/* Heading */}
         <div className="flex items-center justify-center gap-3 sm:gap-5">
-          <img
-            src={`${FERN_BASE}/left%20fern.svg`}
-            alt=""
-            aria-hidden="true"
-            className="h-10 w-auto shrink-0 sm:h-14"
-          />
+          <img src={`${FERN_BASE}/left%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
           <h2 className="text-center text-3xl font-extrabold text-ink sm:text-[2.6rem]">
             What clients tell us
           </h2>
-          <img
-            src={`${FERN_BASE}/right%20fern.svg`}
-            alt=""
-            aria-hidden="true"
-            className="h-10 w-auto shrink-0 sm:h-14"
-          />
+          <img src={`${FERN_BASE}/right%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
         </div>
 
-        <div className="mt-12 mx-auto max-w-3xl rounded-2xl bg-white px-8 py-10 sm:px-14 sm:py-14">
-          <div className={slideClass}>
-            {/* Quote */}
-            <blockquote className="text-2xl font-semibold leading-snug text-ink sm:text-3xl">
-              {current.quote}
-            </blockquote>
+        {/* Carousel */}
+        <Carousel
+          setApi={setApi}
+          opts={{ loop: true, align: "start" }}
+          plugins={[autoplay.current]}
+          className="mt-12 mx-auto max-w-3xl"
+        >
+          <CarouselContent>
+            {testimonials.map((t) => (
+              <CarouselItem key={t.name}>
+                <div className="rounded-2xl bg-white px-8 py-10 sm:px-14 sm:py-14">
+                  <blockquote className="text-2xl font-semibold leading-snug text-ink sm:text-3xl">
+                    {t.quote}
+                  </blockquote>
 
-            {/* Divider + footer row */}
-            <div className="mt-10 border-t border-line pt-6 flex items-center justify-between gap-4">
-              {/* Avatar + name */}
-              <div className="flex items-center gap-4">
-                <img
-                  src={current.image}
-                  alt={current.name}
-                  className="h-12 w-12 rounded-full object-cover ring-2 ring-line"
-                />
-                <div>
-                  <p className="text-sm font-semibold text-ink">{current.name}</p>
-                  <p className="text-sm text-ink/50">{current.title}</p>
+                  <div className="mt-10 border-t border-line pt-6 flex items-center gap-4">
+                    <img
+                      src={t.image}
+                      alt={t.name}
+                      className="h-12 w-12 rounded-full object-cover ring-2 ring-line"
+                    />
+                    <div>
+                      <p className="text-sm font-semibold text-ink">{t.name}</p>
+                      <p className="text-sm text-ink/50">{t.title}</p>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
 
-              {/* Prev / next arrows */}
-              <div className="flex shrink-0 gap-2">
+          {/* Dots + arrows — inside Carousel so context is available */}
+          <div className="mt-1 flex items-center justify-center gap-4">
+            <CarouselPrevious />
+            <div className="flex gap-2">
+              {testimonials.map((t, i) => (
                 <button
+                  key={t.name}
                   type="button"
-                  onClick={prev}
-                  aria-label="Previous testimonial"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition hover:bg-stone"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={next}
-                  aria-label="Next testimonial"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition hover:bg-stone"
-                >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              </div>
+                  onClick={() => api?.scrollTo(i)}
+                  aria-label={`Go to testimonial from ${t.name}`}
+                  aria-current={i === current}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === current ? "w-6 bg-ink" : "w-1.5 bg-line hover:bg-ink/40"
+                  }`}
+                />
+              ))}
             </div>
+            <CarouselNext />
           </div>
-        </div>
-
-        {/* Dots */}
-        <div className="mt-6 flex justify-center gap-2">
-          {testimonials.map((t, i) => (
-            <button
-              key={t.name}
-              type="button"
-              onClick={() => navigate(i, i > active ? "right" : "left")}
-              aria-label={`Go to testimonial from ${t.name}`}
-              aria-current={i === active}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === active ? "w-6 bg-ink" : "w-1.5 bg-line hover:bg-ink/40"
-              }`}
-            />
-          ))}
-        </div>
+        </Carousel>
       </div>
     </section>
   );

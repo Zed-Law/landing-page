@@ -1,7 +1,18 @@
+import { Fragment } from "react";
 import { Button } from "../Button";
 import { GoldGradient } from "../GoldGradient";
 import { ShinyText } from "../ShinyText";
+import { SpotlightCard } from "../SpotlightCard";
 import { CheckIcon } from "../icons";
+
+const PARACHUTE_LOGO =
+  "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/client-logos/parachute.svg";
+
+const parachuteCapabilities = [
+  "Answers in seconds",
+  "Contract review",
+  "Document drafting",
+];
 
 const tiers = [
   {
@@ -11,6 +22,7 @@ const tiers = [
     tagline: "For early teams getting the basics right.",
     features: [
       "Single point of contact",
+      "Parachute legal AI access",
       "Contract review and light drafting",
       "Standard turnaround",
       "Business-hours email support",
@@ -65,15 +77,55 @@ export function Pricing() {
             spread={120}
             className="font-display text-4xl font-extrabold leading-tight sm:text-[3rem]"
           />
-          <div className="mx-auto mt-6 h-0.5 w-28 bg-gradient-to-r from-transparent via-ink/70 to-transparent" />
-          <h2 className="mt-6 text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
+          <h2 className="mt-3 text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
             Counsel on retainer, priced to plan around
           </h2>
           <p className="mt-5 text-lg text-body">
-            One monthly fee for ongoing legal support, no surprise bills and no
-            six-minute increments. Pick the level that fits, change it whenever
-            you need to. All prices in AUD, excluding GST.
+            One monthly fee for ongoing legal support. No surprise bills, no
+            six-minute increments. Pick the level that fits and change it
+            whenever you need to.
           </p>
+
+          {/* Parachute: an included benefit, softly tinted to set it apart */}
+          <SpotlightCard
+            spotlightColor="rgba(241, 191, 101, 0.5)"
+            className="mt-10 rounded-2xl bg-gold-soft/20 px-6 py-7 ring-1 ring-gold-deep/10 sm:px-10"
+          >
+            <a
+              href="https://www.goparachute.ai/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 text-muted transition-colors hover:text-ink"
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.16em]">
+                Supercharged with
+              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PARACHUTE_LOGO}
+                alt="Parachute"
+                width={365}
+                height={51}
+                className="block h-5 w-auto"
+              />
+            </a>
+            <p className="mt-3 text-lg font-medium text-ink">
+              Legal AI, included with every retainer.
+            </p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-sm font-semibold text-ink">
+              {parachuteCapabilities.map((cap, i) => (
+                <Fragment key={cap}>
+                  {i > 0 && (
+                    <span
+                      aria-hidden
+                      className="h-1 w-1 rounded-full bg-gold-deep"
+                    />
+                  )}
+                  <span>{cap}</span>
+                </Fragment>
+              ))}
+            </div>
+          </SpotlightCard>
         </div>
 
         <div className="mt-14 grid items-start gap-6 lg:grid-cols-3">
@@ -85,6 +137,11 @@ export function Pricing() {
             )
           )}
         </div>
+
+        <p className="mt-8 text-center text-sm text-muted">
+          All prices in AUD, excluding GST. Change or cancel your plan whenever
+          you need to.
+        </p>
       </div>
     </section>
   );

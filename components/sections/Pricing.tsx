@@ -1,9 +1,20 @@
+"use client";
+
+import * as React from "react";
 import { Fragment } from "react";
 import { Button } from "../Button";
 import { GoldGradient } from "../GoldGradient";
 import { ShinyText } from "../ShinyText";
 import { SpotlightCard } from "../SpotlightCard";
 import { CheckIcon } from "../icons";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 
 const PARACHUTE_LOGO =
   "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/client-logos/parachute.svg";
@@ -16,48 +27,76 @@ const parachuteCapabilities = [
 
 const tiers = [
   {
-    name: "Foundations",
-    price: "$1,500",
+    name: "Basic",
+    price: "$2,000",
     cadence: "/ month",
-    tagline: "For early teams getting the basics right.",
+    tagline: "For early-stage teams getting the basics right.",
     features: [
-      "Single point of contact",
-      "Parachute legal AI access",
-      "Contract review and light drafting",
-      "Standard turnaround",
-      "Business-hours email support",
-      "Plain-English advice, always",
+      "Parachute legal AI access (up to 4 seats)",
+      "Light touch support",
+      "3 × 30 min advice calls per month",
+      "9am – 5pm Mon-Fri availability",
     ],
     cta: "Book a call",
     highlight: false,
   },
   {
-    name: "Zed Plus",
+    name: "Startup",
     price: "$3,500",
     cadence: "/ month",
-    tagline: "Senior counsel on call. Where most teams start.",
+    tagline: "For growing teams that need faster answers.",
     features: [
-      "Everything in Foundations",
-      "Dedicated senior lawyer",
-      "Priority turnaround in hours",
-      "Unlimited contract reviews",
-      "Quarterly legal health check",
-      "Direct line for the urgent calls",
+      "Everything in Basic",
+      "2-business day advice turnaround",
+      "9am – 5pm Mon-Fri availability",
+    ],
+    cta: "Book a call",
+    highlight: false,
+  },
+  {
+    name: "Growth",
+    price: "$5,500",
+    cadence: "/ month",
+    tagline: "Faster turnaround and full access to templates.",
+    features: [
+      "Everything in Startup",
+      "1-business day advice turnaround",
+      "9am – 7pm Mon-Fri availability",
+      "Access to all Zed Law contract templates",
+    ],
+    cta: "Book a call",
+    highlight: false,
+  },
+  {
+    name: "Enterprise",
+    price: "$8,000",
+    cadence: "/ month",
+    tagline: "Dedicated senior counsel. Where most teams land.",
+    features: [
+      "Everything in Growth",
+      "Fractional full-suite legal support as external counsel",
+      "Operate from a legal@yourcompany account",
+      "9am – 9pm availability",
+      "Priority offers across all Zed Partners",
+      "Dedicated Zed Lawyer as your primary contact",
+      "Optional integration into your business systems",
     ],
     cta: "Book a call",
     highlight: true,
   },
   {
-    name: "Bespoke",
-    price: "Custom",
-    cadence: "",
-    tagline: "For complex, high-volume or cross-border needs.",
+    name: "Dominate",
+    price: "$15,500",
+    cadence: "/ month",
+    tagline: "Full-time embedded counsel, on your terms.",
     features: [
-      "Everything in Zed Plus",
-      "Multi-entity and cross-border",
-      "Embedded counsel days",
-      "Custom service levels",
-      "Named partner oversight",
+      "Everything in Enterprise",
+      "Dedicated full-time legal resource on demand",
+      "2 × full days on site",
+      "Project work capped at $400/hour",
+      "9am – 11pm availability",
+      "Dedicated integrations (Slack, Notion, G Suite)",
+      "Priority access to a Zed Principal as General Counsel",
     ],
     cta: "Talk to us",
     highlight: false,
@@ -65,6 +104,15 @@ const tiers = [
 ];
 
 export function Pricing() {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
+
   return (
     <section id="zed-plus" className="bg-surface-alt">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
@@ -128,15 +176,48 @@ export function Pricing() {
           </SpotlightCard>
         </div>
 
-        <div className="mt-14 grid items-start gap-6 lg:grid-cols-3">
-          {tiers.map((tier) =>
-            tier.highlight ? (
-              <HighlightCard key={tier.name} tier={tier} />
-            ) : (
-              <PlainCard key={tier.name} tier={tier} />
-            )
-          )}
-        </div>
+        {/* Pricing carousel */}
+        <Carousel
+          setApi={setApi}
+          opts={{ loop: false, align: "start" }}
+          className="mt-14"
+        >
+          <CarouselContent className="items-stretch">
+            {tiers.map((tier) => (
+              <CarouselItem
+                key={tier.name}
+                className="pl-4 basis-[85%] sm:basis-1/2 lg:basis-1/4"
+              >
+                {tier.highlight ? (
+                  <HighlightCard tier={tier} />
+                ) : (
+                  <PlainCard tier={tier} />
+                )}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+
+          <div className="mt-6 flex items-center justify-center gap-4">
+            <CarouselPrevious />
+            <div className="flex gap-2">
+              {tiers.map((tier, i) => (
+                <button
+                  key={tier.name}
+                  type="button"
+                  onClick={() => api?.scrollTo(i)}
+                  aria-label={`Go to ${tier.name} plan`}
+                  aria-current={i === current}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "w-6 bg-ink"
+                      : "w-1.5 bg-line hover:bg-ink/40"
+                  }`}
+                />
+              ))}
+            </div>
+            <CarouselNext />
+          </div>
+        </Carousel>
 
         <p className="mt-8 text-center text-sm text-muted">
           All prices in AUD, excluding GST. Change or cancel your plan whenever
@@ -181,15 +262,15 @@ function PlainCard({ tier }: { tier: Tier }) {
 
 function HighlightCard({ tier }: { tier: Tier }) {
   return (
-    <div className="relative">
+    <div className="relative h-full">
       {/* fuzzy gold bloom behind the card */}
       <div className="pointer-events-none absolute -inset-6 gold-glow opacity-70 blur-2xl" />
-      <div className="relative flex h-full flex-col overflow-hidden rounded-2xl p-8 shadow-[0_30px_70px_-30px_rgba(226,162,60,0.7)] lg:-mt-4 lg:pb-12 lg:pt-12">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-2xl p-8 shadow-[0_30px_70px_-30px_rgba(226,162,60,0.7)]">
         {/* animated grainy gold gradient background */}
         <GoldGradient className="absolute inset-0" />
         {/* inner soft glow */}
         <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/40 blur-3xl" />
-        <div className="relative">
+        <div className="relative flex h-full flex-col">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-ink">{tier.name}</h3>
             <span className="rounded-full bg-ink px-3 py-1 text-xs font-bold text-white">
@@ -205,7 +286,7 @@ function HighlightCard({ tier }: { tier: Tier }) {
               </span>
             )}
           </div>
-          <ul className="mt-7 space-y-3.5">
+          <ul className="mt-7 flex-1 space-y-3.5">
             {tier.features.map((f) => (
               <li
                 key={f}

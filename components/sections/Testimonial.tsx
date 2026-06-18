@@ -60,7 +60,7 @@ export function Testimonial() {
         <div className="flex items-center justify-center gap-3 sm:gap-5">
           <img src={`${FERN_BASE}/left%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
           <h2 className="text-center text-3xl font-extrabold text-ink sm:text-[2.6rem]">
-            What clients tell us
+            What clients say about us
           </h2>
           <img src={`${FERN_BASE}/right%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
         </div>

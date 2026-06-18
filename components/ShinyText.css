@@ -1,0 +1,23 @@
+.shiny-text {
+  display: inline-block;
+  background-size: 200% auto;
+  background-position: 150% center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shiny-text-shine var(--shiny-duration, 3s) linear infinite;
+}
+
+@keyframes shiny-text-shine {
+  to {
+    background-position: -50% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text {
+    animation: none;
+    background-position: 50% center;
+  }
+}

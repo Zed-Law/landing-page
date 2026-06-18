@@ -1,5 +1,6 @@
 import { Button } from "../Button";
 import { GoldGradient } from "../GoldGradient";
+import { ShinyText } from "../ShinyText";
 import { CheckIcon } from "../icons";
 
 const tiers = [
@@ -56,7 +57,16 @@ export function Pricing() {
     <section id="zed-plus" className="bg-surface-alt">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
+          <ShinyText
+            text="Zed Plus"
+            color="#c8862a"
+            shineColor="#f4cd86"
+            speed={3}
+            spread={120}
+            className="font-display text-4xl font-extrabold leading-tight sm:text-[3rem]"
+          />
+          <div className="mx-auto mt-6 h-0.5 w-28 bg-gradient-to-r from-transparent via-ink/70 to-transparent" />
+          <h2 className="mt-6 text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
             Counsel on retainer, priced to plan around
           </h2>
           <p className="mt-5 text-lg text-body">
@@ -96,7 +106,9 @@ function PlainCard({ tier }: { tier: Tier }) {
       <ul className="mt-7 flex-1 space-y-3.5">
         {tier.features.map((f) => (
           <li key={f} className="flex items-start gap-3 text-sm text-body">
-            <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-gold-deep" />
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-deep">
+              <CheckIcon className="h-3 w-3 text-white" />
+            </span>
             {f}
           </li>
         ))}
@@ -123,7 +135,7 @@ function HighlightCard({ tier }: { tier: Tier }) {
         <div className="relative">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-ink">{tier.name}</h3>
-            <span className="rounded-full bg-ink px-3 py-1 text-xs font-semibold text-white">
+            <span className="rounded-full bg-ink px-3 py-1 text-xs font-bold text-white">
               Most popular
             </span>
           </div>
@@ -142,7 +154,9 @@ function HighlightCard({ tier }: { tier: Tier }) {
                 key={f}
                 className="flex items-start gap-3 text-sm font-medium text-ink"
               >
-                <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-ink" />
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink">
+                  <CheckIcon className="h-3 w-3 text-white" />
+                </span>
                 {f}
               </li>
             ))}

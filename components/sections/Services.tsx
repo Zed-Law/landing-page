@@ -1,12 +1,12 @@
 import {
   DocIcon,
   HandshakeIcon,
-  BuildingIcon,
-  UsersIcon,
-  GavelIcon,
-  ChartIcon,
   ShieldIcon,
-  ClockIcon,
+  GavelIcon,
+  UsersIcon,
+  GlobeIcon,
+  ScrollIcon,
+  BriefcaseIcon,
 } from "../icons";
 
 const firms = ["Ashurst", "Herbert Smith Freehills", "King & Wood Mallesons", "Baker McKenzie", "Clifford Chance", "Allens", "MinterEllison"];
@@ -14,50 +14,50 @@ const firms = ["Ashurst", "Herbert Smith Freehills", "King & Wood Mallesons", "B
 const services = [
   {
     icon: DocIcon,
-    title: "Commercial contracts",
-    body: "Drafting, review and negotiation on the terms that decide the deal.",
+    title: "Commercial",
+    body: "Contracts, structuring and compliance for a growing business.",
   },
   {
     icon: HandshakeIcon,
-    title: "M&A and investment",
-    body: "Buy-side, sell-side and capital raises, run all the way to close.",
+    title: "Corporate and M&A",
+    body: "Capital raises and deals on both sides, from term sheet to close.",
   },
   {
-    icon: BuildingIcon,
-    title: "Corporate governance",
-    body: "Structures, shareholder agreements and the board matters that follow.",
+    icon: ShieldIcon,
+    title: "Health and regulatory",
+    body: "Specialist counsel for regulated health and telehealth businesses.",
+  },
+  {
+    icon: GavelIcon,
+    title: "Dispute resolution",
+    body: "Resolving disputes quickly, with litigation as the last resort.",
   },
   {
     icon: UsersIcon,
     title: "Employment",
-    body: "Hiring, contracts and exits, plus the awkward conversations between.",
+    body: "Acting for employers and employees, contracts to disputes.",
   },
   {
-    icon: ChartIcon,
-    title: "Fundraising",
-    body: "Term sheets, SAFEs and rounds, founder-side and turned around fast.",
+    icon: GlobeIcon,
+    title: "Migration",
+    body: "Bringing talent to Australia, from visas to relocation.",
   },
   {
-    icon: ShieldIcon,
-    title: "IP and technology",
-    body: "Protecting what you've built, and licensing it on the right terms.",
+    icon: ScrollIcon,
+    title: "Wills and estate planning",
+    body: "Wills, beneficiaries and asset planning, sorted early.",
   },
   {
-    icon: GavelIcon,
-    title: "Disputes",
-    body: "Pragmatic resolution, aimed at the outcome rather than the fight.",
-  },
-  {
-    icon: ClockIcon,
-    title: "Ongoing counsel",
-    body: "Senior advice on tap through Zed Plus, priced so you can plan around it.",
+    icon: BriefcaseIcon,
+    title: "General counsel",
+    body: "Senior counsel on retainer, without the full-time hire.",
   },
 ];
 
 export function Services() {
   return (
     <section id="services" className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
             Counsel across everything commercial
@@ -72,9 +72,7 @@ export function Services() {
         <div className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {services.map(({ icon: Icon, title, body }) => (
             <div key={title}>
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface-alt text-ink">
-                <Icon className="h-5 w-5" />
-              </span>
+              <Icon className="h-9 w-9 text-ink" />
               <h3 className="mt-5 text-lg font-bold text-ink">{title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-body">{body}</p>
             </div>

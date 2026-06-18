@@ -1,7 +1,7 @@
 export function Testimonial() {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
         <h2 className="text-center text-3xl font-extrabold text-ink sm:text-[2.6rem]">
           What clients tell us
         </h2>

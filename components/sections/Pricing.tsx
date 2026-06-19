@@ -6,7 +6,24 @@ import { Button } from "../Button";
 import { GoldGradient } from "../GoldGradient";
 import { ShinyText } from "../ShinyText";
 import { SpotlightCard } from "../SpotlightCard";
-import { CheckIcon } from "../icons";
+import {
+  AtSign,
+  BadgeDollarSign,
+  CalendarDays,
+  Clock,
+  Crown,
+  FileText,
+  Handshake,
+  LifeBuoy,
+  Phone,
+  Plug,
+  Scale,
+  Sparkles,
+  Timer,
+  UserRound,
+  Users,
+  Workflow,
+} from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -32,10 +49,10 @@ const tiers = [
     cadence: "/ month",
     tagline: "For early-stage teams getting the basics right.",
     features: [
-      "Parachute legal AI access (up to 4 seats)",
-      "Light touch support",
-      "3 × 30 min advice calls per month",
-      "9am – 5pm Mon-Fri availability",
+      { text: "Parachute legal AI access (up to 4 seats)", icon: Sparkles },
+      { text: "Light touch support", icon: LifeBuoy },
+      { text: "3 × 30 min advice calls per month", icon: Phone },
+      { text: "9am – 5pm Mon-Fri availability", icon: Clock },
     ],
     cta: "Book a call",
     highlight: false,
@@ -46,9 +63,9 @@ const tiers = [
     cadence: "/ month",
     tagline: "For growing teams that need faster answers.",
     features: [
-      "Everything in Basic",
-      "2-business day advice turnaround",
-      "9am – 5pm Mon-Fri availability",
+      { text: "Everything in Basic" },
+      { text: "2-business day advice turnaround", icon: Timer },
+      { text: "9am – 5pm Mon-Fri availability", icon: Clock },
     ],
     cta: "Book a call",
     highlight: false,
@@ -59,10 +76,10 @@ const tiers = [
     cadence: "/ month",
     tagline: "Faster turnaround and full access to templates.",
     features: [
-      "Everything in Startup",
-      "1-business day advice turnaround",
-      "9am – 7pm Mon-Fri availability",
-      "Access to all Zed Law contract templates",
+      { text: "Everything in Startup" },
+      { text: "1-business day advice turnaround", icon: Timer },
+      { text: "9am – 7pm Mon-Fri availability", icon: Clock },
+      { text: "Access to all Zed Law contract templates", icon: FileText },
     ],
     cta: "Book a call",
     highlight: false,
@@ -73,13 +90,16 @@ const tiers = [
     cadence: "/ month",
     tagline: "Dedicated senior counsel. Where most teams land.",
     features: [
-      "Everything in Growth",
-      "Fractional full-suite legal support as external counsel",
-      "Operate from a legal@yourcompany account",
-      "9am – 9pm availability",
-      "Priority offers across all Zed Partners",
-      "Dedicated Zed Lawyer as your primary contact",
-      "Optional integration into your business systems",
+      { text: "Everything in Growth" },
+      {
+        text: "Fractional full-suite legal support as external counsel",
+        icon: Scale,
+      },
+      { text: "Operate from a legal@yourcompany account", icon: AtSign },
+      { text: "9am – 9pm availability", icon: Clock },
+      { text: "Priority offers across all Zed Partners", icon: Handshake },
+      { text: "Dedicated Zed Lawyer as your primary contact", icon: UserRound },
+      { text: "Optional integration into your business systems", icon: Plug },
     ],
     cta: "Book a call",
     highlight: true,
@@ -90,13 +110,16 @@ const tiers = [
     cadence: "/ month",
     tagline: "Full-time embedded counsel, on your terms.",
     features: [
-      "Everything in Enterprise",
-      "Dedicated full-time legal resource on demand",
-      "2 × full days on site",
-      "Project work capped at $400/hour",
-      "9am – 11pm availability",
-      "Dedicated integrations (Slack, Notion, G Suite)",
-      "Priority access to a Zed Principal as General Counsel",
+      { text: "Everything in Enterprise" },
+      { text: "Dedicated full-time legal resource on demand", icon: Users },
+      { text: "2 × full days on site", icon: CalendarDays },
+      { text: "Project work capped at $400/hour", icon: BadgeDollarSign },
+      { text: "9am – 11pm availability", icon: Clock },
+      { text: "Dedicated integrations (Slack, Notion, G Suite)", icon: Workflow },
+      {
+        text: "Priority access to a Zed Principal as General Counsel",
+        icon: Crown,
+      },
     ],
     cta: "Talk to us",
     highlight: false,
@@ -123,7 +146,7 @@ export function Pricing() {
             shineColor="#f4cd86"
             speed={3}
             spread={120}
-            className="font-display text-4xl font-extrabold leading-tight sm:text-[3rem]"
+            className="font-display text-6xl font-extrabold leading-tight"
           />
           {/* Mobile-only compact Parachute badge */}
           <a
@@ -253,14 +276,25 @@ function PlainCard({ tier }: { tier: Tier }) {
         )}
       </div>
       <ul className="mt-7 flex-1 space-y-3.5">
-        {tier.features.map((f) => (
-          <li key={f} className="flex items-start gap-3 text-sm text-body">
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold-deep">
-              <CheckIcon className="h-3 w-3 text-white" />
-            </span>
-            {f}
-          </li>
-        ))}
+        {tier.features.map((f) => {
+          if (!f.icon) {
+            return (
+              <li key={f.text} className="text-sm font-bold text-ink">
+                {f.text}, plus:
+              </li>
+            );
+          }
+          const Icon = f.icon;
+          return (
+            <li
+              key={f.text}
+              className="flex items-start gap-3 text-sm text-body"
+            >
+              <Icon className="mt-px h-4 w-4 shrink-0 text-ink" />
+              {f.text}
+            </li>
+          );
+        })}
       </ul>
       <div className="mt-8">
         <Button href="#book" variant="primary" className="w-full justify-between">
@@ -298,17 +332,25 @@ function HighlightCard({ tier }: { tier: Tier }) {
             )}
           </div>
           <ul className="mt-7 flex-1 space-y-3.5">
-            {tier.features.map((f) => (
-              <li
-                key={f}
-                className="flex items-start gap-3 text-sm font-medium text-ink"
-              >
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-ink">
-                  <CheckIcon className="h-3 w-3 text-white" />
-                </span>
-                {f}
-              </li>
-            ))}
+            {tier.features.map((f) => {
+              if (!f.icon) {
+                return (
+                  <li key={f.text} className="text-sm font-bold text-ink">
+                    {f.text}, plus:
+                  </li>
+                );
+              }
+              const Icon = f.icon;
+              return (
+                <li
+                  key={f.text}
+                  className="flex items-start gap-3 text-sm font-medium text-ink"
+                >
+                  <Icon className="mt-px h-4 w-4 shrink-0 text-ink" />
+                  {f.text}
+                </li>
+              );
+            })}
           </ul>
           <div className="mt-8">
             <Button

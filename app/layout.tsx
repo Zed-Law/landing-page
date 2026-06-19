@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 // Plus Jakarta Sans: tight, punchy display headings.
 const display = Plus_Jakarta_Sans({
@@ -33,7 +34,9 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-white">{children}</body>
+      <body className="min-h-full flex flex-col bg-white">
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }

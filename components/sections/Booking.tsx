@@ -6,7 +6,7 @@ export function Booking() {
       <div className="absolute inset-0 dark-grid opacity-60" />
       <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 gold-glow opacity-25 blur-2xl" />
 
-      <div className="relative mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+      <div className="relative mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-extrabold leading-tight text-white sm:text-[2.6rem]">
             Book a discovery call

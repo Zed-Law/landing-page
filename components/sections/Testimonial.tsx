@@ -55,7 +55,7 @@ export function Testimonial() {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
+      <div className="mx-auto max-w-7xl px-5 pb-14 pt-8 sm:px-8 sm:pb-20 sm:pt-10">
         {/* Heading */}
         <div className="flex items-center justify-center gap-3 sm:gap-5">
           <img src={`${FERN_BASE}/left%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />

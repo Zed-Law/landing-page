@@ -8,7 +8,7 @@ import {
 import BorderGlow from "../BorderGlow";
 
 const cardChrome =
-  "w-full rounded-xl bg-white p-4 sm:p-5 shadow-[0_18px_44px_-32px_rgba(3,20,40,0.45)] ring-1 ring-line";
+  "w-full rounded-xl bg-white p-4 sm:p-5 ring-1 ring-line";
 
 function FoundersGraphic() {
   const avatars = [
@@ -161,7 +161,7 @@ const segments = [
 export function Segments() {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
             Legal that starts with the outcome,{" "}
@@ -179,13 +179,14 @@ export function Segments() {
           {segments.map(({ icon: Icon, graphic: Graphic, label, body }) => (
             <BorderGlow
               key={label}
+              className="glow-desktop-off"
               borderRadius={20}
               glowRadius={28}
               glowIntensity={1.15}
               edgeSensitivity={22}
             >
               <div className="p-2">
-                <div className="aspect-[16/10] overflow-hidden rounded-xl bg-surface-alt">
+                <div className="aspect-[16/10] overflow-hidden rounded-xl bg-surface-alt md:bg-transparent">
                   <Graphic />
                 </div>
                 <div className="px-4 pb-5 pt-5">
@@ -193,7 +194,7 @@ export function Segments() {
                     <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-ink text-white">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <h3 className="text-lg font-bold text-ink">{label}</h3>
+                    <h3 className="text-xl font-bold text-ink">{label}</h3>
                   </div>
                   <p className="mt-4 text-sm leading-relaxed text-body">
                     {body}

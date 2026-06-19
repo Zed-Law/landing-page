@@ -115,7 +115,7 @@ export function Pricing() {
 
   return (
     <section id="zed-plus" className="bg-surface-alt">
-      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-2xl text-center">
           <ShinyText
             text="Zed Plus"
@@ -244,7 +244,7 @@ type Tier = (typeof tiers)[number];
 function PlainCard({ tier }: { tier: Tier }) {
   return (
     <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-8">
-      <h3 className="text-lg font-bold text-ink">{tier.name}</h3>
+      <h3 className="text-xl font-bold text-ink">{tier.name}</h3>
       <p className="mt-2 text-sm text-body">{tier.tagline}</p>
       <div className="mt-6 flex items-baseline gap-1">
         <span className="text-4xl font-extrabold text-ink">{tier.price}</span>
@@ -283,7 +283,7 @@ function HighlightCard({ tier }: { tier: Tier }) {
         <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/40 blur-3xl" />
         <div className="relative flex h-full flex-col">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-bold text-ink">{tier.name}</h3>
+            <h3 className="text-xl font-bold text-ink">{tier.name}</h3>
             <span className="rounded-full bg-ink px-3 py-1 text-xs font-bold text-white">
               Most popular
             </span>

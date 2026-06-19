@@ -88,7 +88,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto max-w-4xl px-5 pb-40 pt-32 text-center sm:px-8 sm:pb-52 sm:pt-32">
+      <div className="relative mx-auto max-w-4xl px-5 pb-28 pt-32 text-center sm:px-8 sm:pb-36 sm:pt-32">
         <h1 className="mx-auto max-w-4xl text-[3rem] font-extrabold leading-[1.05] text-white sm:text-7xl sm:leading-[1.04]">
           Top-tier legals,
           <br className="hidden sm:block" /> without the top-tier{" "}

@@ -1,33 +1,46 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { ArrowIcon } from "./icons";
+import { CheckIcon, CopyIcon } from "./icons";
 
-const columns = [
-  {
-    title: "Firm",
-    links: ["About", "Our lawyers", "Zed Plus", "Careers", "Contact"],
-  },
-  {
-    title: "Practice areas",
-    links: [
-      "Commercial contracts",
-      "M&A and investment",
-      "Corporate governance",
-      "Employment",
-      "Disputes",
-    ],
-  },
-  {
-    title: "Resources",
-    links: ["Blog", "Case studies", "Pricing", "FAQs"],
-  },
+const EMAIL = "hello@zed.law";
+
+const firmLinks = [
+  { label: "Zed Plus", href: "#zed-plus" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "#contact" },
+];
+
+const practiceAreas = [
+  "Commercial",
+  "Corporate and M&A",
+  "Health and regulatory",
+  "Dispute resolution",
+  "Employment",
+  "Migration",
+  "Wills and estate planning",
+  "General counsel",
 ];
 
 export function Footer() {
+  const [copied, setCopied] = useState(false);
+
+  function handleCopy() {
+    navigator.clipboard.writeText(EMAIL).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
   return (
     <footer id="contact" className="bg-white">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+
+        {/* Mega menu columns */}
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">
             <Logo className="h-6 w-auto" />
             <p className="mt-5 text-sm leading-relaxed text-body">
@@ -35,49 +48,64 @@ export function Footer() {
               the big firms, delivering sharp commercial advice at a fairer
               price.
             </p>
-            <p className="mt-5 text-xs text-muted">
-              Zed Law Pty Ltd · Sydney, Australia
-              <br />
-              Liability limited by a scheme approved under Professional Standards
-              Legislation.
+            <p className="mt-5 text-xs leading-relaxed text-muted">
+              <strong className="font-medium text-body">Zed Law</strong> is the registered business name of Zed Consulting PTY LTD ABN 89 633 273 177, an incorporated legal practice.
+              <br /><br />
+              Level 24, 3 International Towers, 300 Barangaroo Avenue, Sydney NSW 2000.
+              <br /><br />
+              Liability limited by a scheme approved under Professional Standards Legislation.
             </p>
+            {/* Email copy pill */}
+            <div className="mt-6 inline-flex rounded-[18px] bg-night p-1.5">
+              <div className="flex items-center gap-3 pl-5">
+                <span className="text-sm text-white/60">{EMAIL}</span>
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  aria-label={copied ? "Copied" : "Copy email address"}
+                  className="flex h-9 w-9 items-center justify-center rounded-[12px] bg-white text-ink transition-colors hover:bg-white/90"
+                >
+                  {copied ? (
+                    <CheckIcon className="h-4 w-4" />
+                  ) : (
+                    <CopyIcon className="h-4 w-4" />
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
 
-          {columns.map((col) => (
-            <div key={col.title}>
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">
-                {col.title}
-              </h4>
-              <ul className="mt-4 space-y-3">
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <Link
-                      href="#"
-                      className="text-sm text-body transition-colors hover:text-ink"
-                    >
-                      {link}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">
+              Firm
+            </h4>
+            <ul className="mt-4 space-y-3">
+              {firmLinks.map((l) => (
+                <li key={l.label}>
+                  <Link href={l.href} className="text-sm text-body transition-colors hover:text-ink">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">
+              Practice areas
+            </h4>
+            <ul className="mt-4 space-y-3">
+              {practiceAreas.map((area) => (
+                <li key={area} className="text-sm text-body">
+                  {area}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="mt-14 grid gap-6 border-t border-line pt-8 sm:grid-cols-2 sm:items-center">
-          <div className="rounded-2xl bg-night p-1.5 sm:max-w-md">
-            <div className="flex items-center justify-between gap-3 pl-4">
-              <span className="text-sm text-white/70">hello@zedlaw.com.au</span>
-              <Link
-                href="#book"
-                className="flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-white/90"
-              >
-                Get in touch
-                <ArrowIcon className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-          <p className="text-xs text-muted sm:text-right">
+        <div className="mt-14 border-t border-line pt-8 sm:flex sm:items-center sm:justify-end">
+          <p className="text-xs text-muted">
             © {new Date().getFullYear()} Zed Law. All rights reserved.
           </p>
         </div>

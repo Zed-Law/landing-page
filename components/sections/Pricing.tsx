@@ -302,7 +302,7 @@ function HighlightCard({ tier }: { tier: Tier }) {
           <div className="mt-8">
             <Button
               href="#book"
-              variant="primary"
+              variant="primary-lift"
               className="w-full justify-between"
             >
               {tier.cta}

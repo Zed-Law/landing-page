@@ -168,3 +168,12 @@ export function RocketIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function CopyIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" className={className} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5.5" y="5.5" width="8" height="9" rx="1.5" />
+      <path d="M10.5 5.5V4A1.5 1.5 0 0 0 9 2.5H3.5A1.5 1.5 0 0 0 2 4v7A1.5 1.5 0 0 0 3.5 12.5H5" />
+    </svg>
+  );
+}

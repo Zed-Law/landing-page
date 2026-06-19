@@ -9,7 +9,6 @@ import {
   BriefcaseIcon,
 } from "../icons";
 
-const firms = ["Ashurst", "Herbert Smith Freehills", "King & Wood Mallesons", "Baker McKenzie", "Clifford Chance", "Allens", "MinterEllison"];
 
 const services = [
   {
@@ -77,25 +76,6 @@ export function Services() {
               <p className="mt-2 text-sm leading-relaxed text-body">{body}</p>
             </div>
           ))}
-        </div>
-
-        {/* Firm pedigree strip */}
-        <div className="mt-16 border-t border-line pt-10">
-          <p className="mb-6 text-sm font-medium text-muted">
-            Counsel with pedigree from the world&apos;s leading firms
-          </p>
-          <div className="overflow-hidden">
-            <div className="flex w-max animate-marquee items-center gap-14">
-              {[...firms, ...firms].map((firm, i) => (
-                <span
-                  key={i}
-                  className="whitespace-nowrap text-base font-semibold tracking-tight text-ink/25"
-                >
-                  {firm}
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>

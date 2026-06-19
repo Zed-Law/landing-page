@@ -19,9 +19,19 @@ const body = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Zed Law — Top-tier legal talent, without the top-tier theatre",
+  title: "Zed Law | Best Law Firm for Time-Poor CXOs and Founders",
   description:
-    "Lawyers trained at the big firms (Ashurst, HSF, KWM, Bakers, Clifford Chance), delivering sharp commercial advice at a fairer price. Book a discovery call.",
+    "Zed Law provides a comprehensive range of legal services as part of its commercial practice, catering to the unique needs of founders and CXOs.",
+  icons: {
+    icon: [
+      { url: "/z-logo.svg", type: "image/svg+xml" },
+      {
+        url: "/z-logo-dark-mode.svg",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

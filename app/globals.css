@@ -34,10 +34,6 @@
 /* Base element styles live in @layer base so Tailwind utilities
    (e.g. text-white on a heading) still win the cascade. */
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     background: var(--background);
     color: var(--color-body);

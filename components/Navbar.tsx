@@ -62,17 +62,22 @@ export function Navbar() {
           </Button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-white/60 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          <div className="space-y-1.5">
-            <span className="block h-0.5 w-5 bg-ink" />
-            <span className="block h-0.5 w-5 bg-ink" />
-          </div>
-        </button>
+        {/* Mobile: CTA + hamburger */}
+        <div className="flex items-center gap-2 md:hidden">
+          <Button href="#book" size="md" variant={scrolled ? "primary" : "light"} withArrow={false} className="!pl-5 !pr-5 justify-center">
+            Book a call
+          </Button>
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-white/60"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Toggle menu"
+          >
+            <div className="space-y-1.5">
+              <span className="block h-0.5 w-5 bg-ink" />
+              <span className="block h-0.5 w-5 bg-ink" />
+            </div>
+          </button>
+        </div>
       </nav>
 
       {open && (

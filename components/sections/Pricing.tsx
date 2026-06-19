@@ -125,6 +125,17 @@ export function Pricing() {
             spread={120}
             className="font-display text-4xl font-extrabold leading-tight sm:text-[3rem]"
           />
+          {/* Mobile-only compact Parachute badge */}
+          <a
+            href="https://www.goparachute.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-2 sm:hidden"
+          >
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Supercharged with</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={PARACHUTE_LOGO} alt="Parachute" width={365} height={51} className="h-4 w-auto" />
+          </a>
           <h2 className="mt-3 text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
             Counsel on retainer, priced to plan around
           </h2>
@@ -137,7 +148,7 @@ export function Pricing() {
           {/* Parachute: an included benefit, softly tinted to set it apart */}
           <SpotlightCard
             spotlightColor="rgba(241, 191, 101, 0.5)"
-            className="mt-10 rounded-2xl bg-gold-soft/20 px-6 py-7 ring-1 ring-gold-deep/10 sm:px-10"
+            className="mt-10 hidden rounded-2xl bg-gold-soft/20 px-6 py-7 ring-1 ring-gold-deep/10 sm:block sm:px-10"
           >
             <a
               href="https://www.goparachute.ai/"

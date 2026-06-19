@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   DocIcon,
   HandshakeIcon,
@@ -8,7 +11,6 @@ import {
   ScrollIcon,
   BriefcaseIcon,
 } from "../icons";
-
 
 const services = [
   {
@@ -54,6 +56,8 @@ const services = [
 ];
 
 export function Services() {
+  const [open, setOpen] = useState<string | null>(null);
+
   return (
     <section id="services" className="bg-white">
       <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
@@ -68,7 +72,8 @@ export function Services() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Desktop: unchanged grid */}
+        <div className="mt-14 hidden gap-x-8 gap-y-12 sm:grid sm:grid-cols-2 lg:grid-cols-4">
           {services.map(({ icon: Icon, title, body }) => (
             <div key={title}>
               <Icon className="h-9 w-9 text-ink" />
@@ -76,6 +81,35 @@ export function Services() {
               <p className="mt-2 text-sm leading-relaxed text-body">{body}</p>
             </div>
           ))}
+        </div>
+
+        {/* Mobile: accordion */}
+        <div className="mt-10 divide-y divide-line sm:hidden">
+          {services.map(({ icon: Icon, title, body }) => {
+            const isOpen = open === title;
+            return (
+              <div key={title}>
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : title)}
+                  className="flex w-full items-center gap-4 py-4 text-left"
+                >
+                  <Icon className="h-6 w-6 shrink-0 text-ink" />
+                  <span className="flex-1 text-base font-semibold text-ink">{title}</span>
+                  <span className={`text-muted transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                      <path d="M3 6l5 5 5-5" />
+                    </svg>
+                  </span>
+                </button>
+                {isOpen && (
+                  <p className="pb-4 pl-10 text-sm leading-relaxed text-body">
+                    {body}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

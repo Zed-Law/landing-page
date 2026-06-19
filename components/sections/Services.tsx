@@ -60,7 +60,7 @@ export function Services() {
 
   return (
     <section id="services" className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 pb-20 pt-8 sm:px-8 sm:pb-24 sm:pt-10">
+      <div className="mx-auto max-w-7xl px-5 pb-14 pt-8 sm:px-8 sm:pb-20 sm:pt-10">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
             Counsel across everything commercial
@@ -77,7 +77,7 @@ export function Services() {
           {services.map(({ icon: Icon, title, body }) => (
             <div key={title}>
               <Icon className="h-9 w-9 text-ink" />
-              <h3 className="mt-5 text-lg font-bold text-ink">{title}</h3>
+              <h3 className="mt-5 text-xl font-bold text-ink">{title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-body">{body}</p>
             </div>
           ))}

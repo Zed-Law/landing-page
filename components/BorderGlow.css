@@ -139,3 +139,18 @@
   z-index: 1;
   border-radius: inherit;
 }
+
+/* Desktop: drop the hairline border and the animated mesh/glow layers,
+   keeping the resting elevation shadow. Mobile keeps the full treatment. */
+@media (min-width: 768px) {
+  .border-glow-card.glow-desktop-off {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .border-glow-card.glow-desktop-off::before,
+  .border-glow-card.glow-desktop-off::after,
+  .border-glow-card.glow-desktop-off > .edge-light {
+    display: none;
+  }
+}

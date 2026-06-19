@@ -20,7 +20,7 @@ const awards = [
 export function FinalCta() {
   return (
     <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-16">
         <div className="relative overflow-hidden rounded-[2rem] px-6 py-16 text-center sm:px-12 sm:py-20">
           {/* animated grainy gold gradient background */}
           <GoldGradient className="absolute inset-0" />

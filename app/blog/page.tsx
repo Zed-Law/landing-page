@@ -28,14 +28,11 @@ export default async function BlogIndexPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar forceSolid />
       <main className="flex-1 px-5 pb-24 pt-32 sm:pt-40">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-6xl">
           <header className="border-b border-line pb-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold-deep">
-              Zed Law
-            </p>
-            <h1 className="mt-3 text-4xl font-bold text-ink sm:text-5xl">Blog</h1>
+            <h1 className="text-4xl font-bold text-ink sm:text-5xl">Blog</h1>
             <p className="mt-4 max-w-xl text-lg text-body">
               Legal insights and practical guides for founders and CXOs.
             </p>
@@ -44,20 +41,17 @@ export default async function BlogIndexPage() {
           {posts.length === 0 ? (
             <p className="mt-10 text-body">No posts published yet.</p>
           ) : (
-            <ul className="mt-4 divide-y divide-line">
+            <ul className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
                 <li key={post._id}>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="group flex flex-col gap-4 py-8 sm:flex-row sm:items-center"
-                  >
+                  <Link href={`/blog/${post.slug}`} className="group flex h-full flex-col gap-4">
                     {post.mainImage ? (
-                      <div className="relative h-40 w-full shrink-0 overflow-hidden rounded-xl border border-line sm:h-24 sm:w-40">
+                      <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-xl border border-line">
                         <Image
                           src={urlFor(post.mainImage).width(640).fit("max").auto("format").url()}
                           alt=""
                           fill
-                          sizes="(min-width: 640px) 160px, 100vw"
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                           className="object-cover"
                         />
                       </div>

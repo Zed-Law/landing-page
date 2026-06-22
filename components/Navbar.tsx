@@ -12,9 +12,12 @@ const links = [
   { label: "Blog", href: "/blog" },
 ];
 
-export function Navbar() {
+export function Navbar({ forceSolid = false }: { forceSolid?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // On pages without a dark hero, text/logo stay dark even before scrolling,
+  // but the background/border only appear once the user actually scrolls.
+  const dark = forceSolid || scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -37,7 +40,7 @@ export function Navbar() {
         }`}
       >
         <Link href="/" className="flex items-center" aria-label="Zed Law home">
-          <Logo variant={scrolled ? "black" : "white"} className="h-5 w-auto sm:h-6" />
+          <Logo variant={dark ? "black" : "white"} className="h-5 w-auto sm:h-6" />
         </Link>
 
         {/* Links + CTA, aligned right */}
@@ -48,7 +51,7 @@ export function Navbar() {
                 key={l.label}
                 href={l.href}
                 className={`text-sm font-medium transition-colors ${
-                  scrolled
+                  dark
                     ? "text-body hover:text-ink"
                     : "text-white/70 hover:text-white"
                 }`}
@@ -57,14 +60,14 @@ export function Navbar() {
               </Link>
             ))}
           </div>
-          <Button href="#book" size="md" variant={scrolled ? "primary" : "light"}>
+          <Button href="#book" size="md" variant={dark ? "primary" : "light"}>
             Book a call
           </Button>
         </div>
 
         {/* Mobile: CTA + hamburger */}
         <div className="flex items-center gap-2 md:hidden">
-          <Button href="#book" size="md" variant={scrolled ? "primary" : "light"} withArrow={false} className="!pl-5 !pr-5 justify-center">
+          <Button href="#book" size="md" variant={dark ? "primary" : "light"} withArrow={false} className="!pl-5 !pr-5 justify-center">
             Book a call
           </Button>
           <button

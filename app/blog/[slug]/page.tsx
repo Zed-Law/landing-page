@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { portableComponents } from "@/components/portableComponents";
-import { getPost, getPostSlugs, imageDimensions, urlFor } from "@/sanity";
+import { getPost, getPostSlugs } from "@/sanity";
 
 export const revalidate = 60;
 
@@ -43,12 +42,10 @@ export default async function BlogPostPage({ params }: Params) {
   const post = await getPost(slug);
   if (!post) notFound();
 
-  const mainDims = post.mainImage ? imageDimensions(post.mainImage) : undefined;
-
   return (
     <>
-      <Navbar />
-      <main className="flex-1 px-5 pb-24 pt-32 sm:pt-40">
+      <Navbar forceSolid />
+      <main className="flex-1 px-5 pb-24 pt-24 sm:pt-28">
         <article className="mx-auto max-w-2xl">
           <Link
             href="/blog"
@@ -70,18 +67,6 @@ export default async function BlogPostPage({ params }: Params) {
               {post.title}
             </h1>
           </header>
-
-          {post.mainImage && mainDims ? (
-            <Image
-              src={urlFor(post.mainImage).width(1600).fit("max").auto("format").url()}
-              alt=""
-              width={mainDims.width}
-              height={mainDims.height}
-              sizes="(min-width: 768px) 42rem, 100vw"
-              priority
-              className="mt-8 h-auto w-full rounded-2xl border border-line"
-            />
-          ) : null}
 
           <div className="mt-8">
             <PortableText value={post.body ?? []} components={portableComponents} />

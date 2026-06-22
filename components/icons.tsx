@@ -17,6 +17,14 @@ export function ArrowIcon({ className }: IconProps) {
   );
 }
 
+export function CloseIcon({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} {...stroke}>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
 export function CheckIcon({ className }: IconProps) {
   return (
     <svg viewBox="0 0 24 24" className={className} {...stroke}>

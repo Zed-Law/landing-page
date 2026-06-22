@@ -1,5 +1,6 @@
 import Aurora from "../Aurora";
 import { Button } from "../Button";
+import { IntakeChip } from "../IntakeChip";
 
 const LOGO_BASE =
   "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/client-logos";
@@ -100,7 +101,11 @@ export function Hero() {
           and fees you can actually plan around.
         </p>
 
-        <div className="mt-7 flex flex-col items-center justify-center gap-2 sm:mt-9 sm:flex-row sm:gap-3">
+        <div className="mt-6 flex justify-center sm:mt-7">
+          <IntakeChip />
+        </div>
+
+        <div className="mt-5 flex flex-col items-center justify-center gap-2 sm:mt-7 sm:flex-row sm:gap-3">
           <Button href="#book" size="md" variant="light" className="sm:pl-7 sm:pr-2.5 sm:py-2.5 sm:text-base">
             Book a discovery call
           </Button>

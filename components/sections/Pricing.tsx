@@ -140,6 +140,18 @@ export function Pricing() {
     <section id="zed-plus" className="bg-surface-alt">
       <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-2xl text-center">
+          {/* Orienting line above the brand: names the lighter option first so
+              price-sensitive visitors don't bounce, while steering to Zed Plus. */}
+          <p className="mb-4 text-base font-medium text-body sm:text-lg">
+            You can{" "}
+            <a
+              href="#per-engagement"
+              className="font-semibold text-ink underline decoration-gold-deep/40 underline-offset-4 transition-colors hover:decoration-gold-deep"
+            >
+              engage us per matter
+            </a>
+            . Most teams go further and partner with us through
+          </p>
           <ShinyText
             text="Zed Plus"
             color="#c8862a"
@@ -164,8 +176,8 @@ export function Pricing() {
           </h2>
           <p className="mt-5 text-lg text-body">
             One monthly fee for ongoing legal support. No surprise bills, no
-            six-minute increments. Pick the level that fits and change it
-            whenever you need to.
+            six-minute increments. It's how most of our clients choose to work
+            with us. Pick the level that fits and change it whenever you need to.
           </p>
 
           {/* Parachute: an included benefit, softly tinted to set it apart */}
@@ -257,6 +269,35 @@ export function Pricing() {
           All prices in AUD, excluding GST. Change or cancel your plan whenever
           you need to.
         </p>
+
+        {/* Per-engagement: a deliberately understated alternative, kept
+            outside the Zed Plus brand. Retainer stays the preferred path. */}
+        <div id="per-engagement" className="mx-auto mt-16 max-w-3xl scroll-mt-24">
+          <div className="flex items-center gap-4">
+            <div className="h-px flex-1 bg-line" />
+            <span className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+              Not ready for a retainer?
+            </span>
+            <div className="h-px flex-1 bg-line" />
+          </div>
+
+          <div className="mt-8 flex flex-col items-start gap-5 rounded-2xl border border-line bg-white p-6 sm:flex-row sm:items-center sm:gap-6 sm:p-8">
+            <FileText className="h-6 w-6 shrink-0 text-muted" />
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-ink">
+                Work with us per engagement
+              </h3>
+              <p className="mt-1 text-sm text-body">
+                Prefer to handle one matter at a time? We also take on individual
+                engagements, scoped and quoted upfront, with no ongoing
+                commitment.
+              </p>
+            </div>
+            <Button href="#book" variant="ghost" className="shrink-0">
+              Talk to us
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );

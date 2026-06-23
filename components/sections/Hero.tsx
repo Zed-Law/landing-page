@@ -1,4 +1,4 @@
-import Aurora from "../Aurora";
+import Silk from "../Silk";
 import { Button } from "../Button";
 import { IntakeChip } from "../IntakeChip";
 
@@ -61,32 +61,33 @@ const edgeFade = {
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-night">
-      {/* Aurora WebGL backdrop, gold brand stops, fading out toward the page */}
+      {/* Silk WebGL backdrop, monochrome slate, fading out toward the page */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[620px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[900px]"
         style={{
           maskImage:
-            "radial-gradient(120% 90% at 50% 0%, black 30%, transparent 80%)",
+            "radial-gradient(125% 100% at 50% 0%, black 50%, transparent 92%)",
           WebkitMaskImage:
-            "radial-gradient(120% 90% at 50% 0%, black 30%, transparent 80%)",
+            "radial-gradient(125% 100% at 50% 0%, black 50%, transparent 92%)",
         }}
       >
-        <Aurora
-          colorStops={["#f8dca0", "#f1bf65", "#e2a23c"]}
-          blend={0.5}
-          amplitude={1.0}
-          speed={0.5}
+        <Silk
+          color="#5e6f8e"
+          speed={5}
+          scale={1}
+          noiseIntensity={1.5}
+          rotation={0}
         />
       </div>
 
-      {/* Contrast scrim: darkens the centre band (where the bright aurora and
-          the headline overlap) so white text stays legible, while the gold
-          keeps glowing toward the edges and top. */}
+      {/* Contrast scrim: darkens the centre band (where the bright silk and
+          the headline overlap) so white text stays legible, while the texture
+          keeps flowing toward the edges and top. */}
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[620px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[900px]"
         style={{
           background:
-            "radial-gradient(115% 75% at 50% 38%, rgba(5,10,20,0.62) 0%, rgba(5,10,20,0.28) 55%, rgba(5,10,20,0) 100%)",
+            "radial-gradient(115% 75% at 50% 40%, rgba(5,10,20,0.5) 0%, rgba(5,10,20,0.2) 55%, rgba(5,10,20,0) 100%)",
         }}
       />
 

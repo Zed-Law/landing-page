@@ -1,9 +1,23 @@
 "use client";
 
 import Cal, { getCalApi } from "@calcom/embed-react";
-import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 
-export function CalEmbed() {
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+function CalEmbedInner() {
+  const searchParams = useSearchParams();
+  const utm = {
+    utm_source: searchParams.get("utm_source") ?? "",
+    utm_medium: searchParams.get("utm_medium") ?? "",
+    utm_campaign: searchParams.get("utm_campaign") ?? "",
+  };
+
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "free-15-minute-intro-call" });
@@ -16,7 +30,15 @@ export function CalEmbed() {
         hideEventTypeDetails: false,
         layout: "month_view",
       });
+
+      cal("on", {
+        action: "bookingSuccessfulV2",
+        callback: () => {
+          window.gtag?.("event", "intro_call_booked", utm);
+        },
+      });
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -28,7 +50,16 @@ export function CalEmbed() {
         layout: "month_view",
         useSlotsViewOnSmallScreen: "true",
         theme: "dark",
+        metadata: utm,
       }}
     />
+  );
+}
+
+export function CalEmbed() {
+  return (
+    <Suspense fallback={null}>
+      <CalEmbedInner />
+    </Suspense>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { IntakeWidget } from "@/components/IntakeWidget";
@@ -49,6 +50,7 @@ export default function RootLayout({
         <SmoothScroll>{children}</SmoothScroll>
         <IntakeWidget />
       </body>
+      <GoogleAnalytics gaId="G-HGGKN04GDT" />
     </html>
   );
 }

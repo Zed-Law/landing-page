@@ -27,6 +27,7 @@ const ROW_2: Logo[] = [
   { name: "Aurasens", file: "aurasens.png" },
   { name: "Co Ventures", file: "co-ventures.png" },
   { name: "Rays", file: "rays.png" },
+  { name: "Nakatomi", file: "nakatomi.png" },
 ];
 
 // One copy of a logo row. Rendered twice per track so the -50% translate

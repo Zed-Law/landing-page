@@ -9,9 +9,7 @@ const EMAIL = "hello@zed.law";
 
 const firmLinks = [
   { label: "Zed Plus", href: "#zed-plus" },
-  { label: "Pricing", href: "#pricing" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "#contact" },
 ];
 
 const practiceAreas = [

@@ -8,7 +8,6 @@ import { Button } from "./Button";
 const links = [
   { label: "Zed Plus", href: "#zed-plus" },
   { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
   { label: "Blog", href: "/blog" },
 ];
 

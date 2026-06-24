@@ -60,7 +60,7 @@ export function FinalCta() {
               {awards.map((award) => (
                 <div
                   key={award.alt}
-                  className="rounded-xl ring-1 ring-ink/10 bg-white/20 p-1.5"
+                  className="rounded-xl border border-ink/10 bg-white/20 p-1.5"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

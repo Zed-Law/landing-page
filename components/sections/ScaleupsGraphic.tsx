@@ -55,7 +55,7 @@ export function ScaleupsGraphic() {
           </span>
           <span
             ref={badgeRef}
-            className="inline-flex items-center gap-1.5 rounded-full bg-surface-alt px-2.5 py-1 text-[11px] font-semibold text-ink ring-1 ring-line"
+            className="inline-flex items-center gap-1.5 rounded-full bg-surface-alt px-2.5 py-1 text-[11px] font-semibold text-ink border border-line"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-ink" /> Counsel on call
           </span>

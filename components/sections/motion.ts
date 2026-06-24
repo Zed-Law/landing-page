@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 export const cardChrome =
-  "w-full rounded-xl bg-white p-4 sm:p-5 ring-1 ring-line";
+  "w-full rounded-lg bg-white p-4 sm:p-5 border border-line";
 
 export const clamp = (v: number, min: number, max: number) =>
   Math.min(max, Math.max(min, v));

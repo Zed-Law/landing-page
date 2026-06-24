@@ -183,7 +183,7 @@ export function Pricing() {
           {/* Parachute: an included benefit, softly tinted to set it apart */}
           <SpotlightCard
             spotlightColor="rgba(241, 191, 101, 0.5)"
-            className="mt-10 hidden rounded-2xl bg-gold-soft/20 px-6 py-7 ring-1 ring-gold-deep/10 sm:block sm:px-10"
+            className="mt-10 hidden rounded-2xl bg-gold-soft/20 px-6 py-7 border border-gold-deep/10 sm:block sm:px-10"
           >
             <a
               href="https://www.goparachute.ai/"

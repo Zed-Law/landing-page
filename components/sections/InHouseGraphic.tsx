@@ -83,7 +83,7 @@ export function InHouseGraphic() {
                 ref={(el) => {
                   overflowRefs.current[i] = el;
                 }}
-                className="h-3 rounded-md bg-surface-alt ring-1 ring-line"
+                className="h-3 rounded-md bg-surface-alt border border-line"
                 style={{ width: o.w, opacity: 0 }}
               />
             ))}
@@ -94,7 +94,7 @@ export function InHouseGraphic() {
           <ArrowIcon className="h-4 w-4 text-muted" />
         </span>
 
-        <div className="min-w-0 flex-1 rounded-lg bg-white p-2.5 ring-1 ring-line shadow-[0_10px_28px_-22px_rgba(3,20,40,0.6)] sm:p-3">
+        <div className="min-w-0 flex-1 rounded-lg bg-white p-2.5 border border-line shadow-[0_10px_28px_-22px_rgba(3,20,40,0.6)] sm:p-3">
           <span className="text-[10px] font-semibold tracking-[0.12em] text-muted">
             HANDLED
           </span>

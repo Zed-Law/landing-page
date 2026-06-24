@@ -1,32 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { CheckIcon } from "../icons";
+import {
+  cardChrome,
+  clamp,
+  ev,
+  easeOutCubic,
+  easeInOutSine,
+  easeOutBack,
+  useInViewOnce,
+} from "./motion";
 
-const cardChrome = "w-full rounded-xl bg-white p-4 sm:p-5 ring-1 ring-line";
-
-const DURATION = 6; // seconds, matches the source motion design's timeline
+const DURATION = 4.5; // seconds — timeline ends as the last avatar settles (~4.25s)
 const SPEED = 1.4; // playback rate multiplier
 const PATH_LEN = 300;
-
-const clamp = (v: number, min: number, max: number) =>
-  Math.min(max, Math.max(min, v));
-
-const easeOutCubic = (t: number) => --t * t * t + 1;
-const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2;
-const easeOutBack = (t: number) => {
-  const c1 = 1.70158;
-  const c3 = c1 + 1;
-  return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
-};
-
-// progress of [a, b] mapped through an ease, clamped to [0, 1]
-const ev = (
-  t: number,
-  a: number,
-  b: number,
-  ease: (t: number) => number = easeOutCubic
-) => ease(clamp((t - a) / (b - a), 0, 1));
 
 // widths as a % of the line's max-width container, derived from the source design (568/520/360 out of 568)
 const LINES = [
@@ -42,7 +30,6 @@ const AVATARS = [
 ];
 
 export function FoundersGraphic() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLSpanElement>(null);
   const badgeRef = useRef<HTMLSpanElement>(null);
   const checkRef = useRef<HTMLSpanElement>(null);
@@ -53,15 +40,8 @@ export function FoundersGraphic() {
   const sigPathRef = useRef<SVGPathElement>(null);
   const avatarRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    let rafId = 0;
-    let startTime: number | null = null;
-    let running = false;
-
-    const render = (t: number) => {
+  const containerRef = useInViewOnce(
+    (t) => {
       if (titleRef.current) {
         const op = ev(t, 0.45, 0.9);
         const y = (1 - ev(t, 0.45, 0.9)) * 14;
@@ -116,40 +96,10 @@ export function FoundersGraphic() {
         el.style.opacity = String(clamp(p * 1.5, 0, 1));
         el.style.transform = `scale(${scale})`;
       });
-    };
-
-    const step = (now: number) => {
-      if (startTime === null) startTime = now;
-      const elapsed = (((now - startTime) / 1000) * SPEED) % DURATION;
-      render(elapsed);
-      if (running) rafId = requestAnimationFrame(step);
-    };
-
-    const start = () => {
-      if (running) return;
-      running = true;
-      startTime = null;
-      rafId = requestAnimationFrame(step);
-    };
-    const stop = () => {
-      running = false;
-      cancelAnimationFrame(rafId);
-    };
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) start();
-        else stop();
-      },
-      { threshold: 0.2 }
-    );
-    io.observe(container);
-
-    return () => {
-      io.disconnect();
-      stop();
-    };
-  }, []);
+    },
+    DURATION,
+    SPEED
+  );
 
   return (
     <div

@@ -1,86 +1,8 @@
-import {
-  RocketIcon,
-  ChartIcon,
-  BuildingIcon,
-  CheckIcon,
-  ArrowIcon,
-} from "../icons";
+import { RocketIcon, ChartIcon, BuildingIcon } from "../icons";
 import BorderGlow from "../BorderGlow";
 import { FoundersGraphic } from "./FoundersGraphic";
-
-const cardChrome =
-  "w-full rounded-xl bg-white p-4 sm:p-5 ring-1 ring-line";
-
-function ScaleupsGraphic() {
-  const bars = [38, 50, 42, 64, 76, 100];
-  return (
-    <div className="flex h-full w-full items-center justify-center p-7 sm:p-5">
-      <div className={cardChrome}>
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-bold text-ink">Growth</span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-alt px-2.5 py-1 text-[11px] font-semibold text-ink ring-1 ring-line">
-            <span className="h-1.5 w-1.5 rounded-full bg-ink" /> Counsel on call
-          </span>
-        </div>
-
-        <div className="mt-5 flex h-24 items-end gap-2">
-          {bars.map((h, i) => (
-            <div
-              key={i}
-              className={`flex-1 rounded-t-md ${
-                i === bars.length - 1 ? "bg-ink" : "bg-slate-200"
-              }`}
-              style={{ height: `${h}%` }}
-            />
-          ))}
-        </div>
-
-        <div className="mt-2.5 flex justify-between text-[11px] font-medium text-muted">
-          <span>Seed</span>
-          <span>Series B</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function InHouseGraphic() {
-  return (
-    <div className="flex h-full w-full items-center justify-center p-7 sm:p-5">
-      <div className={`flex items-center gap-2.5 sm:gap-3 ${cardChrome}`}>
-        <div className="min-w-0 flex-1 rounded-lg border border-dashed border-line p-2.5 sm:p-3">
-          <span className="text-[10px] font-semibold tracking-[0.12em] text-muted">
-            OVERFLOW
-          </span>
-          <div className="mt-3 space-y-2">
-            <div className="h-3 rounded-md bg-surface-alt ring-1 ring-line" />
-            <div className="h-3 rounded-md bg-surface-alt ring-1 ring-line" />
-            <div className="h-3 w-5/6 rounded-md bg-surface-alt ring-1 ring-line" />
-          </div>
-        </div>
-
-        <ArrowIcon className="h-4 w-4 shrink-0 text-muted" />
-
-        <div className="min-w-0 flex-1 rounded-lg bg-white p-2.5 ring-1 ring-line shadow-[0_10px_28px_-22px_rgba(3,20,40,0.6)] sm:p-3">
-          <span className="text-[10px] font-semibold tracking-[0.12em] text-muted">
-            HANDLED
-          </span>
-          <div className="mt-3 space-y-2">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2 rounded-md bg-ink px-1.5 py-1.5"
-              >
-                <CheckIcon className="h-3 w-3 shrink-0 text-white" />
-                <div className="h-1.5 flex-1 rounded-full bg-white/30" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+import { ScaleupsGraphic } from "./ScaleupsGraphic";
+import { InHouseGraphic } from "./InHouseGraphic";
 
 const segments = [
   {

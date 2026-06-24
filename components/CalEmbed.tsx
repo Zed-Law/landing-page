@@ -12,11 +12,11 @@ declare global {
 
 function CalEmbedInner() {
   const searchParams = useSearchParams();
-  const utm = {
-    utm_source: searchParams.get("utm_source") ?? "",
-    utm_medium: searchParams.get("utm_medium") ?? "",
-    utm_campaign: searchParams.get("utm_campaign") ?? "",
-  };
+  const utm: Record<string, string> = {};
+  for (const key of ["utm_source", "utm_medium", "utm_campaign"]) {
+    const value = searchParams.get(key);
+    if (value) utm[key] = value;
+  }
 
   useEffect(() => {
     (async function () {
@@ -50,7 +50,7 @@ function CalEmbedInner() {
         layout: "month_view",
         useSlotsViewOnSmallScreen: "true",
         theme: "dark",
-        metadata: utm,
+        ...utm,
       }}
     />
   );

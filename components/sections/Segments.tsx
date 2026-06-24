@@ -6,65 +6,10 @@ import {
   ArrowIcon,
 } from "../icons";
 import BorderGlow from "../BorderGlow";
+import { FoundersGraphic } from "./FoundersGraphic";
 
 const cardChrome =
   "w-full rounded-xl bg-white p-4 sm:p-5 ring-1 ring-line";
-
-function FoundersGraphic() {
-  const avatars = [
-    { l: "A", c: "bg-ink text-white" },
-    { l: "M", c: "bg-slate-500 text-white" },
-    { l: "K", c: "bg-slate-300 text-ink" },
-  ];
-  return (
-    <div className="flex h-full w-full items-center justify-center p-7 sm:p-5">
-      <div className={`relative ${cardChrome}`}>
-        <div className="flex items-center justify-between">
-          <span className="text-sm font-bold text-ink">Term Sheet</span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-ink px-2.5 py-1 text-[11px] font-semibold text-white">
-            <CheckIcon className="h-3 w-3" /> Signed
-          </span>
-        </div>
-
-        <div className="mt-4 space-y-2">
-          <div className="h-2 w-full rounded-full bg-slate-200" />
-          <div className="h-2 w-11/12 rounded-full bg-slate-200" />
-          <div className="h-2 w-2/3 rounded-full bg-slate-200" />
-        </div>
-
-        <div className="my-4 border-t border-dashed border-line" />
-
-        <span className="text-[10px] font-semibold tracking-[0.12em] text-muted">
-          SIGNATURE
-        </span>
-        <svg
-          className="mt-1 h-7 w-24 text-ink sm:w-28"
-          viewBox="0 0 120 28"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M2 18 C 8 6, 16 6, 22 16 S 36 26, 44 14 S 60 4, 70 16 S 90 24, 98 12 S 112 6, 118 14"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        <div className="absolute bottom-4 right-4 flex -space-x-2 sm:bottom-5 sm:right-5">
-          {avatars.map(({ l, c }) => (
-            <span
-              key={l}
-              className={`flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-bold ring-2 ring-white sm:h-7 sm:w-7 ${c}`}
-            >
-              {l}
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function ScaleupsGraphic() {
   const bars = [38, 50, 42, 64, 76, 100];

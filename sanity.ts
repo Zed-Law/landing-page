@@ -60,6 +60,11 @@ export type Post = PostListItem & {
   body: PortableTextBlock[] | null;
 };
 
+export type Referrer = {
+  displayName: string;
+  discount: number;
+};
+
 // --- Queries ----------------------------------------------------------------
 
 const listFields = `
@@ -89,4 +94,12 @@ export async function getPost(slug: string): Promise<Post | null> {
 /** Every post slug, for generateStaticParams. */
 export async function getPostSlugs(): Promise<string[]> {
   return client.fetch(`*[_type == "post" && defined(slug.current)].slug.current`);
+}
+
+/** A referrer by slug, or null if none matches. Used by the homepage referral chip. */
+export async function getReferrer(slug: string): Promise<Referrer | null> {
+  return client.fetch(
+    `*[_type == "referrer" && slug.current == $slug][0] { displayName, discount }`,
+    { slug },
+  );
 }

@@ -7,11 +7,20 @@ import { Testimonial } from "@/components/sections/Testimonial";
 import { Pricing } from "@/components/sections/Pricing";
 import { Booking } from "@/components/sections/Booking";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { getReferrer } from "@/sanity";
 
-export default function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { utm_medium } = await searchParams;
+  const slug = Array.isArray(utm_medium) ? utm_medium[0] : utm_medium;
+  const referrer = slug ? await getReferrer(slug) : null;
+
   return (
     <>
-      <Navbar />
+      <Navbar referrer={referrer} />
       <main className="flex-1">
         <Hero />
         <Segments />

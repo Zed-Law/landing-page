@@ -10,6 +10,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/ref/:name",
+        destination:
+          "/?utm_source=referral&utm_medium=:name&utm_campaign=referral-program",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

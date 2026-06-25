@@ -13,9 +13,13 @@ declare global {
 function CalEmbedInner() {
   const searchParams = useSearchParams();
   const utm: Record<string, string> = {};
+  const utmMetadata: Record<string, string> = {};
   for (const key of ["utm_source", "utm_medium", "utm_campaign"]) {
     const value = searchParams.get(key);
-    if (value) utm[key] = value;
+    if (value) {
+      utm[key] = value;
+      utmMetadata[`metadata[${key}]`] = value;
+    }
   }
 
   useEffect(() => {
@@ -50,7 +54,7 @@ function CalEmbedInner() {
         layout: "month_view",
         useSlotsViewOnSmallScreen: "true",
         theme: "dark",
-        metadata: { ...utm },
+        ...utmMetadata,
       }}
     />
   );

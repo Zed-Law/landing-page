@@ -50,7 +50,7 @@ function CalEmbedInner() {
         layout: "month_view",
         useSlotsViewOnSmallScreen: "true",
         theme: "dark",
-        metadata: utm,
+        metadata: { ...utm },
       }}
     />
   );

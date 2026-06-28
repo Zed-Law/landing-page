@@ -49,7 +49,7 @@ function CalEmbedInner() {
     <Cal
       namespace="free-15-minute-intro-call"
       calLink="team/zed-law/free-15-minute-intro-call"
-      style={{ width: "100%", height: "100%", overflow: "hidden" }}
+      style={{ width: "100%", height: "100%" }}
       config={{
         layout: "month_view",
         useSlotsViewOnSmallScreen: "true",

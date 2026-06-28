@@ -17,7 +17,7 @@ export function Booking() {
           </p>
         </div>
 
-        <div className="mx-auto mt-1 h-[680px] max-w-4xl">
+        <div className="mx-auto mt-1 h-[850px] max-w-4xl overflow-y-auto sm:h-[680px]">
           <CalEmbed />
         </div>
       </div>

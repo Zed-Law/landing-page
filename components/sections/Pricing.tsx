@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/carousel";
 
 const PARACHUTE_LOGO =
-  "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/client-logos/parachute.svg";
+  "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/client-logos/parachute.svg";
 
 const parachuteCapabilities = [
   "Answers in seconds",

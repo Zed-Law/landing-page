@@ -3,7 +3,7 @@ import { Button } from "../Button";
 import { IntakeChip } from "../IntakeChip";
 
 const LOGO_BASE =
-  "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/client-logos";
+  "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/client-logos";
 
 type Logo = { name: string; file: string };
 

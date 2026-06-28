@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/carousel";
 
 const FERN_BASE =
-  "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/misc-ui";
+  "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/misc-ui";
 const HEADSHOT_BASE =
-  "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/testimonial/headshots";
+  "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/testimonial/headshots";
 
 const testimonials = [
   {

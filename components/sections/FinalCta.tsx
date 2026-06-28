@@ -4,15 +4,15 @@ import { StarIcon } from "../icons";
 
 const awards = [
   {
-    src: "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/awards/future-legal-leader.png",
+    src: "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/awards/future-legal-leader.png",
     alt: "Future Legal Leader award",
   },
   {
-    src: "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/awards/finalist.png",
+    src: "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/awards/finalist.png",
     alt: "Finalist award",
   },
   {
-    src: "https://md9kcpfkxv7xttab.public.blob.vercel-storage.com/zed-landing-components/awards/cub-awards.png",
+    src: "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/awards/cub-awards.png",
     alt: "CUB Awards",
   },
 ];

@@ -125,7 +125,7 @@ export function Pricing() {
             </a>
             . Most teams go further and partner with us through
           </p>
-          <p className="mt-2 font-display text-6xl font-semibold leading-tight text-ink sm:text-7xl">
+          <p className="mt-2 font-jubilee-hero text-6xl font-medium leading-tight text-ink sm:text-7xl">
             Zed Plus
           </p>
           <h2 className="mt-5 text-3xl leading-tight sm:text-4xl">
@@ -298,7 +298,7 @@ function PlainCard({ tier }: { tier: Tier }) {
       <h3 className="text-2xl">{tier.name}</h3>
       <p className="mt-2 text-sm text-body">{tier.tagline}</p>
       <div className="mt-6 flex items-baseline gap-1.5">
-        <span className="font-display text-4xl font-semibold tabular-nums text-ink">
+        <span className="font-jubilee-subheading text-4xl font-medium tabular-nums text-ink">
           {tier.price}
         </span>
         {tier.cadence && (
@@ -327,7 +327,7 @@ function HighlightCard({ tier }: { tier: Tier }) {
       </div>
       <p className="mt-2 text-sm text-night-body">{tier.tagline}</p>
       <div className="mt-6 flex items-baseline gap-1.5">
-        <span className="font-display text-4xl font-semibold tabular-nums text-night-ink">
+        <span className="font-jubilee-subheading text-4xl font-medium tabular-nums text-night-ink">
           {tier.price}
         </span>
         {tier.cadence && (

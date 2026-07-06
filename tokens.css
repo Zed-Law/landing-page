@@ -1,6 +1,6 @@
 /* Zed Law design tokens — "midnight chambers, engraved brass, austere"
  * Portable mirror of the Tailwind v4 @theme block in app/globals.css.
- * Display: Cormorant Garamond · Body: Source Serif 4
+ * Display: OT Jubilee (Diamond/Golden/Silver, graded by size) · Body: PP Radio Grotesk
  */
 :root {
   --color-paper: oklch(96.5% 0.012 85);
@@ -22,8 +22,9 @@
   --color-accent-soft: oklch(90% 0.045 85);
   --color-focus: oklch(70% 0.14 82);
 
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "PP Neue Montreal Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "OT Jubilee", Georgia, serif;
+  --font-body: "PP Radio Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "PP Neue Montreal Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   --space-3xs: 0.125rem;
   --space-2xs: 0.25rem;

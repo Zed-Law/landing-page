@@ -1,6 +1,6 @@
 /* Hallmark · genre: editorial · macrostructure: Marquee Hero · H1 knobs: size=xl, alignment=left-bias, underlay=rule-below
  * theme: custom · vibe: "midnight chambers, engraved brass, austere" · paper: oklch(96.5% 0.012 85) · night: oklch(16% 0.012 75) · accent: oklch(74% 0.115 82)
- * display: Cormorant Garamond · body: Source Serif 4 · axes: light (dark-anchored) / roman-serif / warm
+ * display: OT Jubilee (Diamond/Golden/Silver, graded by size) · body: PP Radio Grotesk · mono: PP Neue Montreal Mono · axes: light (dark-anchored) / roman-serif / warm
  * hero: light print (Odin-inspired: press lines + reversed banner strip)
  * nav: inline integrated (wordmark left · links right) · footer: Ft4 colophon · enrichment: none
  * studied: no · context: user-provided
@@ -39,8 +39,7 @@
   --color-gold-soft: oklch(90% 0.045 85);
 
   /* Fonts (wired up in layout.tsx) */
-  --font-display: var(--font-display), "Georgia", serif;
-  --font-sans: var(--font-body), "Georgia", serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-jubilee-hero: var(--font-hero), "Georgia", serif;
   --font-jubilee-heading: var(--font-heading), "Georgia", serif;
   --font-jubilee-subheading: var(--font-subheading), "Georgia", serif;
@@ -130,6 +129,20 @@ body {
   animation-delay: calc(var(--i, 0) * 80ms);
 }
 
+/* Scroll-scrubbed reveal for below-the-fold sections — fades up as the
+   element enters the viewport, staggered via --i. Progressive enhancement:
+   browsers without scroll-driven animations render static. */
+@supports (animation-timeline: view()) {
+  .view-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--i, 0) * 8%) entry
+      calc(45% + var(--i, 0) * 8%);
+  }
+}
+
 /* Logo marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -151,6 +164,11 @@ body {
   .reveal {
     animation-duration: 150ms;
     animation-delay: 0ms;
+    transform: none;
+  }
+  .view-reveal {
+    animation: none;
+    opacity: 1;
     transform: none;
   }
   .animate-marquee,

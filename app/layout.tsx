@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Source_Serif_4 } from "next/font/google";
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
@@ -32,20 +31,28 @@ const subheading = localFont({
   display: "swap",
 });
 
-// Cormorant Garamond: classical high-contrast serif for display headings.
-const display = Cormorant_Garamond({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-// Source Serif 4: transitional serif that holds up at UI sizes — long-form
-// paragraph copy (blog posts, testimonials, descriptions).
-const body = Source_Serif_4({
+// PP Radio Grotesk: warm grotesque for body copy. 500/600 utilities fall
+// back to the nearest declared weight (400/700) per CSS font matching.
+const body = localFont({
   variable: "--font-body",
-  subsets: ["latin"],
   display: "swap",
+  src: [
+    {
+      path: "./fonts/Radio Grotesk/PPRadioGrotesk-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Radio Grotesk/PPRadioGrotesk-RegularItalic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/Radio Grotesk/PPRadioGrotesk-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
 });
 
 // PP Neue Montreal Mono: short UI text only (nav, buttons, labels, captions)
@@ -96,7 +103,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${hero.variable} ${heading.variable} ${subheading.variable} ${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
+      className={`${hero.variable} ${heading.variable} ${subheading.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper">
         <SmoothScroll>{children}</SmoothScroll>

@@ -95,7 +95,7 @@ export function Hero() {
             Big-firm pedigree. Straight advice, fast turnarounds, fair fees.
           </p>
           <span
-            className="shrink-0 font-display text-3xl leading-none text-accent"
+            className="shrink-0 text-3xl leading-none text-accent"
             aria-hidden
           >
             ↓

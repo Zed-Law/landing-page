@@ -41,7 +41,7 @@ export function IntakeWidget() {
         </button>
       </div>
 
-      <p className="mt-2 font-display text-base font-bold text-ink sm:mt-3 sm:text-xl">
+      <p className="mt-2 text-base font-bold text-ink sm:mt-3 sm:text-xl">
         {spotsLeft} of {totalSpots} spots left
       </p>
 

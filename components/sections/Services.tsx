@@ -1,40 +1,40 @@
+import Link from "next/link";
+
 const services = [
   {
     title: "Commercial",
-    body: "Contracts, structuring and compliance for a growing business.",
+    matters: "Contracts · structuring · privacy & compliance",
   },
   {
     title: "Corporate and M&A",
-    body: "Capital raises and deals on both sides, from term sheet to close.",
+    matters: "Capital raises · SAFE notes · buy & sell side",
   },
   {
     title: "Health and regulatory",
-    body: "Specialist counsel for regulated health and telehealth businesses.",
+    matters: "Telehealth · AHPRA · TGA advertising",
   },
   {
     title: "Dispute resolution",
-    body: "Resolving disputes quickly, with litigation as the last resort.",
+    matters: "Negotiation · mediation · litigation",
   },
   {
     title: "Employment",
-    body: "Acting for employers and employees, contracts to disputes.",
+    matters: "Employment agreements · Fair Work · restraints",
   },
   {
     title: "Migration",
-    body: "Bringing talent to Australia, from visas to relocation.",
+    matters: "Skilled visas · global talent · sponsorship",
   },
   {
     title: "Wills and estate planning",
-    body: "Wills, beneficiaries and asset planning, sorted early.",
-  },
-  {
-    title: "General counsel",
-    body: "Senior counsel on retainer, without the full-time hire.",
+    matters: "Wills · testamentary trusts · powers of attorney",
   },
 ];
 
-// Practice areas set like a fee schedule — ruled rows, name beside
-// description, no icons.
+// Practice areas set like a fee schedule — numbered rows, dot leaders
+// running from the practice name to a mono list of typical matters.
+// General counsel breaks out of the table into a reversed night strip
+// (echoing the hero banner) and points at Zed Plus.
 export function Services() {
   return (
     <section id="services" className="bg-paper">
@@ -50,18 +50,48 @@ export function Services() {
           </p>
         </div>
 
-        <div className="mt-12 grid lg:grid-cols-2 lg:gap-x-16">
-          {services.map(({ title, body }) => (
+        <div className="mt-12 border-b border-line">
+          {services.map(({ title, matters }, i) => (
             <div
               key={title}
-              className="grid border-t border-line py-5 sm:grid-cols-[minmax(0,13rem)_1fr] sm:gap-6"
+              className="group flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line py-4 transition-colors duration-200 hover:border-ink/40 sm:py-5"
             >
-              <h3 className="text-xl">{title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-body sm:mt-0 sm:pt-1 sm:text-base">
-                {body}
+              <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-muted">
+                No. {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-xl transition-colors duration-200 group-hover:text-accent-deep sm:text-2xl">
+                {title}
+              </h3>
+              <span
+                className="hidden min-w-10 flex-1 border-b border-dotted border-muted/60 sm:block"
+                aria-hidden
+              />
+              <p className="w-full font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-body sm:w-auto">
+                {matters}
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Row No. 08, promoted out of the schedule */}
+        <div className="mt-10 flex flex-col items-start gap-5 bg-night px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+          <div>
+            <div className="flex flex-wrap items-baseline gap-x-4">
+              <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-night-body">
+                No. 08
+              </span>
+              <h3 className="text-2xl text-night-ink">General counsel</h3>
+            </div>
+            <p className="mt-1.5 text-sm text-night-body sm:text-base">
+              Senior counsel on retainer, without the full-time hire.
+            </p>
+          </div>
+          <Link
+            href="#zed-plus"
+            className="shrink-0 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-accent transition-colors duration-200 hover:text-night-ink"
+          >
+            Explore Zed Plus →
+          </Link>
         </div>
       </div>
     </section>

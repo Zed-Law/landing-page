@@ -3,14 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { CheckIcon, CopyIcon } from "./icons";
 
 const EMAIL = "hello@zed.law";
-
-const firmLinks = [
-  { label: "Zed Plus", href: "#zed-plus" },
-  { label: "Blog", href: "/blog" },
-];
 
 const practiceAreas = [
   "Commercial",
@@ -23,6 +17,8 @@ const practiceAreas = [
   "General counsel",
 ];
 
+// Ft4 dense colophon — the firm's regulatory particulars, practice areas and
+// contacts set as one quiet block of type, ragged right.
 export function Footer() {
   const [copied, setCopied] = useState(false);
 
@@ -34,75 +30,57 @@ export function Footer() {
   }
 
   return (
-    <footer id="contact" className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+    <footer id="contact" className="border-t border-line bg-paper">
+      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-16">
+        <Logo className="h-5 w-auto" />
 
-        {/* Mega menu columns */}
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
-          <div className="max-w-sm">
-            <Logo className="h-6 w-auto" />
-            <p className="mt-5 text-sm leading-relaxed text-body">
-              Top-tier legal talent, without the top-tier theatre. Lawyers from
-              the big firms, delivering sharp commercial advice at a fairer
-              price.
-            </p>
-            <p className="mt-5 text-xs leading-relaxed text-muted">
-              <strong className="font-medium text-body">Zed Law</strong> is the registered business name of Zed Consulting PTY LTD ABN 89 633 273 177, an incorporated legal practice.
-              <br /><br />
-              Level 24, 3 International Towers, 300 Barangaroo Avenue, Sydney NSW 2000.
-              <br /><br />
-              Liability limited by a scheme approved under Professional Standards Legislation.
-            </p>
-            {/* Email copy pill */}
-            <div className="mt-6 inline-flex rounded-[18px] bg-night p-1.5">
-              <div className="flex items-center gap-3 pl-5">
-                <span className="text-sm text-white/60">{EMAIL}</span>
-                <button
-                  type="button"
-                  onClick={handleCopy}
-                  aria-label={copied ? "Copied" : "Copy email address"}
-                  className="flex h-9 w-9 items-center justify-center rounded-[12px] bg-white text-ink transition-colors hover:bg-white/90"
-                >
-                  {copied ? (
-                    <CheckIcon className="h-4 w-4" />
-                  ) : (
-                    <CopyIcon className="h-4 w-4" />
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="mt-8 max-w-2xl space-y-5 text-sm leading-relaxed text-body">
+          <p>
+            Top-tier legal talent, without the top-tier theatre. Lawyers from
+            the big firms, delivering sharp commercial advice at a fairer
+            price.
+          </p>
 
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">
-              Firm
-            </h4>
-            <ul className="mt-4 space-y-3">
-              {firmLinks.map((l) => (
-                <li key={l.label}>
-                  <Link href={l.href} className="text-sm text-body transition-colors hover:text-ink">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="text-muted">
+            <strong className="font-semibold text-body">Zed Law</strong> is the
+            registered business name of Zed Consulting PTY LTD ABN 89 633 273
+            177, an incorporated legal practice. Level 24, 3 International
+            Towers, 300 Barangaroo Avenue, Sydney NSW 2000. Liability limited
+            by a scheme approved under Professional Standards Legislation.
+          </p>
 
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted">
-              Practice areas
-            </h4>
-            <ul className="mt-4 space-y-3">
-              {practiceAreas.map((area) => (
-                <li key={area} className="text-sm text-body">
-                  {area}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+          <p className="text-muted">
+            Practice areas — {practiceAreas.join(" · ")}.
+          </p>
 
-        <div className="mt-14 border-t border-line pt-8 sm:flex sm:items-center sm:justify-end">
+          <p>
+            <Link
+              href="#zed-plus"
+              className="underline decoration-line underline-offset-4 transition-colors hover:text-ink hover:decoration-accent-deep"
+            >
+              Zed Plus
+            </Link>
+            {" · "}
+            <Link
+              href="/blog"
+              className="underline decoration-line underline-offset-4 transition-colors hover:text-ink hover:decoration-accent-deep"
+            >
+              Blog
+            </Link>
+            {" · "}
+            <button
+              type="button"
+              onClick={handleCopy}
+              aria-label={copied ? "Copied" : "Copy email address"}
+              className="underline decoration-line underline-offset-4 transition-colors hover:text-ink hover:decoration-accent-deep"
+            >
+              {EMAIL}
+            </button>
+            {copied && (
+              <span className="ml-2 text-xs text-accent-deep">copied</span>
+            )}
+          </p>
+
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} Zed Law. All rights reserved.
           </p>

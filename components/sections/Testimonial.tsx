@@ -11,40 +11,40 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-const FERN_BASE =
-  "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/misc-ui";
 const HEADSHOT_BASE =
   "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/testimonial/headshots";
 
 const testimonials = [
   {
     quote:
-      "Hands down the best legal professionals I've had the pleasure of working with. Approachable, humble, and insightful, their advice is always clear, practical, and impactful.",
+      "Hands down the best legal professionals I’ve had the pleasure of working with. Approachable, humble, and insightful, their advice is always clear, practical, and impactful.",
     name: "Carolina Dreifuss",
     title: "Founder, SyncTechnologies",
     image: `${HEADSHOT_BASE}/carolina-dreifuss.jpeg`,
   },
   {
     quote:
-      "I worried working with a lawyer would be slow, complicated and stressful. Zed Law was the complete opposite. Had my company registered and trademark submitted, all done by professionals. Couldn't recommend them enough.",
+      "I worried working with a lawyer would be slow, complicated and stressful. Zed Law was the complete opposite. Had my company registered and trademark submitted, all done by professionals. Couldn’t recommend them enough.",
     name: "Elliot Toms",
     title: "Founder, Oddity",
     image: `${HEADSHOT_BASE}/elliot-toms.jpeg`,
   },
   {
     quote:
-      "Pragmatic, fairly priced, and a nice team to deal with. We'd 100% recommend Zed Law to support your business.",
+      "Pragmatic, fairly priced, and a nice team to deal with. We’d 100% recommend Zed Law to support your business.",
     name: "Helena Turpin",
     title: "Co-Founder, GoFIGR",
     image: `${HEADSHOT_BASE}/helena-turpin.jpeg`,
   },
 ];
 
+// One quote at a time, set big enough to earn the room. The carousel pauses
+// on hover and on interaction.
 export function Testimonial() {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const autoplay = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+    Autoplay({ delay: 6000, stopOnInteraction: true, stopOnMouseEnter: true })
   );
 
   React.useEffect(() => {
@@ -54,50 +54,43 @@ export function Testimonial() {
   }, [api]);
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 pb-14 pt-8 sm:px-8 sm:pb-20 sm:pt-10">
-        {/* Heading */}
-        <div className="flex items-center justify-center gap-3 sm:gap-5">
-          <img src={`${FERN_BASE}/left%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
-          <h2 className="text-center text-3xl font-extrabold text-ink sm:text-[2.6rem]">
-            What clients say about us
-          </h2>
-          <img src={`${FERN_BASE}/right%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
-        </div>
+    <section className="border-y border-line bg-paper-2">
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <h2 className="text-center font-mono text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-muted">
+          What clients say
+        </h2>
 
-        {/* Carousel */}
         <Carousel
           setApi={setApi}
           opts={{ loop: true, align: "start" }}
           plugins={[autoplay.current]}
-          className="mt-12 mx-auto max-w-3xl"
+          className="mx-auto mt-12 max-w-4xl"
         >
           <CarouselContent>
             {testimonials.map((t) => (
               <CarouselItem key={t.name}>
-                <div className="rounded-2xl bg-white px-8 py-10 sm:px-14 sm:py-14">
-                  <blockquote className="text-2xl font-semibold leading-snug text-ink sm:text-3xl">
-                    {t.quote}
+                <figure className="px-2 text-center sm:px-10">
+                  <blockquote className="text-2xl font-medium leading-snug text-ink [font-family:var(--font-jubilee-heading)] sm:text-[2.4rem] sm:leading-[1.25]">
+                    &ldquo;{t.quote}&rdquo;
                   </blockquote>
 
-                  <div className="mt-10 border-t border-line pt-6 flex items-center gap-4">
+                  <figcaption className="mt-10 flex items-center justify-center gap-4">
                     <img
                       src={t.image}
                       alt={t.name}
-                      className="h-12 w-12 rounded-full object-cover ring-2 ring-line"
+                      className="h-11 w-11 rounded-full object-cover"
                     />
-                    <div>
-                      <p className="text-sm font-semibold text-ink">{t.name}</p>
-                      <p className="text-sm text-ink/50">{t.title}</p>
-                    </div>
-                  </div>
-                </div>
+                    <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                      {t.name} · {t.title}
+                    </p>
+                  </figcaption>
+                </figure>
               </CarouselItem>
             ))}
           </CarouselContent>
 
           {/* Dots + arrows — inside Carousel so context is available */}
-          <div className="mt-1 flex items-center justify-center gap-4">
+          <div className="mt-10 flex items-center justify-center gap-4">
             <CarouselPrevious />
             <div className="flex gap-2">
               {testimonials.map((t, i) => (

@@ -1,4 +1,4 @@
-import Silk from "../Silk";
+import Link from "next/link";
 import { Button } from "../Button";
 import { IntakeChip } from "../IntakeChip";
 
@@ -42,14 +42,14 @@ function LogoGroup({ logos }: { logos: Logo[] }) {
           key={logo.name}
           src={`${LOGO_BASE}/${logo.file}`}
           alt={logo.name}
-          className="h-7 w-auto shrink-0 object-contain opacity-50 brightness-0 invert transition-opacity hover:opacity-90 sm:h-8"
+          className="h-7 w-auto shrink-0 object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 sm:h-8"
         />
       ))}
     </div>
   );
 }
 
-// Soft fade at the marquee edges so the logos dissolve into the dark hero
+// Soft fade at the marquee edges so the logos dissolve into the paper
 // instead of stopping at a hard line.
 const edgeFade = {
   maskImage:
@@ -58,78 +58,78 @@ const edgeFade = {
     "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)",
 };
 
+// Print-style hero: giant statement on paper, register line between rules,
+// a stack of press lines, then the pitch reversed out in a night strip.
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-night">
-      {/* Silk WebGL backdrop, monochrome slate, fading out toward the page */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[900px]"
-        style={{
-          maskImage:
-            "radial-gradient(125% 100% at 50% 0%, black 50%, transparent 92%)",
-          WebkitMaskImage:
-            "radial-gradient(125% 100% at 50% 0%, black 50%, transparent 92%)",
-        }}
-      >
-        <Silk
-          color="#5e6f8e"
-          speed={5}
-          scale={1}
-          noiseIntensity={1.5}
-          rotation={0}
-        />
-      </div>
-
-      {/* Contrast scrim: darkens the centre band (where the bright silk and
-          the headline overlap) so white text stays legible, while the texture
-          keeps flowing toward the edges and top. */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[900px]"
-        style={{
-          background:
-            "radial-gradient(115% 75% at 50% 40%, rgba(5,10,20,0.5) 0%, rgba(5,10,20,0.2) 55%, rgba(5,10,20,0) 100%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-4xl px-5 pb-28 pt-32 text-center sm:px-8 sm:pb-36 sm:pt-32">
-        <h1 className="mx-auto max-w-4xl text-[3rem] font-extrabold leading-[1.05] text-white sm:text-7xl sm:leading-[1.04]">
-          Top-tier legals,
-          <br className="hidden sm:block" /> without the top-tier{" "}
-          <span className="text-gradient-gold">theatre.</span>
+    <section className="bg-paper">
+      <div className="mx-auto max-w-7xl px-5 pt-6 sm:px-8 sm:pt-8">
+        <h1
+          className="reveal text-[clamp(2.75rem,7.5vw,6rem)] font-medium leading-[0.98] tracking-[-0.015em] text-ink"
+          style={{ "--i": 0 } as React.CSSProperties}
+        >
+          <span className="whitespace-nowrap">Top-tier</span> legals, without
+          the <span className="whitespace-nowrap">top-tier</span>{" "}
+          <span className="text-accent-deep">theatre.</span>
         </h1>
 
-        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70 sm:mt-6 sm:text-xl">
-          Big-firm pedigree, boutique focus. Straight advice, fast turnarounds,
-          and fees you can actually plan around.
-        </p>
+        {/* Press lines */}
+        <div
+          className="reveal mt-3 space-y-[5px]"
+          style={{ "--i": 1 } as React.CSSProperties}
+          aria-hidden
+        >
+          <div className="h-px bg-ink/70" />
+          <div className="h-px bg-ink/70" />
+          <div className="h-[2px] bg-ink/70" />
+          <div className="h-[3px] bg-ink/70" />
+          <div className="h-[5px] bg-ink/70" />
+        </div>
 
-        <div className="mt-6 flex justify-center sm:mt-7">
+        {/* The pitch, reversed out */}
+        <div
+          className="reveal mt-4 flex items-center justify-between gap-6 bg-night px-5 py-4 sm:px-7 sm:py-5"
+          style={{ "--i": 2 } as React.CSSProperties}
+        >
+          <p className="text-sm font-semibold leading-snug text-night-ink sm:whitespace-nowrap sm:text-xl">
+            Big-firm pedigree. Straight advice, fast turnarounds, fair fees.
+          </p>
+          <span
+            className="shrink-0 font-display text-3xl leading-none text-accent"
+            aria-hidden
+          >
+            ↓
+          </span>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 sm:pb-20">
+        <div
+          className="reveal mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8"
+          style={{ "--i": 3 } as React.CSSProperties}
+        >
+          <Button href="#book" size="lg" variant="primary">
+            Book a discovery call
+          </Button>
+          <Link
+            href="#zed-plus"
+            className="text-sm font-medium text-body underline decoration-line underline-offset-4 transition-colors duration-200 hover:text-ink hover:decoration-accent-deep"
+          >
+            Explore Zed Plus →
+          </Link>
           <IntakeChip />
         </div>
 
-        <div className="mt-5 flex flex-col items-center justify-center gap-2 sm:mt-7 sm:flex-row sm:gap-3">
-          <Button href="#book" size="md" variant="light" className="sm:pl-7 sm:pr-2.5 sm:py-2.5 sm:text-base">
-            Book a discovery call
-          </Button>
-          <Button href="#zed-plus" size="md" variant="outline-light" className="sm:pl-7 sm:pr-2.5 sm:py-2.5 sm:text-base">
-            Explore Zed Plus
-          </Button>
-        </div>
+        {/* Trust: hairline rule, small-caps line, logo marquee */}
+        <div
+          className="reveal mt-16 border-t border-line pt-8 sm:mt-20"
+          style={{ "--i": 4 } as React.CSSProperties}
+        >
+          <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
+            Trusted by 500+ companies across Australia and beyond
+          </p>
 
-        {/* Trusted by 500+ logo carousel — borderless, sits on the dark hero */}
-        <div className="relative mx-auto mt-14 max-w-4xl">
-          <div className="mb-9 text-center">
-            <p className="text-sm font-medium text-white/40">
-              Trusted by
-            </p>
-            <p className="mt-2 font-display text-4xl font-bold tracking-tight text-white">
-              500+ <span className="font-medium text-white/85">companies</span>
-            </p>
-            <p className="mt-2.5 text-sm text-white/40">
-              across Australia and beyond
-            </p>
-          </div>
-          <div className="overflow-hidden" style={edgeFade}>
+          <div className="mt-8 overflow-hidden" style={edgeFade}>
             <div className="flex w-max animate-marquee items-center">
               <LogoGroup logos={ROW_1} />
               <LogoGroup logos={ROW_1} />

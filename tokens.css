@@ -1,0 +1,48 @@
+/* Zed Law design tokens — "midnight chambers, engraved brass, austere"
+ * Portable mirror of the Tailwind v4 @theme block in app/globals.css.
+ * Display: Cormorant Garamond · Body: Source Serif 4
+ */
+:root {
+  --color-paper: oklch(96.5% 0.012 85);
+  --color-paper-2: oklch(93.5% 0.014 85);
+  --color-ink: oklch(21% 0.015 75);
+  --color-ink-soft: oklch(28% 0.015 75);
+  --color-body: oklch(38% 0.014 75);
+  --color-muted: oklch(52% 0.013 78);
+  --color-line: oklch(87% 0.012 85);
+
+  --color-night: oklch(16% 0.012 75);
+  --color-night-soft: oklch(20% 0.013 75);
+  --color-night-line: oklch(30% 0.014 78);
+  --color-night-ink: oklch(94% 0.01 85);
+  --color-night-body: oklch(72% 0.012 82);
+
+  --color-accent: oklch(74% 0.115 82);
+  --color-accent-deep: oklch(56% 0.12 70);
+  --color-accent-soft: oklch(90% 0.045 85);
+  --color-focus: oklch(70% 0.14 82);
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "PP Neue Montreal Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  --text-display: clamp(2.9rem, 7vw, 5.5rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --radius-card: 3px;
+  --radius-input: 2px;
+}

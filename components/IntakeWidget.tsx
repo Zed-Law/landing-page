@@ -23,7 +23,7 @@ export function IntakeWidget() {
   if (dismissed || !visible) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-40 w-[230px] rounded-xl border border-line bg-white p-3.5 shadow-[0_20px_50px_-12px_rgba(3,20,40,0.25)] sm:bottom-6 sm:right-6 sm:w-[300px] sm:rounded-2xl sm:p-5">
+    <div className="fixed bottom-4 right-4 z-40 w-[230px] rounded-xl border border-line bg-paper p-3.5 shadow-[0_20px_50px_-12px_rgba(3,20,40,0.25)] sm:bottom-6 sm:right-6 sm:w-[300px] sm:rounded-2xl sm:p-5">
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-2">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 sm:h-2 sm:w-2" />

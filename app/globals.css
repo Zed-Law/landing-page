@@ -115,31 +115,28 @@ body {
   }
 }
 
-/* Single orchestrated entrance on the hero — staggered via --i */
 @keyframes reveal {
   to {
     opacity: 1;
     transform: none;
   }
 }
-.reveal {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: reveal var(--dur-long) var(--ease-out) forwards;
-  animation-delay: calc(var(--i, 0) * 80ms);
-}
 
 /* Scroll-scrubbed reveal for below-the-fold sections — fades up as the
-   element enters the viewport, staggered via --i. Progressive enhancement:
-   browsers without scroll-driven animations render static. */
+   element enters the viewport, staggered via --i. The range ends in the
+   `cover` phase (viewport-relative) rather than `entry` (element-relative)
+   so short elements like schedule rows still animate over ~a quarter of a
+   viewport of scroll instead of blinking in over their own height.
+   Progressive enhancement: browsers without scroll-driven animations
+   render static. */
 @supports (animation-timeline: view()) {
   .view-reveal {
     opacity: 0;
-    transform: translateY(14px);
-    animation: reveal linear both;
+    transform: translateY(28px);
+    animation: reveal var(--ease-out) both;
     animation-timeline: view();
-    animation-range: entry calc(var(--i, 0) * 8%) entry
-      calc(45% + var(--i, 0) * 8%);
+    animation-range: entry calc(var(--i, 0) * 6%) cover
+      calc(25% + var(--i, 0) * 6%);
   }
 }
 
@@ -161,11 +158,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    animation-duration: 150ms;
-    animation-delay: 0ms;
-    transform: none;
-  }
   .view-reveal {
     animation: none;
     opacity: 1;

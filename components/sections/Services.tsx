@@ -39,7 +39,7 @@ export function Services() {
   return (
     <section id="services" className="bg-paper">
       <div className="mx-auto max-w-7xl px-5 pb-24 pt-6 sm:px-8 sm:pb-28 sm:pt-8">
-        <div className="max-w-3xl">
+        <div className="view-reveal max-w-3xl">
           <h2 className="text-4xl leading-tight sm:text-5xl">
             Counsel across everything commercial
           </h2>
@@ -54,7 +54,7 @@ export function Services() {
           {services.map(({ title, matters }, i) => (
             <div
               key={title}
-              className="group flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line py-4 transition-colors duration-200 hover:border-ink/40 sm:py-5"
+              className="view-reveal group flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line py-4 transition-colors duration-200 hover:border-ink/40 sm:py-5"
             >
               <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-muted">
                 No. {String(i + 1).padStart(2, "0")}
@@ -74,7 +74,7 @@ export function Services() {
         </div>
 
         {/* Row No. 08, promoted out of the schedule */}
-        <div className="mt-10 flex flex-col items-start gap-5 bg-night px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-7">
+        <div className="view-reveal mt-10 flex flex-col items-start gap-5 bg-night px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-7">
           <div>
             <div className="flex flex-wrap items-baseline gap-x-4">
               <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-night-body">

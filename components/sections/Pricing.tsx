@@ -112,7 +112,7 @@ export function Pricing() {
   return (
     <section id="zed-plus" className="border-t border-line bg-paper">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <div className="max-w-3xl">
+        <div className="view-reveal max-w-3xl">
           {/* Orienting line above the brand: names the lighter option first so
               price-sensitive visitors don't bounce, while steering to Zed Plus. */}
           <p className="text-base text-body sm:text-lg">
@@ -140,7 +140,7 @@ export function Pricing() {
         </div>
 
         {/* Parachute: an included benefit, set as a ruled strip */}
-        <div className="mt-12 border-y border-line py-6">
+        <div className="view-reveal mt-12 border-y border-line py-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
             <div>
               <a
@@ -185,7 +185,7 @@ export function Pricing() {
         <Carousel
           setApi={setApi}
           opts={{ loop: false, align: "start" }}
-          className="mt-12"
+          className="view-reveal mt-12"
         >
           <CarouselContent className="items-stretch">
             {tiers.map((tier) => (
@@ -231,7 +231,7 @@ export function Pricing() {
 
         {/* Per-engagement: a deliberately understated alternative, kept
             outside the Zed Plus brand. Retainer stays the preferred path. */}
-        <div id="per-engagement" className="mt-20 scroll-mt-24 border-t border-line pt-10">
+        <div id="per-engagement" className="view-reveal mt-20 scroll-mt-24 border-t border-line pt-10">
           <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
             Not ready for a retainer?
           </p>

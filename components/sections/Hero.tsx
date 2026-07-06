@@ -1,6 +1,20 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { Button } from "../Button";
 import { IntakeChip } from "../IntakeChip";
+
+// Headline words for the typed-on intro. Each word renders as an
+// inline-block of per-character spans, so lines still wrap at word
+// boundaries while characters appear one by one.
+const HEADLINE: { text: string; accent?: boolean }[] = [
+  { text: "Top-tier" },
+  { text: "legals," },
+  { text: "without" },
+  { text: "the" },
+  { text: "top-tier" },
+  { text: "theatre.", accent: true },
+];
+const HEADLINE_PLAIN = HEADLINE.map((w) => w.text).join(" ");
 
 const LOGO_BASE =
   "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/client-logos";
@@ -65,20 +79,25 @@ export function Hero() {
     <section className="bg-paper">
       <div className="mx-auto max-w-7xl px-5 pt-6 sm:px-8 sm:pt-8">
         <h1
-          className="reveal text-[clamp(2.75rem,7.5vw,6rem)] font-medium leading-[0.98] tracking-[-0.015em] text-ink"
-          style={{ "--i": 0 } as React.CSSProperties}
+          aria-label={HEADLINE_PLAIN}
+          className="text-[clamp(2.75rem,7.5vw,6rem)] font-medium leading-[0.98] tracking-[-0.015em] text-ink"
         >
-          <span className="whitespace-nowrap">Top-tier</span> legals, without
-          the <span className="whitespace-nowrap">top-tier</span>{" "}
-          <span className="text-accent-deep">theatre.</span>
+          <span aria-hidden>
+            {HEADLINE.map(({ text, accent }, wi) => (
+              <Fragment key={wi}>
+                {wi > 0 && " "}
+                <span
+                  className={`inline-block ${accent ? "text-accent-deep" : ""}`}
+                >
+                  {text}
+                </span>
+              </Fragment>
+            ))}
+          </span>
         </h1>
 
         {/* Press lines */}
-        <div
-          className="reveal mt-3 space-y-[5px]"
-          style={{ "--i": 1 } as React.CSSProperties}
-          aria-hidden
-        >
+        <div className="mt-3 space-y-[5px]" aria-hidden>
           <div className="h-px bg-ink/70" />
           <div className="h-px bg-ink/70" />
           <div className="h-[2px] bg-ink/70" />
@@ -87,10 +106,7 @@ export function Hero() {
         </div>
 
         {/* The pitch, reversed out */}
-        <div
-          className="reveal mt-4 flex items-center justify-between gap-6 bg-night px-5 py-4 sm:px-7 sm:py-5"
-          style={{ "--i": 2 } as React.CSSProperties}
-        >
+        <div className="mt-4 flex items-center justify-between gap-6 bg-night px-5 py-4 sm:px-7 sm:py-5">
           <p className="text-sm font-semibold leading-snug text-night-ink sm:whitespace-nowrap sm:text-xl">
             Big-firm pedigree. Straight advice, fast turnarounds, fair fees.
           </p>
@@ -104,10 +120,7 @@ export function Hero() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 sm:pb-20">
-        <div
-          className="reveal mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8"
-          style={{ "--i": 3 } as React.CSSProperties}
-        >
+        <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
           <Button href="#book" size="lg" variant="primary">
             Book a discovery call
           </Button>
@@ -121,10 +134,7 @@ export function Hero() {
         </div>
 
         {/* Trust: hairline rule, small-caps line, logo marquee */}
-        <div
-          className="reveal mt-16 border-t border-line pt-8 sm:mt-20"
-          style={{ "--i": 4 } as React.CSSProperties}
-        >
+        <div className="mt-16 border-t border-line pt-8 sm:mt-20">
           <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
             Trusted by 500+ companies across Australia and beyond
           </p>

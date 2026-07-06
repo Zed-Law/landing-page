@@ -22,7 +22,7 @@ export function FinalCta() {
   return (
     <section className="border-t border-night-line bg-night">
       <div className="mx-auto max-w-7xl px-5 py-20 text-center sm:px-8 sm:py-28">
-        <div className="flex flex-col items-center gap-1.5">
+        <div className="view-reveal flex flex-col items-center gap-1.5">
           <div className="flex items-center gap-2.5">
             {/* Google G */}
             <svg width="18" height="18" viewBox="0 0 24 24" aria-label="Google" role="img">
@@ -41,15 +41,15 @@ export function FinalCta() {
           <p className="text-xs text-night-body">Based on Google Reviews</p>
         </div>
 
-        <h2 className="mx-auto mt-8 max-w-[18ch] text-4xl leading-tight text-night-ink sm:text-6xl">
+        <h2 className="view-reveal mx-auto mt-8 max-w-[18ch] text-4xl leading-tight text-night-ink sm:text-6xl">
           Top-tier counsel, on your side of the table
         </h2>
-        <p className="mx-auto mt-5 max-w-lg text-lg text-night-body">
+        <p className="view-reveal mx-auto mt-5 max-w-lg text-lg text-night-body">
           Tell us what you&apos;re trying to get done. We&apos;ll tell you if
           we can help, and follow up with a clear quote.
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+        <div className="view-reveal mt-9 flex flex-wrap items-center justify-center gap-4">
           {awards.map((award) => (
             <div
               key={award.alt}
@@ -65,7 +65,7 @@ export function FinalCta() {
           ))}
         </div>
 
-        <div className="mt-10 flex justify-center">
+        <div className="view-reveal mt-10 flex justify-center">
           <Button href="#book" size="lg" variant="light">
             Book a discovery call
           </Button>

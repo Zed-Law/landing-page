@@ -4,7 +4,7 @@ export function Booking() {
   return (
     <section id="book" className="bg-night">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-        <div className="max-w-3xl">
+        <div className="view-reveal max-w-3xl">
           <h2 className="text-4xl leading-tight text-night-ink sm:text-5xl">
             Book a discovery call
           </h2>

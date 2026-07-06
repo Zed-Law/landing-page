@@ -56,7 +56,7 @@ export function Testimonial() {
   return (
     <section className="border-y border-line bg-paper-2">
       <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
-        <h2 className="text-center font-mono text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-muted">
+        <h2 className="view-reveal text-center font-mono text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-muted">
           What clients say
         </h2>
 
@@ -64,7 +64,7 @@ export function Testimonial() {
           setApi={setApi}
           opts={{ loop: true, align: "start" }}
           plugins={[autoplay.current]}
-          className="mx-auto mt-12 max-w-4xl"
+          className="view-reveal mx-auto mt-12 max-w-4xl"
         >
           <CarouselContent>
             {testimonials.map((t) => (

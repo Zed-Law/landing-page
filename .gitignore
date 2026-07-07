@@ -27,7 +27,14 @@
 
 # misc
 .DS_Store
+Icon?
 *.pem
+
+# agent tooling
+.claude/
+.agents/
+.hallmark/
+skills-lock.json
 
 # debug
 npm-debug.log*

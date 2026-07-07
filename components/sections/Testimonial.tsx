@@ -11,8 +11,6 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 
-const FERN_BASE =
-  "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/misc-ui";
 const HEADSHOT_BASE =
   "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/testimonial/headshots";
 
@@ -40,11 +38,13 @@ const testimonials = [
   },
 ];
 
+// Statement moment: the quote is the section. Snaps into view; the quote is
+// set in display type at reading weight, attribution in mono.
 export function Testimonial() {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const autoplay = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+    Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true })
   );
 
   React.useEffect(() => {
@@ -54,42 +54,34 @@ export function Testimonial() {
   }, [api]);
 
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 pb-14 pt-8 sm:px-8 sm:pb-20 sm:pt-10">
-        {/* Heading */}
-        <div className="flex items-center justify-center gap-3 sm:gap-5">
-          <img src={`${FERN_BASE}/left%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
-          <h2 className="text-center text-3xl font-extrabold text-ink sm:text-[2.6rem]">
-            What clients say about us
-          </h2>
-          <img src={`${FERN_BASE}/right%20fern.svg`} alt="" aria-hidden="true" className="h-10 w-auto shrink-0 sm:h-14" />
-        </div>
+    <section className="flex min-h-[100dvh] snap-start flex-col justify-center bg-paper">
+      <div className="mx-auto w-full max-w-7xl px-5 py-24 sm:px-8 lg:px-10">
+        <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+          What clients say about us
+        </p>
 
-        {/* Carousel */}
         <Carousel
           setApi={setApi}
           opts={{ loop: true, align: "start" }}
           plugins={[autoplay.current]}
-          className="mt-12 mx-auto max-w-3xl"
+          className="mt-10"
         >
           <CarouselContent>
             {testimonials.map((t) => (
               <CarouselItem key={t.name}>
-                <div className="rounded-2xl bg-white px-8 py-10 sm:px-14 sm:py-14">
-                  <blockquote className="text-2xl font-semibold leading-snug text-ink sm:text-3xl">
-                    {t.quote}
-                  </blockquote>
+                <blockquote className="max-w-5xl font-display text-2xl font-medium leading-snug text-ink sm:text-4xl">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
 
-                  <div className="mt-10 border-t border-line pt-6 flex items-center gap-4">
-                    <img
-                      src={t.image}
-                      alt={t.name}
-                      className="h-12 w-12 rounded-full object-cover ring-2 ring-line"
-                    />
-                    <div>
-                      <p className="text-sm font-semibold text-ink">{t.name}</p>
-                      <p className="text-sm text-ink/50">{t.title}</p>
-                    </div>
+                <div className="mt-10 flex items-center gap-4">
+                  <img
+                    src={t.image}
+                    alt={t.name}
+                    className="h-11 w-11 rounded-full object-cover"
+                  />
+                  <div className="font-mono text-xs uppercase tracking-[0.1em]">
+                    <p className="text-ink">{t.name}</p>
+                    <p className="mt-1 text-muted">{t.title}</p>
                   </div>
                 </div>
               </CarouselItem>
@@ -97,7 +89,7 @@ export function Testimonial() {
           </CarouselContent>
 
           {/* Dots + arrows — inside Carousel so context is available */}
-          <div className="mt-1 flex items-center justify-center gap-4">
+          <div className="mt-12 flex items-center gap-4">
             <CarouselPrevious />
             <div className="flex gap-2">
               {testimonials.map((t, i) => (
@@ -107,8 +99,10 @@ export function Testimonial() {
                   onClick={() => api?.scrollTo(i)}
                   aria-label={`Go to testimonial from ${t.name}`}
                   aria-current={i === current}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === current ? "w-6 bg-ink" : "w-1.5 bg-line hover:bg-ink/40"
+                  className={`h-1 transition-all duration-300 ease-out ${
+                    i === current
+                      ? "w-8 bg-accent"
+                      : "w-3 bg-line hover:bg-muted"
                   }`}
                 />
               ))}

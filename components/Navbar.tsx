@@ -13,6 +13,9 @@ const links = [
   { label: "Blog", href: "/blog" },
 ];
 
+// Fixed slim bar with a one-time drop-down entrance; the mobile menu is a
+// full-screen sheet in display type (nakatomi's sidebar, flattened).
+// forceSolid is kept for the blog, where the bar is solid from the start.
 export function Navbar({
   forceSolid = false,
   referrer = null,
@@ -22,9 +25,7 @@ export function Navbar({
 }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  // On pages without a dark hero, text/logo stay dark even before scrolling,
-  // but the background/border only appear once the user actually scrolls.
-  const dark = forceSolid || scrolled;
+  const solid = forceSolid || scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -33,17 +34,21 @@ export function Navbar({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll while the sheet is open.
+  useEffect(() => {
+    document.documentElement.style.overflowY = open ? "hidden" : "";
+    return () => {
+      document.documentElement.style.overflowY = "";
+    };
+  }, [open]);
+
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "px-3 pt-3 sm:px-5 sm:pt-4" : "px-0 pt-0"
-      }`}
-    >
-      {/* Referral bar, pinned above the nav at the top of the page. Collapses
-          away on scroll, where it reappears as a compact badge inside the nav. */}
+    <header className="nav-drop fixed inset-x-0 top-0 z-50">
+      {/* Referral bar, pinned above the nav. Collapses on scroll and
+          reappears as a compact badge inside the bar. */}
       {referrer && (
         <div
-          className={`overflow-hidden transition-all duration-300 ${
+          className={`overflow-hidden transition-all duration-300 ease-out ${
             scrolled ? "max-h-0 opacity-0" : "max-h-14 opacity-100"
           }`}
         >
@@ -53,30 +58,29 @@ export function Navbar({
           />
         </div>
       )}
+
       <nav
-        className={`relative mx-auto flex h-16 max-w-7xl items-center justify-between px-5 transition-all duration-300 sm:px-8 ${
-          scrolled
-            ? "rounded-[18px] border border-line bg-white/80 shadow-[0_10px_40px_-12px_rgba(3,20,40,0.18)] backdrop-blur-md sm:px-6"
-            : "border border-transparent bg-transparent"
+        className={`relative flex h-16 items-center justify-between px-5 transition-colors duration-300 ease-out sm:px-8 lg:px-10 ${
+          solid
+            ? "border-b border-line bg-paper/85 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
         }`}
       >
         <Link href="/" className="flex items-center" aria-label="Zed Law home">
-          <Logo variant={dark ? "black" : "white"} className="h-5 w-auto sm:h-6" />
+          <Logo variant="white" className="h-5 w-auto sm:h-6" />
         </Link>
 
-        {/* Compact referral badge, centred in the nav once the top bar is gone */}
+        {/* Compact referral badge, centred once the top bar is gone */}
         {referrer && (
           <div
-            className={`pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 lg:block ${
+            className={`pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 ease-out lg:block ${
               scrolled ? "opacity-100" : "opacity-0"
             }`}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1.5 text-sm text-ink">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold-deep" />
-              Referred by {referrer.displayName},
-              <span className="font-semibold text-gold-deep">
-                {referrer.discount}% off applied
-              </span>
+            <span className="inline-flex items-center gap-2 rounded-btn border border-line bg-paper-2 px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.08em] text-body">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+              Referred by {referrer.displayName} ·
+              <span className="text-accent">{referrer.discount}% off</span>
             </span>
           </div>
         )}
@@ -88,60 +92,74 @@ export function Navbar({
               <Link
                 key={l.label}
                 href={l.href}
-                className={`text-sm font-medium transition-colors ${
-                  dark
-                    ? "text-body hover:text-ink"
-                    : "text-white/70 hover:text-white"
-                }`}
+                className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-body transition-colors duration-200 ease-out hover:text-ink"
               >
                 {l.label}
               </Link>
             ))}
           </div>
-          <Button href="#book" size="md" variant={dark ? "primary" : "light"}>
+          <Button href="#book" size="md" variant="outline">
             Book a call
           </Button>
         </div>
 
-        {/* Mobile: CTA + hamburger */}
+        {/* Mobile: CTA + menu toggle */}
         <div className="flex items-center gap-2 md:hidden">
-          <Button href="#book" size="md" variant={dark ? "primary" : "light"} withArrow={false} className="!pl-5 !pr-5 justify-center">
+          <Button href="#book" size="md" withArrow={false}>
             Book a call
           </Button>
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-white/60"
+            className="flex h-11 w-11 items-center justify-center rounded-btn border border-line"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
           >
             <div className="space-y-1.5">
-              <span className="block h-0.5 w-5 bg-ink" />
-              <span className="block h-0.5 w-5 bg-ink" />
+              <span
+                className={`block h-0.5 w-5 bg-ink transition-transform duration-200 ease-out ${
+                  open ? "translate-y-1 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-5 bg-ink transition-transform duration-200 ease-out ${
+                  open ? "-translate-y-1 -rotate-45" : ""
+                }`}
+              />
             </div>
           </button>
         </div>
       </nav>
 
-      {open && (
-        <div className="mx-auto mt-2 max-w-7xl rounded-xl border border-line bg-white p-4 shadow-[0_10px_40px_-12px_rgba(3,20,40,0.18)] md:hidden">
-          <div className="flex flex-col gap-1">
-            {links.map((l) => (
-              <Link
-                key={l.label}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-2 py-2.5 text-sm font-medium text-body hover:bg-surface-alt hover:text-ink"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <div className="pt-2">
-              <Button href="#book" size="md" className="w-full justify-between">
-                Book a call
-              </Button>
-            </div>
-          </div>
+      {/* Full-screen sheet, display type */}
+      <div
+        className={`fixed inset-0 top-16 z-40 flex flex-col bg-paper px-5 pb-10 pt-8 transition-opacity duration-300 ease-out md:hidden ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        aria-hidden={!open}
+      >
+        <nav className="flex flex-col divide-y divide-line">
+          {links.map((l) => (
+            <Link
+              key={l.label}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="py-5 font-display text-3xl font-extrabold uppercase leading-none text-ink transition-colors duration-200 ease-out hover:text-accent"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="mt-auto">
+          <Button
+            href="#book"
+            size="lg"
+            className="w-full"
+            variant="primary"
+          >
+            Book a call
+          </Button>
         </div>
-      )}
+      </div>
     </header>
   );
 }

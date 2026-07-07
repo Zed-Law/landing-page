@@ -134,7 +134,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAtt
         onClick={scrollPrev}
         disabled={!canScrollPrev}
         aria-label="Previous testimonial"
-        className={`flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition hover:bg-stone disabled:opacity-40 ${className ?? ""}`}
+        className={`flex h-9 w-9 items-center justify-center rounded-btn border border-line text-ink transition-colors duration-200 hover:border-accent hover:text-accent disabled:opacity-40 ${className ?? ""}`}
         {...props}
       >
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -156,7 +156,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttribu
         onClick={scrollNext}
         disabled={!canScrollNext}
         aria-label="Next testimonial"
-        className={`flex h-9 w-9 items-center justify-center rounded-full border border-line text-ink transition hover:bg-stone disabled:opacity-40 ${className ?? ""}`}
+        className={`flex h-9 w-9 items-center justify-center rounded-btn border border-line text-ink transition-colors duration-200 hover:border-accent hover:text-accent disabled:opacity-40 ${className ?? ""}`}
         {...props}
       >
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">

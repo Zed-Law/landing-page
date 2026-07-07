@@ -1,6 +1,6 @@
-import Silk from "../Silk";
 import { Button } from "../Button";
 import { IntakeChip } from "../IntakeChip";
+import { Reveal } from "../Reveal";
 
 const LOGO_BASE =
   "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/client-logos";
@@ -42,14 +42,14 @@ function LogoGroup({ logos }: { logos: Logo[] }) {
           key={logo.name}
           src={`${LOGO_BASE}/${logo.file}`}
           alt={logo.name}
-          className="h-7 w-auto shrink-0 object-contain opacity-50 brightness-0 invert transition-opacity hover:opacity-90 sm:h-8"
+          className="h-6 w-auto shrink-0 object-contain opacity-45 brightness-0 invert transition-opacity duration-200 ease-out hover:opacity-90 sm:h-7"
         />
       ))}
     </div>
   );
 }
 
-// Soft fade at the marquee edges so the logos dissolve into the dark hero
+// Soft fade at the marquee edges so the logos dissolve into the paper
 // instead of stopping at a hard line.
 const edgeFade = {
   maskImage:
@@ -60,89 +60,58 @@ const edgeFade = {
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-night">
-      {/* Silk WebGL backdrop, monochrome slate, fading out toward the page */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[900px]"
-        style={{
-          maskImage:
-            "radial-gradient(125% 100% at 50% 0%, black 50%, transparent 92%)",
-          WebkitMaskImage:
-            "radial-gradient(125% 100% at 50% 0%, black 50%, transparent 92%)",
-        }}
-      >
-        <Silk
-          color="#5e6f8e"
-          speed={5}
-          scale={1}
-          noiseIntensity={1.5}
-          rotation={0}
-        />
-      </div>
-
-      {/* Contrast scrim: darkens the centre band (where the bright silk and
-          the headline overlap) so white text stays legible, while the texture
-          keeps flowing toward the edges and top. */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-[900px]"
-        style={{
-          background:
-            "radial-gradient(115% 75% at 50% 40%, rgba(5,10,20,0.5) 0%, rgba(5,10,20,0.2) 55%, rgba(5,10,20,0) 100%)",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-4xl px-5 pb-28 pt-32 text-center sm:px-8 sm:pb-36 sm:pt-32">
-        <h1 className="mx-auto max-w-4xl text-[3rem] font-extrabold leading-[1.05] text-white sm:text-7xl sm:leading-[1.04]">
-          Top-tier legals,
-          <br className="hidden sm:block" /> without the top-tier{" "}
-          <span className="text-gradient-gold">theatre.</span>
-        </h1>
-
-        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-white/70 sm:mt-6 sm:text-xl">
-          Big-firm pedigree, boutique focus. Straight advice, fast turnarounds,
-          and fees you can actually plan around.
-        </p>
-
-        <div className="mt-6 flex justify-center sm:mt-7">
+    <section className="relative flex min-h-[100dvh] snap-start flex-col justify-between overflow-hidden bg-paper pt-28 sm:pt-32">
+      {/* Left-biased typographic hero — the headline is the image. */}
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
+        <Reveal>
           <IntakeChip />
-        </div>
+        </Reveal>
 
-        <div className="mt-5 flex flex-col items-center justify-center gap-2 sm:mt-7 sm:flex-row sm:gap-3">
-          <Button href="#book" size="md" variant="light" className="sm:pl-7 sm:pr-2.5 sm:py-2.5 sm:text-base">
-            Book a discovery call
-          </Button>
-          <Button href="#zed-plus" size="md" variant="outline-light" className="sm:pl-7 sm:pr-2.5 sm:py-2.5 sm:text-base">
-            Explore Zed Plus
-          </Button>
-        </div>
+        <Reveal index={1}>
+          <h1 className="mt-6 max-w-6xl text-display font-extrabold uppercase text-ink">
+            <span className="whitespace-nowrap">Top-tier</span> legals,
+            without the <span className="whitespace-nowrap">top-tier</span>{" "}
+            <span className="text-accent">theatre.</span>
+          </h1>
+        </Reveal>
 
-        {/* Trusted by 500+ logo carousel — borderless, sits on the dark hero */}
-        <div className="relative mx-auto mt-14 max-w-4xl">
-          <div className="mb-9 text-center">
-            <p className="text-sm font-medium text-white/40">
-              Trusted by
-            </p>
-            <p className="mt-2 font-display text-4xl font-bold tracking-tight text-white">
-              500+ <span className="font-medium text-white/85">companies</span>
-            </p>
-            <p className="mt-2.5 text-sm text-white/40">
-              across Australia and beyond
-            </p>
+        <Reveal index={2}>
+          <p className="mt-7 max-w-lg text-lg leading-relaxed text-body sm:text-xl">
+            Big-firm pedigree, boutique focus. Straight advice, fast
+            turnarounds, and fees you can actually plan around.
+          </p>
+        </Reveal>
+
+        <Reveal index={3}>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button href="#book" size="lg">
+              Book a discovery call
+            </Button>
+            <Button href="#zed-plus" size="lg" variant="outline">
+              Explore Zed Plus
+            </Button>
           </div>
-          <div className="overflow-hidden" style={edgeFade}>
-            <div className="flex w-max animate-marquee items-center">
-              <LogoGroup logos={ROW_1} />
-              <LogoGroup logos={ROW_1} />
-            </div>
-          </div>
-          <div className="mt-7 overflow-hidden" style={edgeFade}>
-            <div className="flex w-max animate-marquee-reverse items-center">
-              <LogoGroup logos={ROW_2} />
-              <LogoGroup logos={ROW_2} />
-            </div>
-          </div>
-        </div>
+        </Reveal>
       </div>
+
+      {/* Proof strip pinned to the bottom of the viewport */}
+      <Reveal index={4} className="mt-16 w-full pb-10">
+        <p className="mx-auto max-w-7xl px-5 font-mono text-xs uppercase tracking-[0.14em] text-muted sm:px-8 lg:px-10">
+          Trusted by 500+ companies across Australia and beyond
+        </p>
+        <div className="mt-6 overflow-hidden" style={edgeFade}>
+          <div className="flex w-max animate-marquee items-center">
+            <LogoGroup logos={ROW_1} />
+            <LogoGroup logos={ROW_1} />
+          </div>
+        </div>
+        <div className="mt-6 overflow-hidden" style={edgeFade}>
+          <div className="flex w-max animate-marquee-reverse items-center">
+            <LogoGroup logos={ROW_2} />
+            <LogoGroup logos={ROW_2} />
+          </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

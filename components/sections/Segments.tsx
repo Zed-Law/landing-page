@@ -1,74 +1,53 @@
-import { RocketIcon, ChartIcon, BuildingIcon } from "../icons";
-import BorderGlow from "../BorderGlow";
-import { FoundersGraphic } from "./FoundersGraphic";
-import { ScaleupsGraphic } from "./ScaleupsGraphic";
-import { InHouseGraphic } from "./InHouseGraphic";
+import { Reveal } from "../Reveal";
 
 const segments = [
   {
-    icon: RocketIcon,
-    graphic: FoundersGraphic,
     label: "Founders & startups",
     body: "Raising a round, making your first hires, signing the contracts that matter. We get the deal done so you can keep building.",
   },
   {
-    icon: ChartIcon,
-    graphic: ScaleupsGraphic,
     label: "Scaleups",
     body: "You've outgrown generic legal support but balk at big-firm rates, rightly. Senior counsel on call for the decisions that move the business.",
   },
   {
-    icon: BuildingIcon,
-    graphic: InHouseGraphic,
     label: "In-house teams",
     body: "Extra capacity from lawyers who've sat where you sit. Overflow handled, judgement included, no ramp-up required.",
   },
 ];
 
+// Nakatomi's partnership blocks, flattened to full-width hairline rows:
+// big display label left, working copy right.
 export function Segments() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl font-extrabold leading-tight text-ink sm:text-[2.6rem]">
-            Legal that starts with the outcome,{" "}
-            <br />
-            <span className="text-muted">not the legal lecture.</span>
+    <section className="bg-paper">
+      <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
+        <Reveal>
+          <h2 className="max-w-4xl text-display-s font-extrabold uppercase text-ink">
+            Legal that starts with the{" "}
+            <span className="text-accent">outcome,</span> not the legal
+            lecture.
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-body">
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-body sm:text-lg">
             We ask what you&apos;re trying to achieve, then work back to the
             cleanest legal path that gets you there. Whatever stage you&apos;re
             at, the advice connects to a business decision.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {segments.map(({ icon: Icon, graphic: Graphic, label, body }) => (
-            <BorderGlow
+        <div className="mt-16">
+          {segments.map(({ label, body }, i) => (
+            <Reveal
               key={label}
-              className="glow-desktop-off"
-              borderRadius={20}
-              glowRadius={28}
-              glowIntensity={1.15}
-              edgeSensitivity={22}
+              index={i}
+              className="grid gap-4 border-t border-line py-10 last:border-b sm:grid-cols-[1.2fr_1fr] sm:gap-10 sm:py-12"
             >
-              <div className="p-2">
-                <div className="aspect-[16/10] overflow-hidden rounded-xl bg-surface-alt md:bg-transparent">
-                  <Graphic />
-                </div>
-                <div className="px-4 pb-5 pt-5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-ink text-white">
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <h3 className="text-xl font-bold text-ink">{label}</h3>
-                  </div>
-                  <p className="mt-4 text-sm leading-relaxed text-body">
-                    {body}
-                  </p>
-                </div>
-              </div>
-            </BorderGlow>
+              <h3 className="font-display text-2xl font-medium uppercase leading-tight text-ink sm:text-4xl">
+                {label}
+              </h3>
+              <p className="max-w-md text-base leading-relaxed text-body">
+                {body}
+              </p>
+            </Reveal>
           ))}
         </div>
       </div>

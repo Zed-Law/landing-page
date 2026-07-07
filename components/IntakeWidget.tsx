@@ -23,11 +23,11 @@ export function IntakeWidget() {
   if (dismissed || !visible) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-40 w-[230px] rounded-xl border border-line bg-white p-3.5 shadow-[0_20px_50px_-12px_rgba(3,20,40,0.25)] sm:bottom-6 sm:right-6 sm:w-[300px] sm:rounded-2xl sm:p-5">
+    <div className="fixed bottom-4 right-4 z-40 w-[230px] rounded-card border border-line bg-paper-2 p-3.5 sm:bottom-6 sm:right-6 sm:w-[300px] sm:p-5">
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 sm:h-2 sm:w-2" />
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-muted sm:text-xs">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent sm:h-2 sm:w-2" />
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.1em] text-muted sm:text-xs">
             {monthLabel} intake
           </p>
         </div>
@@ -41,7 +41,7 @@ export function IntakeWidget() {
         </button>
       </div>
 
-      <p className="mt-2 font-display text-base font-bold text-ink sm:mt-3 sm:text-xl">
+      <p className="mt-2 font-display text-base font-medium uppercase text-ink sm:mt-3 sm:text-xl">
         {spotsLeft} of {totalSpots} spots left
       </p>
 
@@ -49,8 +49,8 @@ export function IntakeWidget() {
         {Array.from({ length: totalSpots }).map((_, i) => (
           <span
             key={i}
-            className={`h-1 flex-1 rounded-full sm:h-1.5 ${
-              i < spotsLeft ? "bg-ink" : "bg-surface-alt"
+            className={`h-1 flex-1 sm:h-1.5 ${
+              i < spotsLeft ? "bg-accent" : "bg-line"
             }`}
           />
         ))}

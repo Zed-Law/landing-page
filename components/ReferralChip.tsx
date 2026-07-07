@@ -11,8 +11,8 @@ export function ReferralChip({ displayName, discount }: ReferralChipProps) {
   if (!displayName || discount == null) return null;
 
   return (
-    <div className="w-full border-b border-white/10 bg-night-soft">
-      <p className="mx-auto max-w-4xl px-5 py-2.5 text-center text-sm text-white/80 sm:px-8">
+    <div className="w-full border-b border-line bg-paper-2">
+      <p className="mx-auto max-w-4xl px-5 py-2.5 text-center font-mono text-xs uppercase tracking-[0.08em] text-body sm:px-8">
         {displayName} referred you. Your first engagement is{" "}
         <span className="font-semibold text-gradient-gold">{discount}% off.</span>
       </p>

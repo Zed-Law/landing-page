@@ -60,9 +60,11 @@ const edgeFade = {
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[100dvh] snap-start flex-col justify-between overflow-hidden bg-paper pt-28 sm:pt-32">
-      {/* Left-biased typographic hero — the headline is the image. */}
-      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
+    <section className="relative flex min-h-[100dvh] snap-start flex-col overflow-hidden bg-paper pt-24 sm:pt-28">
+      {/* Left-biased typographic hero — the headline is the image. flex-1 +
+          justify-center splits the viewport slack evenly around the copy
+          instead of piling it all up against the marquee. */}
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 py-8 sm:px-8 lg:px-10">
         <Reveal>
           <IntakeChip />
         </Reveal>
@@ -95,7 +97,7 @@ export function Hero() {
       </div>
 
       {/* Proof strip pinned to the bottom of the viewport */}
-      <Reveal index={4} className="mt-16 w-full pb-10">
+      <Reveal index={4} className="w-full pb-10">
         <p className="mx-auto max-w-7xl px-5 font-mono text-xs uppercase tracking-[0.14em] text-muted sm:px-8 lg:px-10">
           Trusted by 500+ companies across Australia and beyond
         </p>

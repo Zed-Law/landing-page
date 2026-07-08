@@ -4,30 +4,37 @@ import { GeneralCounselRow } from "./GeneralCounselRow";
 const services: Service[] = [
   {
     title: "Commercial",
+    keywords: "Contracts · structuring · privacy & compliance",
     matters: "Contracts, structuring and compliance for a growing business.",
   },
   {
     title: "Corporate and M&A",
+    keywords: "Capital raises · SAFE notes · buy & sell side",
     matters: "Capital raises and deals on both sides, from term sheet to close.",
   },
   {
     title: "Health and regulatory",
+    keywords: "Telehealth · AHPRA · TGA advertising",
     matters: "Specialist counsel for regulated health and telehealth businesses.",
   },
   {
     title: "Dispute resolution",
+    keywords: "Negotiation · mediation · litigation",
     matters: "Resolving disputes quickly, with litigation as the last resort.",
   },
   {
     title: "Employment",
+    keywords: "Employment agreements · Fair Work · restraints",
     matters: "Acting for employers and employees, contracts to disputes.",
   },
   {
     title: "Migration",
+    keywords: "Skilled visas · global talent · sponsorship",
     matters: "Bringing talent to Australia, from visas to relocation.",
   },
   {
     title: "Wills and estate planning",
+    keywords: "Wills · testamentary trusts · powers of attorney",
     matters: "Wills, beneficiaries and asset planning, sorted early.",
   },
 ];

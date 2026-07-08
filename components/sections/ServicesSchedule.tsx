@@ -2,20 +2,20 @@
 
 import * as React from "react";
 
-export type Service = { title: string; matters: string };
+export type Service = { title: string; keywords: string; matters: string };
 
 // The practice-area schedule. From md up it renders as the fee-schedule
-// table — numbered rows, dot leaders, mono matters — untouched. Below md
-// the matters collapse behind an accordion: rows show just the numbered
-// practice names, and tapping one expands its matters as a quiet
-// sentence-case caption (the full-width mono caps read as a second
-// heading on narrow screens).
+// table — numbered rows, dot leaders, mono keyword list — untouched. Below
+// md the keyword list collapses behind an accordion: rows show just the
+// numbered practice names, and tapping one expands a quiet sentence-case
+// caption instead (mono caps read as a second heading at that width, and
+// dot-separated keywords don't wrap into a sentence-case flow).
 export function ServicesSchedule({ services }: { services: Service[] }) {
   const [open, setOpen] = React.useState<number | null>(null);
 
   return (
     <div className="mt-8 border-b border-line sm:mt-12">
-      {services.map(({ title, matters }, i) => {
+      {services.map(({ title, keywords, matters }, i) => {
         const isOpen = open === i;
         return (
           <div
@@ -34,7 +34,7 @@ export function ServicesSchedule({ services }: { services: Service[] }) {
                 aria-hidden
               />
               <p className="hidden font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-body md:block">
-                {matters}
+                {keywords}
               </p>
 
               {/* Expand indicator — mobile only */}

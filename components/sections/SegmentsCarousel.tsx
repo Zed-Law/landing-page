@@ -19,6 +19,20 @@ export function SegmentsCarousel({ segments }: { segments: Segment[] }) {
   const rowRef = React.useRef<HTMLDivElement>(null);
   const [active, setActive] = React.useState(0);
 
+  // Whether the row is actually a horizontal scroller (<md). Lenis must not
+  // intercept wheel events over it there, but from md up the row is a static
+  // grid — leaving data-lenis-prevent on would hand wheel events back to
+  // native scrolling, which fights any in-flight Lenis animation and makes
+  // the page judder in place.
+  const [isScroller, setIsScroller] = React.useState(false);
+  React.useEffect(() => {
+    const mq = window.matchMedia("(min-width: 48rem)");
+    const update = () => setIsScroller(!mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
   // Nearest card to the current scroll offset, measured against the first
   // card's resting position so container padding cancels out.
   const onScroll = () => {
@@ -85,9 +99,9 @@ export function SegmentsCarousel({ segments }: { segments: Segment[] }) {
         <div
           ref={rowRef}
           onScroll={onScroll}
-          // data-lenis-prevent: root Lenis would otherwise intercept wheel
-          // events over the row and scroll the page instead.
-          data-lenis-prevent
+          // Root Lenis would otherwise intercept wheel events over the row
+          // and scroll the page instead of the carousel.
+          {...(isScroller ? { "data-lenis-prevent": "" } : {})}
           className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-5 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:px-8 md:grid md:grid-cols-3 md:gap-0 md:divide-x md:divide-line md:overflow-visible md:px-0"
           style={{ scrollPaddingInline: "1.25rem" }}
         >

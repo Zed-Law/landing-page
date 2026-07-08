@@ -119,7 +119,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 sm:pb-20">
+      <div className="mx-auto max-w-7xl px-5 pb-12 sm:px-8 sm:pb-20">
         <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
           <Button href="#book" size="lg" variant="gold-solid">
             Book a discovery call
@@ -134,7 +134,7 @@ export function Hero() {
         </div>
 
         {/* Trust: hairline rule, small-caps line, logo marquee */}
-        <div className="mt-16 border-t border-line pt-8 sm:mt-20">
+        <div className="mt-12 border-t border-line pt-8 sm:mt-20">
           <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
             Trusted by 500+ companies across Australia and beyond
           </p>

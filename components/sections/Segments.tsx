@@ -23,13 +23,13 @@ const segments = [
 export function Segments() {
   return (
     <section className="bg-paper">
-      <div className="mx-auto max-w-7xl px-5 pb-20 pt-20 sm:px-8 sm:pb-24 sm:pt-28">
+      <div className="mx-auto max-w-7xl px-5 pb-14 pt-12 sm:px-8 sm:pb-24 sm:pt-28">
         <h2 className="view-reveal max-w-3xl text-4xl leading-tight sm:text-5xl">
           Legal that starts with the outcome,{" "}
           <span className="text-muted">not the legal lecture.</span>
         </h2>
 
-        <div className="mt-16 grid gap-y-10 md:grid-cols-3 md:gap-y-0 md:divide-x md:divide-line">
+        <div className="mt-10 grid gap-y-10 sm:mt-16 md:grid-cols-3 md:gap-y-0 md:divide-x md:divide-line">
           {segments.map(({ label, clause, body }, i) => (
             <div
               key={label}

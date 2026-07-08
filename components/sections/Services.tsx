@@ -38,7 +38,7 @@ const services = [
 export function Services() {
   return (
     <section id="services" className="bg-paper">
-      <div className="mx-auto max-w-7xl px-5 pb-24 pt-6 sm:px-8 sm:pb-28 sm:pt-8">
+      <div className="mx-auto max-w-7xl px-5 pb-16 pt-6 sm:px-8 sm:pb-28 sm:pt-8">
         <div className="view-reveal max-w-3xl">
           <h2 className="text-4xl leading-tight sm:text-5xl">
             Counsel across everything commercial
@@ -50,7 +50,7 @@ export function Services() {
           </p>
         </div>
 
-        <div className="mt-12 border-b border-line">
+        <div className="mt-8 border-b border-line sm:mt-12">
           {services.map(({ title, matters }, i) => (
             <div
               key={title}

@@ -1,33 +1,34 @@
-import Link from "next/link";
+import { ServicesSchedule, type Service } from "./ServicesSchedule";
+import { GeneralCounselRow } from "./GeneralCounselRow";
 
-const services = [
+const services: Service[] = [
   {
     title: "Commercial",
-    matters: "Contracts · structuring · privacy & compliance",
+    matters: "Contracts, structuring and compliance for a growing business.",
   },
   {
     title: "Corporate and M&A",
-    matters: "Capital raises · SAFE notes · buy & sell side",
+    matters: "Capital raises and deals on both sides, from term sheet to close.",
   },
   {
     title: "Health and regulatory",
-    matters: "Telehealth · AHPRA · TGA advertising",
+    matters: "Specialist counsel for regulated health and telehealth businesses.",
   },
   {
     title: "Dispute resolution",
-    matters: "Negotiation · mediation · litigation",
+    matters: "Resolving disputes quickly, with litigation as the last resort.",
   },
   {
     title: "Employment",
-    matters: "Employment agreements · Fair Work · restraints",
+    matters: "Acting for employers and employees, contracts to disputes.",
   },
   {
     title: "Migration",
-    matters: "Skilled visas · global talent · sponsorship",
+    matters: "Bringing talent to Australia, from visas to relocation.",
   },
   {
     title: "Wills and estate planning",
-    matters: "Wills · testamentary trusts · powers of attorney",
+    matters: "Wills, beneficiaries and asset planning, sorted early.",
   },
 ];
 
@@ -45,54 +46,17 @@ export function Services() {
           </h2>
           <p className="mt-6 max-w-[58ch] text-lg text-body">
             One senior team for the legal work a growing business actually runs
-            into. Same calibre as the big firms, handled like a partner who
-            wants you to win.
+            into.{" "}
+            <span className="hidden md:inline">
+              Same calibre as the big firms, handled like a partner who wants
+              you to win.
+            </span>
           </p>
         </div>
 
-        <div className="mt-8 border-b border-line sm:mt-12">
-          {services.map(({ title, matters }, i) => (
-            <div
-              key={title}
-              className="view-reveal group flex flex-wrap items-baseline gap-x-4 gap-y-1.5 border-t border-line py-4 transition-colors duration-200 hover:border-ink/40 sm:py-5"
-            >
-              <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-muted">
-                No. {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="text-xl transition-colors duration-200 group-hover:text-accent-deep sm:text-2xl">
-                {title}
-              </h3>
-              <span
-                className="hidden min-w-10 flex-1 border-b border-dotted border-muted/60 sm:block"
-                aria-hidden
-              />
-              <p className="w-full font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-body sm:w-auto">
-                {matters}
-              </p>
-            </div>
-          ))}
-        </div>
+        <ServicesSchedule services={services} />
 
-        {/* Row No. 08, promoted out of the schedule */}
-        <div className="view-reveal mt-10 flex flex-col items-start gap-5 bg-night px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:px-7">
-          <div>
-            <div className="flex flex-wrap items-baseline gap-x-4">
-              <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-night-body">
-                No. 08
-              </span>
-              <h3 className="text-2xl text-night-ink">General counsel</h3>
-            </div>
-            <p className="mt-1.5 text-sm text-night-body sm:text-base">
-              Senior counsel on retainer, without the full-time hire.
-            </p>
-          </div>
-          <Link
-            href="#zed-plus"
-            className="shrink-0 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-accent transition-colors duration-200 hover:text-night-ink"
-          >
-            Explore Zed Plus →
-          </Link>
-        </div>
+        <GeneralCounselRow />
       </div>
     </section>
   );

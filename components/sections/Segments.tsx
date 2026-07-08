@@ -1,16 +1,21 @@
-const segments = [
+import { SegmentsCarousel, type Segment } from "./SegmentsCarousel";
+
+const segments: Segment[] = [
   {
     label: "Founders & startups",
+    tab: "Founders",
     clause: "You’re raising your first round.",
     body: "Making your first hires, signing the contracts that matter. We get the deal done so you can keep building.",
   },
   {
     label: "Scaleups",
+    tab: "Scaleups",
     clause: "You’ve outgrown generic legal support.",
     body: "But you balk at big-firm rates, rightly. Senior counsel on call for the decisions that move the business.",
   },
   {
     label: "In-house teams",
+    tab: "In-house",
     clause: "You are the legal team.",
     body: "Extra capacity from lawyers who’ve sat where you sit. Overflow handled, judgement included, no ramp-up required.",
   },
@@ -20,6 +25,8 @@ const segments = [
 // clause under a small-caps label, so the reader self-selects at a glance.
 // Subgrid keeps the label / clause / body rows aligned across columns;
 // columns fade up on scroll and draw a brass rule under the clause on hover.
+// On mobile the triptych becomes a swipeable snap row behind audience tabs
+// (see SegmentsCarousel).
 export function Segments() {
   return (
     <section className="bg-paper">
@@ -29,25 +36,7 @@ export function Segments() {
           <span className="text-muted">not the legal lecture.</span>
         </h2>
 
-        <div className="mt-10 grid gap-y-10 sm:mt-16 md:grid-cols-3 md:gap-y-0 md:divide-x md:divide-line">
-          {segments.map(({ label, clause, body }, i) => (
-            <div
-              key={label}
-              style={{ "--i": i } as React.CSSProperties}
-              className={`view-reveal group border-t border-line pt-6 md:grid md:grid-rows-subgrid md:row-span-3 md:border-t-0 md:pt-0 ${
-                i === 0 ? "md:pr-10" : i === segments.length - 1 ? "md:pl-10" : "md:px-10"
-              }`}
-            >
-              <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
-                {label}
-              </p>
-              <h3 className="mt-4 text-2xl leading-snug after:mt-3 after:block after:h-px after:origin-left after:scale-x-0 after:bg-accent-deep after:transition-transform after:duration-300 group-hover:after:scale-x-100 motion-reduce:after:transition-none sm:text-3xl">
-                {clause}
-              </h3>
-              <p className="mt-4 text-base leading-relaxed text-body">{body}</p>
-            </div>
-          ))}
-        </div>
+        <SegmentsCarousel segments={segments} />
       </div>
     </section>
   );

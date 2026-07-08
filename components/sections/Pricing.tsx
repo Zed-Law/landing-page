@@ -133,9 +133,11 @@ export function Pricing() {
           </h2>
           <p className="mt-5 max-w-[58ch] text-lg text-body">
             One monthly fee for ongoing legal support. No surprise bills, no
-            six-minute increments. It&apos;s how most of our clients choose to
-            work with us. Pick the level that fits and change it whenever you
-            need to.
+            six-minute increments.{" "}
+            <span className="hidden md:inline">
+              It&apos;s how most of our clients choose to work with us. Pick
+              the level that fits and change it whenever you need to.
+            </span>
           </p>
         </div>
 
@@ -165,7 +167,9 @@ export function Pricing() {
                 Legal AI, included with every retainer.
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-body">
+            {/* Capabilities restate what the plan cards below already list,
+                so they only earn their space from md up */}
+            <div className="hidden flex-wrap items-center gap-x-3 gap-y-1.5 text-sm text-body md:flex">
               {parachuteCapabilities.map((cap, i) => (
                 <Fragment key={cap}>
                   {i > 0 && (

@@ -81,7 +81,9 @@ export function Team() {
                 // `!` because CarouselItem's own `basis-full` wins the
                 // stylesheet-order fight against an unimportant override,
                 // leaving cards full-width with no peek of the next one.
-                className="pl-4 basis-[70%]! sm:basis-1/2! lg:basis-1/3!"
+                // Widths sit just under the even split at every breakpoint
+                // so the next card always peeks in as a swipe cue.
+                className="pl-4 basis-[70%]! sm:basis-[45%]! lg:basis-[30%]!"
               >
                 <ProfileCard member={member} />
               </CarouselItem>

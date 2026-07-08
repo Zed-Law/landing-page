@@ -22,7 +22,7 @@ export function Navbar({
 }) {
   return (
     <header id="site-header" className="bg-paper">
-      <StickyNav />
+      <StickyNav referrer={referrer} />
       {referrer && (
         <ReferralChip
           displayName={referrer.displayName}

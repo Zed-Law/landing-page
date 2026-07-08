@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowIcon } from "./icons";
 
-type Variant = "primary" | "primary-lift" | "gold" | "light" | "light-lift" | "ghost" | "outline-light";
+type Variant = "primary" | "primary-lift" | "gold" | "gold-solid" | "light" | "light-lift" | "ghost" | "outline-light";
 
 const base =
   "group inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-[2px] font-mono transition-colors duration-200";
@@ -19,6 +19,8 @@ const variants: Record<Variant, string> = {
   "primary-lift": `${caps} bg-ink text-paper hover:bg-ink-soft`,
   // The single brass moment — used very sparingly
   gold: `${caps} border border-accent-deep/40 text-ink hover:border-accent-deep`,
+  // Solid brass fill — reserved for the one primary CTA on the page
+  "gold-solid": `${caps} bg-accent-deep text-paper hover:bg-ink`,
   // On dark surfaces: ivory fill, brass tint on hover
   light: `${caps} bg-paper text-ink hover:bg-accent-soft`,
   "light-lift": `${caps} bg-paper text-ink hover:bg-accent-soft`,

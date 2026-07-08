@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { StickyNav } from "./StickyNav";
 import { ReferralChip } from "./ReferralChip";
 import type { Referrer } from "@/sanity";
 
@@ -20,7 +21,8 @@ export function Navbar({
   referrer?: Referrer | null;
 }) {
   return (
-    <header className="bg-paper">
+    <header id="site-header" className="bg-paper">
+      <StickyNav />
       {referrer && (
         <ReferralChip
           displayName={referrer.displayName}

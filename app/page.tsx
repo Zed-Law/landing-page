@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Segments } from "@/components/sections/Segments";
 import { Services } from "@/components/sections/Services";
 import { Testimonial } from "@/components/sections/Testimonial";
+import { Team } from "@/components/sections/Team";
 import { Pricing } from "@/components/sections/Pricing";
 import { Booking } from "@/components/sections/Booking";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -26,6 +27,7 @@ export default async function Home({
         <Segments />
         <Services />
         <Testimonial />
+        <Team />
         <Pricing />
         <Booking />
         <FinalCta />

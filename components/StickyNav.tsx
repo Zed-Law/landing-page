@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Logo } from "./Logo";
+import { MobileMenu } from "./MobileMenu";
 import type { Referrer } from "@/sanity";
 
 const links = [
@@ -61,9 +62,9 @@ export function StickyNav({
         )}
 
         <nav aria-label="Secondary">
-          <ul className="flex items-center gap-x-6 sm:gap-x-7">
+          <ul className="flex items-center gap-x-2.5 md:gap-x-7">
             {links.map((l) => (
-              <li key={l.label} className="hidden sm:block">
+              <li key={l.label} className="hidden md:block">
                 <Link
                   href={l.href}
                   tabIndex={visible ? 0 : -1}
@@ -81,6 +82,9 @@ export function StickyNav({
               >
                 Book a call
               </Link>
+            </li>
+            <li className="md:hidden">
+              <MobileMenu links={links} />
             </li>
           </ul>
         </nav>

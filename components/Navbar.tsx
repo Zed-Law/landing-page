@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Logo } from "./Logo";
 import { StickyNav } from "./StickyNav";
 import { ReferralChip } from "./ReferralChip";
+import { MobileMenu } from "./MobileMenu";
 import type { Referrer } from "@/sanity";
 
 const links = [
@@ -10,6 +11,8 @@ const links = [
   { label: "Blog", href: "/blog", accent: false },
   { label: "Book a call", href: "#book", accent: true },
 ];
+
+const menuLinks = links.filter((l) => !l.accent);
 
 // Integrated inline nav — sits on the same paper as the hero: wordmark left,
 // links right. In document flow, not sticky; every section below carries its
@@ -30,13 +33,14 @@ export function Navbar({
         />
       )}
 
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-5 py-6 sm:px-8 sm:py-7">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-x-6 px-5 py-6 sm:px-8 sm:py-7">
         <Link href="/" aria-label="Zed Law home" className="flex items-center">
           <Logo variant="black" className="h-5 w-auto sm:h-6" />
         </Link>
 
-        <nav aria-label="Primary">
-          <ul className="flex flex-wrap items-center gap-x-7 gap-y-2">
+        {/* Desktop: full inline nav */}
+        <nav aria-label="Primary" className="hidden md:block">
+          <ul className="flex items-center gap-x-7">
             {links.map((l) => (
               <li key={l.label}>
                 <Link
@@ -53,6 +57,17 @@ export function Navbar({
             ))}
           </ul>
         </nav>
+
+        {/* Mobile: Book a call CTA + hamburger */}
+        <div className="flex items-center gap-2.5 md:hidden">
+          <Link
+            href="#book"
+            className="inline-flex whitespace-nowrap rounded-[2px] bg-accent-deep px-4 py-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-paper transition-colors duration-200 hover:bg-ink"
+          >
+            Book a call
+          </Link>
+          <MobileMenu links={menuLinks} />
+        </div>
       </div>
     </header>
   );

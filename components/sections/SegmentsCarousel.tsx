@@ -121,7 +121,7 @@ export function SegmentsCarousel({ segments }: { segments: Segment[] }) {
               <p className="hidden font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted md:block">
                 {label}
               </p>
-              <h3 className="mt-1 text-2xl leading-snug after:mt-3 after:block after:h-px after:origin-left after:scale-x-0 after:bg-accent-deep after:transition-transform after:duration-300 group-hover:after:scale-x-100 motion-reduce:after:transition-none sm:text-3xl md:mt-4">
+              <h3 className="mt-1 text-balance text-2xl leading-snug after:mt-3 after:block after:h-px after:origin-left after:scale-x-0 after:bg-accent-deep after:transition-transform after:duration-300 group-hover:after:scale-x-100 motion-reduce:after:transition-none sm:text-3xl md:mt-4">
                 {clause}
               </h3>
               <p className="mt-4 text-base leading-relaxed text-body">{body}</p>

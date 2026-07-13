@@ -19,7 +19,7 @@ const HEADLINE_PLAIN = HEADLINE.map((w) => w.text).join(" ");
 const LOGO_BASE =
   "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/client-logos";
 
-type Logo = { name: string; file: string };
+type Logo = { name: string; file: string; sizeClassName?: string };
 
 // Priority clients surface first, in the top row.
 const ROW_1: Logo[] = [
@@ -34,14 +34,14 @@ const ROW_1: Logo[] = [
 ];
 
 const ROW_2: Logo[] = [
-  { name: "Plntd", file: "plntd.svg" },
+  { name: "Plntd", file: "plntd.svg", sizeClassName: "h-4 sm:h-5" },
   { name: "EasyKind", file: "easykind.webp" },
   { name: "DialAVet", file: "dialavet.webp" },
   { name: "Breathless", file: "breathless.webp" },
   { name: "Aurasens", file: "aurasens.png" },
-  { name: "Co Ventures", file: "co-ventures.png" },
+  { name: "Co Ventures", file: "co-ventures-v3.svg" },
   { name: "Rays", file: "rays.png" },
-  { name: "Nakatomi", file: "nakatomi.png" },
+  { name: "Nakatomi", file: "nakatomi.svg", sizeClassName: "h-5 sm:h-6" },
 ];
 
 // One copy of a logo row. Rendered twice per track so the -50% translate
@@ -56,7 +56,7 @@ function LogoGroup({ logos }: { logos: Logo[] }) {
           key={logo.name}
           src={`${LOGO_BASE}/${logo.file}`}
           alt={logo.name}
-          className="h-7 w-auto shrink-0 object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 sm:h-8"
+          className={`w-auto shrink-0 object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 ${logo.sizeClassName ?? "h-7 sm:h-8"}`}
         />
       ))}
     </div>

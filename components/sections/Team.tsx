@@ -17,28 +17,29 @@ const team = [
   {
     name: "Nandan Subramaniam",
     role: "Principal",
-    image: `${HEADSHOT_BASE}/nandan-profile.webp`,
+    image: `${HEADSHOT_BASE}/nandan-profile-charcoal.jpeg`,
     bio: "Top-tier firm training and in-house experience at one of Australia's leading VC-backed startups. Advises on capital raising, M&A, structuring and governance, from early-stage founders to ASX-listed companies.",
     linkedin: "https://www.linkedin.com/in/nandan-subramaniam-0b394ba4/",
   },
   {
     name: "Ryan Zahrai",
     role: "Founder",
-    image: `${HEADSHOT_BASE}/ryan-profile.webp`,
+    image: `${HEADSHOT_BASE}/ryan-profile-charcoal.jpeg`,
     bio: "Built Zed to change how clients experience working with lawyers. Full-stack AI paired with human expertise, so you get deliverables faster, with the commerciality of a business owner.",
     linkedin: "https://www.linkedin.com/in/rzahrai/",
   },
   {
     name: "Phillip Kilazoglou",
     role: "Lawyer",
-    image: `${HEADSHOT_BASE}/phillip-profile.webp`,
+    image: `${HEADSHOT_BASE}/phil-profile-charcoal.jpeg`,
     bio: "Leads the corporate and commercial function at Zed Law. Advises on M&A, venture capital and private equity, with a reputation for pragmatic advice aligned with your broader business goals.",
     linkedin: "https://www.linkedin.com/in/phillipkilazoglou/",
   },
   {
     name: "Thilini Samarawickrama",
     role: "Lawyer",
-    image: `${HEADSHOT_BASE}/thilini-profile.webp`,
+    image: `${HEADSHOT_BASE}/thilini-profile-charcoal.jpeg`,
+    imagePosition: "center 15%",
     bio: "Drafts and negotiates commercial agreements and advises on regulatory compliance, licensing and governance across jurisdictions. Partners closely with product and operations teams to deliver practical solutions.",
     linkedin: "https://www.linkedin.com/in/thilini-samarawickrama-60245b24/",
   },
@@ -147,6 +148,11 @@ function ProfileCard({ member }: { member: Member }) {
               src={member.image}
               alt={member.name}
               className="absolute inset-0 h-full w-full object-cover"
+              style={
+                member.imagePosition
+                  ? { objectPosition: member.imagePosition }
+                  : undefined
+              }
               loading="lazy"
             />
 

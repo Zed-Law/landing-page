@@ -22,13 +22,6 @@ const team = [
     linkedin: "https://www.linkedin.com/in/nandan-subramaniam-0b394ba4/",
   },
   {
-    name: "Ryan Zahrai",
-    role: "Founder",
-    image: `${HEADSHOT_BASE}/ryan-profile-charcoal.jpeg`,
-    bio: "Built Zed to change how clients experience working with lawyers. Full-stack AI paired with human expertise, so you get deliverables faster, with the commerciality of a business owner.",
-    linkedin: "https://www.linkedin.com/in/rzahrai/",
-  },
-  {
     name: "Phillip Kilazoglou",
     role: "Lawyer",
     image: `${HEADSHOT_BASE}/phil-profile-charcoal.jpeg`,
@@ -42,6 +35,13 @@ const team = [
     imagePosition: "center 15%",
     bio: "Drafts and negotiates commercial agreements and advises on regulatory compliance, licensing and governance across jurisdictions. Partners closely with product and operations teams to deliver practical solutions.",
     linkedin: "https://www.linkedin.com/in/thilini-samarawickrama-60245b24/",
+  },
+  {
+    name: "Ryan Zahrai",
+    role: "Founder",
+    image: `${HEADSHOT_BASE}/ryan-charcoal.jpeg`,
+    bio: "Built Zed to change how clients experience working with lawyers. Full-stack AI paired with human expertise, so you get deliverables faster, with the commerciality of a business owner.",
+    linkedin: "https://www.linkedin.com/in/rzahrai/",
   },
 ];
 

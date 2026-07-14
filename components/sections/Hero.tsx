@@ -19,7 +19,15 @@ const HEADLINE_PLAIN = HEADLINE.map((w) => w.text).join(" ");
 const LOGO_BASE =
   "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/client-logos";
 
-type Logo = { name: string; file: string; sizeClassName?: string };
+type Logo = {
+  name: string;
+  file: string;
+  sizeClassName?: string;
+  /** Actual rendered height of the <img>, when it needs to be scaled up and
+   * cropped to the row height — e.g. a wordmark sitting in a mostly-empty
+   * square canvas, where scaling to the row height alone leaves it tiny. */
+  imgClassName?: string;
+};
 
 // Priority clients surface first, in the top row.
 const ROW_1: Logo[] = [
@@ -30,7 +38,7 @@ const ROW_1: Logo[] = [
   { name: "Arc", file: "arc.png" },
   { name: "Beonic", file: "beonic.png" },
   { name: "CloudPay", file: "cloudpay.webp" },
-  { name: "Kindling", file: "kindling.png" },
+  { name: "Kindling", file: "kindling.png", imgClassName: "h-32 sm:h-36" },
 ];
 
 const ROW_2: Logo[] = [
@@ -51,14 +59,27 @@ const ROW_2: Logo[] = [
 function LogoGroup({ logos }: { logos: Logo[] }) {
   return (
     <div className="flex shrink-0 items-center gap-12 pr-12">
-      {logos.map((logo) => (
-        <img
-          key={logo.name}
-          src={`${LOGO_BASE}/${logo.file}`}
-          alt={logo.name}
-          className={`w-auto shrink-0 object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 ${logo.sizeClassName ?? "h-7 sm:h-8"}`}
-        />
-      ))}
+      {logos.map((logo) =>
+        logo.imgClassName ? (
+          <div
+            key={logo.name}
+            className={`flex shrink-0 items-center overflow-hidden ${logo.sizeClassName ?? "h-7 sm:h-8"}`}
+          >
+            <img
+              src={`${LOGO_BASE}/${logo.file}`}
+              alt={logo.name}
+              className={`w-auto object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 ${logo.imgClassName}`}
+            />
+          </div>
+        ) : (
+          <img
+            key={logo.name}
+            src={`${LOGO_BASE}/${logo.file}`}
+            alt={logo.name}
+            className={`w-auto shrink-0 object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 ${logo.sizeClassName ?? "h-7 sm:h-8"}`}
+          />
+        ),
+      )}
     </div>
   );
 }

@@ -38,7 +38,7 @@ const ROW_1: Logo[] = [
   { name: "Arc", file: "arc.png" },
   { name: "Beonic", file: "beonic.png" },
   { name: "CloudPay", file: "cloudpay.webp" },
-  { name: "Kindling", file: "kindling.png", imgClassName: "h-32 sm:h-36" },
+  { name: "Kindling", file: "kindling-v2.png", imgClassName: "h-32 sm:h-36" },
 ];
 
 const ROW_2: Logo[] = [

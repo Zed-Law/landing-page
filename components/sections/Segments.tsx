@@ -30,7 +30,7 @@ const segments: Segment[] = [
 export function Segments() {
   return (
     <section className="bg-paper">
-      <div className="mx-auto max-w-7xl px-5 pb-14 pt-12 sm:px-8 sm:pb-24 sm:pt-28">
+      <div className="mx-auto max-w-7xl px-5 pb-14 pt-12 sm:px-8 sm:pb-24 sm:pt-16">
         <h2 className="view-reveal max-w-3xl text-4xl leading-tight sm:text-5xl">
           Legal that starts with the outcome,{" "}
           <span className="text-muted">not the legal lecture.</span>

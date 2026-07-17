@@ -140,7 +140,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-5 pb-12 sm:px-8 sm:pb-20">
+      <div className="mx-auto max-w-7xl px-5 pb-12 sm:px-8 sm:pb-16">
         <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
           <Button href="#book" size="lg" variant="gold-solid">
             Book a discovery call

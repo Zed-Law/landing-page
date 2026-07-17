@@ -18,6 +18,31 @@ const nextConfig: NextConfig = {
           "/?utm_source=referral&utm_medium=:name&utm_campaign=referral-program",
         permanent: false,
       },
+      {
+        source: "/our-network",
+        destination: "/#team",
+        permanent: true,
+      },
+      {
+        source: "/ryan-zahrai",
+        destination: "/#team",
+        permanent: true,
+      },
+      {
+        source: "/services",
+        destination: "/#services",
+        permanent: true,
+      },
+      {
+        source: "/plus",
+        destination: "/#zed-plus",
+        permanent: true,
+      },
+      {
+        source: "/contact",
+        destination: "/#contact",
+        permanent: true,
+      },
     ];
   },
 };

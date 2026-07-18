@@ -19,6 +19,20 @@ const HEADLINE_PLAIN = HEADLINE.map((w) => w.text).join(" ");
 const LOGO_BASE =
   "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/client-logos";
 
+const HERO_IMG_BASE =
+  "https://vmsgvrvjo3qlecsp.public.blob.vercel-storage.com/zed-landing-components/hero-images";
+
+const PHOTOS = {
+  storyteller: {
+    src: `${HERO_IMG_BASE}/storyteller-shot.jpeg`,
+    alt: "The Zed Law team recording a podcast episode in the studio",
+  },
+  conference: {
+    src: `${HERO_IMG_BASE}/conference%20shot.jpeg`,
+    alt: "Zed Law team members at an industry conference",
+  },
+} as const;
+
 type Logo = {
   name: string;
   file: string;
@@ -93,8 +107,27 @@ const edgeFade = {
     "linear-gradient(90deg, transparent, black 12%, black 88%, transparent)",
 };
 
+// A photographic print: white matte border, soft warm shadow, slight tilt.
+function PhotoPrint({
+  photo,
+  className,
+}: {
+  photo: { src: string; alt: string };
+  className?: string;
+}) {
+  return (
+    <img
+      src={photo.src}
+      alt={photo.alt}
+      decoding="async"
+      className={`border-[6px] border-white object-cover shadow-[0_10px_26px_rgba(30,24,12,0.22)] ${className ?? ""}`}
+    />
+  );
+}
+
 // Print-style hero: giant statement on paper, register line between rules,
-// a stack of press lines, then the pitch reversed out in a night strip.
+// the pitch reversed out in a night strip, then the CTA row with two team
+// prints fanned beside it like snapshots left on the desk.
 export function Hero() {
   return (
     <section className="bg-paper">
@@ -141,21 +174,35 @@ export function Hero() {
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-12 sm:px-8 sm:pb-16">
-        <div className="mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
-          <Button href="#book" size="lg" variant="gold-solid">
-            Book a discovery call
-          </Button>
-          <Link
-            href="#zed-plus"
-            className="text-sm font-medium text-body underline decoration-line underline-offset-4 transition-colors duration-200 hover:text-ink hover:decoration-accent-deep"
-          >
-            Explore Zed Plus →
-          </Link>
-          <IntakeChip />
+        <div className="mt-9 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-14">
+          <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+            <Button href="#book" size="lg" variant="gold-solid">
+              Book a discovery call
+            </Button>
+            <Link
+              href="#zed-plus"
+              className="text-sm font-medium text-body underline decoration-line underline-offset-4 transition-colors duration-200 hover:text-ink hover:decoration-accent-deep"
+            >
+              Explore Zed Plus →
+            </Link>
+            <IntakeChip />
+          </div>
+
+          {/* Two team prints fanned side by side, snapshots on the desk */}
+          <div className="relative mx-auto flex w-full max-w-md items-center justify-center">
+            <PhotoPrint
+              photo={PHOTOS.conference}
+              className="w-[52%] rotate-[-5deg]"
+            />
+            <PhotoPrint
+              photo={PHOTOS.storyteller}
+              className="-ml-6 w-[56%] rotate-[4deg]"
+            />
+          </div>
         </div>
 
         {/* Trust: hairline rule, small-caps line, logo marquee */}
-        <div className="mt-12 border-t border-line pt-8 sm:mt-20">
+        <div className="mt-12 border-t border-line pt-8 sm:mt-16">
           <p className="font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-muted">
             Trusted by 500+ companies across Australia and beyond
           </p>

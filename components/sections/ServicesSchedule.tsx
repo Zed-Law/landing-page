@@ -5,11 +5,11 @@ import * as React from "react";
 export type Service = { title: string; keywords: string; matters: string };
 
 // The practice-area schedule. From md up it renders as the fee-schedule
-// table — numbered rows, dot leaders, mono keyword list — untouched. Below
-// md the keyword list collapses behind an accordion: rows show just the
-// numbered practice names, and tapping one expands a quiet sentence-case
-// caption instead (mono caps read as a second heading at that width, and
-// dot-separated keywords don't wrap into a sentence-case flow).
+// table — numbered rows, dot leaders, mono keyword list — visually
+// unchanged, with the whole row click-to-expand and no visible affordance.
+// Below md the keyword list stays hidden (mono caps read as a second
+// heading at that width): rows show just the numbered practice names with
+// a plus at the right edge carrying the affordance.
 export function ServicesSchedule({ services }: { services: Service[] }) {
   const [open, setOpen] = React.useState<number | null>(null);
 
@@ -29,13 +29,6 @@ export function ServicesSchedule({ services }: { services: Service[] }) {
               <h3 className="text-xl transition-colors duration-200 group-hover:text-accent-deep sm:text-2xl">
                 {title}
               </h3>
-              <span
-                className="hidden min-w-10 flex-1 border-b border-dotted border-muted/60 md:block"
-                aria-hidden
-              />
-              <p className="hidden font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-body md:block">
-                {keywords}
-              </p>
 
               {/* Expand indicator — mobile only */}
               <span
@@ -58,13 +51,21 @@ export function ServicesSchedule({ services }: { services: Service[] }) {
                 </svg>
               </span>
 
-              {/* Whole row toggles on mobile */}
+              <span
+                className="hidden min-w-10 flex-1 border-b border-dotted border-muted/60 md:block"
+                aria-hidden
+              />
+              <p className="hidden font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-body md:block">
+                {keywords}
+              </p>
+
+              {/* Whole row toggles */}
               <button
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={`service-matters-${i}`}
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="absolute inset-0 md:hidden"
+                className="absolute inset-0 cursor-pointer"
               >
                 <span className="sr-only">
                   {isOpen ? "Hide" : "Show"} {title} matters
@@ -72,15 +73,15 @@ export function ServicesSchedule({ services }: { services: Service[] }) {
               </button>
             </div>
 
-            {/* Collapsible matters — mobile only */}
+            {/* Collapsible matters */}
             <div
               id={`service-matters-${i}`}
-              className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none md:hidden ${
+              className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
                 isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}
             >
               <div className="overflow-hidden">
-                <p className="pb-5 text-sm leading-relaxed text-body">
+                <p className="pb-5 text-sm leading-relaxed text-body md:max-w-[85ch] md:text-base">
                   {matters}
                 </p>
               </div>

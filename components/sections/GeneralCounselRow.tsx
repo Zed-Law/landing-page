@@ -4,11 +4,11 @@ import * as React from "react";
 import Link from "next/link";
 
 // Row No. 08, promoted out of the schedule into a reversed night strip
-// (echoing the hero banner). On mobile it now follows the same
-// collapsed-by-default, tap-to-expand pattern as the rows above it —
-// previously it rendered fully open while every other row sat collapsed,
-// which broke the rhythm of the accordion list right above it. From md up
-// it renders exactly as before: title, paragraph, and CTA always visible.
+// (echoing the hero banner). Like the schedule rows above it, the strip is
+// click-to-expand: on mobile the whole header toggles the retainer copy,
+// with a plus at the right edge; from md up the standing title, one-liner
+// and CTA stay put and clicking the text block reveals the rest, with no
+// visible affordance.
 export function GeneralCounselRow() {
   const [open, setOpen] = React.useState(false);
 
@@ -45,7 +45,7 @@ export function GeneralCounselRow() {
           aria-expanded={open}
           aria-controls="general-counsel-detail"
           onClick={() => setOpen((v) => !v)}
-          className="absolute inset-0"
+          className="absolute inset-0 cursor-pointer"
         >
           <span className="sr-only">
             {open ? "Hide" : "Show"} General counsel details
@@ -75,25 +75,52 @@ export function GeneralCounselRow() {
         </div>
       </div>
 
-      {/* Desktop: unchanged, always expanded */}
-      <div className="hidden md:flex md:items-center md:justify-between md:gap-5">
-        <div>
-          <div className="flex flex-wrap items-baseline gap-x-4">
-            <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-night-body">
-              No. 08
+      {/* Desktop: same strip; clicking the text block expands the rest of
+          the retainer copy beneath the standing one-liner */}
+      <div className="hidden md:block">
+        <div className="flex items-center justify-between gap-5">
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-controls="general-counsel-detail-desktop"
+            onClick={() => setOpen((v) => !v)}
+            className="cursor-pointer text-left"
+          >
+            <div className="flex flex-wrap items-baseline gap-x-4">
+              <span className="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-night-body">
+                No. 08
+              </span>
+              <h3 className="text-2xl text-night-ink">General counsel</h3>
+            </div>
+            <p className="mt-1.5 text-base text-night-body">
+              Senior counsel on retainer, without the full-time hire.
+            </p>
+            <span className="sr-only">
+              {open ? "Hide" : "Show"} General counsel details
             </span>
-            <h3 className="text-2xl text-night-ink">General counsel</h3>
-          </div>
-          <p className="mt-1.5 text-base text-night-body">
-            Senior counsel on retainer, without the full-time hire.
-          </p>
+          </button>
+          <Link
+            href="#zed-plus"
+            className="shrink-0 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-accent transition-colors duration-200 hover:text-night-ink"
+          >
+            Explore Zed Plus →
+          </Link>
         </div>
-        <Link
-          href="#zed-plus"
-          className="shrink-0 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-accent transition-colors duration-200 hover:text-night-ink"
+
+        <div
+          id="general-counsel-detail-desktop"
+          className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+            open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          }`}
         >
-          Explore Zed Plus →
-        </Link>
+          <div className="overflow-hidden">
+            <p className="max-w-[85ch] pt-3 text-base leading-relaxed text-night-body">
+              One monthly fee, a dedicated lawyer who knows your business, and
+              Parachute legal AI for the questions that cannot wait. Plans flex
+              up or down as you grow, and you can leave whenever you like.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

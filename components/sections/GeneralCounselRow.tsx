@@ -60,8 +60,11 @@ export function GeneralCounselRow() {
         }`}
       >
         <div className="overflow-hidden">
-          <p className="pt-1.5 text-sm text-night-body">
-            Senior counsel on retainer, without the full-time hire.
+          <p className="pt-1.5 text-sm leading-relaxed text-night-body">
+            Senior counsel on retainer through Zed Plus. One monthly fee, a
+            dedicated lawyer who knows your business, and Parachute legal AI for
+            the questions that cannot wait. Plans flex up or down as you grow,
+            and you can leave whenever you like.
           </p>
           <Link
             href="#zed-plus"

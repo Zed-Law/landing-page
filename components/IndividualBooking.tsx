@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { CalEmbed } from "@/components/CalEmbed";
+import type { Referrer } from "@/sanity";
 
 // A focused, single-purpose booking page for a specific lawyer's outreach link
 // (e.g. /meet-phil). Minimal chrome — the site navbar, a one-line heading, and
@@ -10,15 +11,17 @@ export function IndividualBooking({
   calLink,
   namespace,
   lawyer,
+  referrer = null,
 }: {
   name: string;
   calLink: string;
   namespace: string;
   lawyer: string;
+  referrer?: Referrer | null;
 }) {
   return (
     <>
-      <Navbar />
+      <Navbar referrer={referrer} />
       <main className="flex flex-1 flex-col bg-night px-5 py-12 sm:py-16">
         <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col">
           <header className="max-w-2xl">

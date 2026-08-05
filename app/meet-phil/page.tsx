@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IndividualBooking } from "@/components/IndividualBooking";
+import { getReferrer } from "@/sanity";
 
 export const metadata: Metadata = {
   title: "Book with Phil | Zed Law",
@@ -8,13 +9,22 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function MeetPhilPage() {
+export default async function MeetPhilPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { utm_medium } = await searchParams;
+  const slug = Array.isArray(utm_medium) ? utm_medium[0] : utm_medium;
+  const referrer = slug ? await getReferrer(slug) : null;
+
   return (
     <IndividualBooking
       name="Phillip"
       calLink="team/zed-law/free-15-minute-intro-call-with-philip"
       namespace="free-15-minute-intro-call-with-philip"
       lawyer="phil"
+      referrer={referrer}
     />
   );
 }

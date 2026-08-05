@@ -43,6 +43,11 @@ const nextConfig: NextConfig = {
         destination: "/#contact",
         permanent: true,
       },
+      {
+        source: "/privacy-policy",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };

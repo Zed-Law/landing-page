@@ -18,7 +18,7 @@ module.exports = {
   siteUrl,
   generateRobotsTxt: true,
   generateIndexSitemap: false,
-  exclude: ["/blog/*"],
+  exclude: ["/blog/*", "/meet-phil", "/meet-nandan"],
   additionalPaths: async (config) => {
     const query = encodeURIComponent(
       `*[_type == "post" && defined(slug.current)]{"slug": slug.current, "lastmod": _updatedAt} | order(lastmod desc)`,

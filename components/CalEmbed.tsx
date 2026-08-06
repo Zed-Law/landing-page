@@ -11,7 +11,7 @@ declare global {
 }
 
 type CalEmbedProps = {
-  // The team booking slug (e.g. "team/zed-law/free-15-minute-intro-call").
+  // The team booking slug (e.g. "team/zed-law/free-30-minute-intro-call").
   calLink?: string;
   // Cal namespace — must be unique per embed and stay in sync between
   // getCalApi() and <Cal>. Defaults to the slug's last segment.
@@ -22,8 +22,8 @@ type CalEmbedProps = {
 };
 
 function CalEmbedInner({
-  calLink = "team/zed-law/free-15-minute-intro-call",
-  namespace = "free-15-minute-intro-call",
+  calLink = "team/zed-law/free-30-minute-intro-call",
+  namespace = "free-30-minute-intro-call",
   lawyer,
 }: CalEmbedProps) {
   const searchParams = useSearchParams();

@@ -44,7 +44,7 @@ export default async function BlogPostPage({ params }: Params) {
 
   return (
     <>
-      <Navbar forceSolid />
+      <Navbar forceSolid offHome />
       <main className="flex-1 px-5 pb-24 pt-10 sm:pt-14">
         <article className="mx-auto max-w-3xl">
           <Link

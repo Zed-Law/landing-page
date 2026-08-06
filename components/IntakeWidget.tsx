@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Button } from "./Button";
 import { CloseIcon } from "./icons";
 import { getIntakeStatus } from "@/lib/intake";
@@ -12,6 +13,9 @@ export function IntakeWidget() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const { spotsLeft, totalSpots, monthLabel } = getIntakeStatus();
+  // The #book section only exists on the homepage; off it, point back home.
+  const pathname = usePathname();
+  const bookHref = pathname === "/" ? "#book" : "/#book";
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6);
@@ -61,7 +65,7 @@ export function IntakeWidget() {
       </p>
 
       <Button
-        href="#book"
+        href={bookHref}
         variant="primary"
         withArrow={false}
         className="mt-3 w-full justify-center !py-2 !text-xs sm:mt-4 sm:!py-2.5 sm:!text-sm"

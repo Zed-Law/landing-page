@@ -28,7 +28,7 @@ export default async function BlogIndexPage() {
 
   return (
     <>
-      <Navbar forceSolid />
+      <Navbar forceSolid offHome />
       <main className="flex-1 px-5 pb-24 pt-10 sm:pt-14">
         <div className="mx-auto max-w-6xl">
           <header className="border-b border-line pb-10">

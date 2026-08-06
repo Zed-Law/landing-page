@@ -17,15 +17,23 @@ const menuLinks = links.filter((l) => !l.accent);
 // Integrated inline nav — sits on the same paper as the hero: wordmark left,
 // links right. In document flow, not sticky; every section below carries its
 // own CTA.
+//
+// `offHome` marks pages that don't contain the homepage's in-page sections
+// (e.g. /blog, /meet-phil), so the #book / #services / #zed-plus anchors point
+// back to the homepage (`/#book`) instead of dead-ending on the current page.
 export function Navbar({
   referrer = null,
+  offHome = false,
 }: {
   forceSolid?: boolean;
   referrer?: Referrer | null;
+  offHome?: boolean;
 }) {
+  const anchor = (hash: string) => (offHome ? `/${hash}` : hash);
+
   return (
     <header id="site-header" className="bg-paper">
-      <StickyNav referrer={referrer} />
+      <StickyNav referrer={referrer} offHome={offHome} />
       {referrer && (
         <ReferralChip
           displayName={referrer.displayName}
@@ -44,7 +52,7 @@ export function Navbar({
             {links.map((l) => (
               <li key={l.label}>
                 <Link
-                  href={l.href}
+                  href={l.href.startsWith("#") ? anchor(l.href) : l.href}
                   className={`whitespace-nowrap font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] transition-colors duration-200 ${
                     l.accent
                       ? "text-accent-deep hover:text-ink"
@@ -61,12 +69,17 @@ export function Navbar({
         {/* Mobile: Book a call CTA + hamburger */}
         <div className="flex items-center gap-2.5 md:hidden">
           <Link
-            href="#book"
+            href={anchor("#book")}
             className="inline-flex whitespace-nowrap rounded-[2px] bg-accent-deep px-4 py-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-paper transition-colors duration-200 hover:bg-ink"
           >
             Book a call
           </Link>
-          <MobileMenu links={menuLinks} />
+          <MobileMenu
+            links={menuLinks.map((l) => ({
+              ...l,
+              href: l.href.startsWith("#") ? anchor(l.href) : l.href,
+            }))}
+          />
         </div>
       </div>
     </header>

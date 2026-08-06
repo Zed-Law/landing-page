@@ -16,9 +16,12 @@ const links = [
 // rule once the real nav scrolls away, so the Book a call CTA persists.
 export function StickyNav({
   referrer = null,
+  offHome = false,
 }: {
   referrer?: Referrer | null;
+  offHome?: boolean;
 }) {
+  const anchor = (hash: string) => (offHome ? `/${hash}` : hash);
   const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -66,7 +69,7 @@ export function StickyNav({
             {links.map((l) => (
               <li key={l.label} className="hidden md:block">
                 <Link
-                  href={l.href}
+                  href={l.href.startsWith("#") ? anchor(l.href) : l.href}
                   tabIndex={visible ? 0 : -1}
                   className="whitespace-nowrap font-mono text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-body transition-colors duration-200 hover:text-ink"
                 >
@@ -76,7 +79,7 @@ export function StickyNav({
             ))}
             <li>
               <Link
-                href="#book"
+                href={anchor("#book")}
                 tabIndex={visible ? 0 : -1}
                 className="inline-flex whitespace-nowrap rounded-[2px] bg-accent-deep px-4 py-2 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-paper transition-colors duration-200 hover:bg-ink"
               >
@@ -84,7 +87,12 @@ export function StickyNav({
               </Link>
             </li>
             <li className="md:hidden">
-              <MobileMenu links={links} />
+              <MobileMenu
+                links={links.map((l) => ({
+                  ...l,
+                  href: l.href.startsWith("#") ? anchor(l.href) : l.href,
+                }))}
+              />
             </li>
           </ul>
         </nav>

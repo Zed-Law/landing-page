@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
       {
         source: "/ref/:name",
         destination:
-          "/?utm_source=referral&utm_medium=:name&utm_campaign=referral-program",
+          "/?utm_source=referral&utm_medium=referral&utm_campaign=:name",
         permanent: false,
       },
       {

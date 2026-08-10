@@ -15,8 +15,8 @@ export default async function MeetNandanPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { utm_medium } = await searchParams;
-  const slug = Array.isArray(utm_medium) ? utm_medium[0] : utm_medium;
+  const { utm_campaign } = await searchParams;
+  const slug = Array.isArray(utm_campaign) ? utm_campaign[0] : utm_campaign;
   const referrer = slug ? await getReferrer(slug) : null;
 
   return (

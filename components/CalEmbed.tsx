@@ -37,8 +37,14 @@ function CalEmbedInner({
     }
   }
   // Prefills the "referrer" custom booking question in Cal.com (the Identifier
-  // must match). Left out entirely when there's no utm_campaign.
-  const referrer = searchParams.get("utm_campaign");
+  // must match). The value is the full display string appended to the calendar
+  // event title, so it carries its own leading space — the "Event Name in
+  // Calendar" template concatenates it with no separator. Left out entirely
+  // when there's no utm_campaign.
+  const campaign = searchParams.get("utm_campaign");
+  const referrer = campaign
+    ? ` (Ref by ${campaign.charAt(0).toUpperCase()}${campaign.slice(1)})`
+    : null;
 
   if (lawyer) {
     utm.lawyer = lawyer;

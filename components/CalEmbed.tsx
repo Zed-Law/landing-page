@@ -36,6 +36,10 @@ function CalEmbedInner({
       utmMetadata[`metadata[${key}]`] = value;
     }
   }
+  // Prefills the "referrer" custom booking question in Cal.com (the Identifier
+  // must match). Left out entirely when there's no utm_campaign.
+  const referrer = searchParams.get("utm_campaign");
+
   if (lawyer) {
     utm.lawyer = lawyer;
     utmMetadata["metadata[lawyer]"] = lawyer;
@@ -74,6 +78,7 @@ function CalEmbedInner({
         useSlotsViewOnSmallScreen: "true",
         theme: "dark",
         ...utmMetadata,
+        ...(referrer ? { referrer } : {}),
       }}
     />
   );

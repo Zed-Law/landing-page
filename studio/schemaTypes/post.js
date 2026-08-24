@@ -11,6 +11,14 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'seoTitle',
+      title: 'SEO title (<title> tag)',
+      description:
+        'Shown in search results and the browser tab. 70 characters max. Leave blank to use the headline.',
+      type: 'string',
+      validation: (Rule) => Rule.max(70).warning(),
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',

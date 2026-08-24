@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // metaDescription is the SEO field; fall back to the excerpt if it's unset.
   const description = post.metaDescription ?? post.excerpt ?? undefined;
   return {
-    title: post.title,
+    // seoTitle overrides the <title> tag; the H1 keeps using `title`.
+    title: post.seoTitle || post.title,
     description,
   };
 }

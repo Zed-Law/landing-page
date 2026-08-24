@@ -56,6 +56,7 @@ export type PostListItem = {
 };
 
 export type Post = PostListItem & {
+  seoTitle: string | null;
   metaDescription: string | null;
   body: PortableTextBlock[] | null;
 };
@@ -86,7 +87,7 @@ export async function getAllPosts(): Promise<PostListItem[]> {
 /** A single post by slug, or null if not found. */
 export async function getPost(slug: string): Promise<Post | null> {
   return client.fetch(
-    `*[_type == "post" && slug.current == $slug][0] { ${listFields}, metaDescription, body }`,
+    `*[_type == "post" && slug.current == $slug][0] { ${listFields}, seoTitle, metaDescription, body }`,
     { slug },
   );
 }

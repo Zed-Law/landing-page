@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { BlogCta } from "@/components/BlogCta";
 import { portableComponents } from "@/components/portableComponents";
 import { getPost, getPostSlugs } from "@/sanity";
 
@@ -72,6 +73,8 @@ export default async function BlogPostPage({ params }: Params) {
           <div className="mt-8">
             <PortableText value={post.body ?? []} components={portableComponents} />
           </div>
+
+          <BlogCta />
         </article>
       </main>
       <Footer />

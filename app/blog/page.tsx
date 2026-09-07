@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Blog | Zed Law",
   description:
     "Legal insights and practical guides for founders and CXOs, from the team at Zed Law.",
+  alternates: { canonical: "/blog" },
 };
 
 function formatDate(date: string | null) {

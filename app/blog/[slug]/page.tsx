@@ -27,6 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     // seoTitle overrides the <title> tag; the H1 keeps using `title`.
     title: post.seoTitle || post.title,
     description,
+    alternates: { canonical: `/blog/${slug}` },
   };
 }
 

@@ -80,6 +80,9 @@ const mono = localFont({
 });
 
 export const metadata: Metadata = {
+  // Lets pages declare relative canonical URLs via `alternates.canonical`.
+  metadataBase: new URL("https://zed.law"),
+  alternates: { canonical: "/" },
   title: "Zed Law | Best Law Firm for Time-Poor CXOs and Founders",
   description:
     "Zed Law provides a comprehensive range of legal services as part of its commercial practice, catering to the unique needs of founders and CXOs.",

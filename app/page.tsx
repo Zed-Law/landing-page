@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/sections/Hero";
+import { VideoIntro } from "@/components/sections/VideoIntro";
 import { Segments } from "@/components/sections/Segments";
 import { Services } from "@/components/sections/Services";
 import { Testimonial } from "@/components/sections/Testimonial";
@@ -24,6 +25,7 @@ export default async function Home({
       <Navbar referrer={referrer} />
       <main className="flex-1">
         <Hero />
+        <VideoIntro />
         <Segments />
         <Services />
         <Testimonial />

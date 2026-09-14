@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://zed.law
+
+# Sitemaps
+Sitemap: https://zed.law/sitemap.xml

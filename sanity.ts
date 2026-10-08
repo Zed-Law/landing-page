@@ -55,10 +55,19 @@ export type PostListItem = {
   mainImage: SanityImageSource | null;
 };
 
+export type Author = {
+  name: string | null;
+  image: SanityImageSource | null;
+  /** One-line role blurb, flattened from the Portable Text `bio` field. */
+  bio: string | null;
+};
+
 export type Post = PostListItem & {
   seoTitle: string | null;
   metaDescription: string | null;
   body: PortableTextBlock[] | null;
+  /** null on older posts, which were imported without an author reference. */
+  author: Author | null;
 };
 
 export type Referrer = {
@@ -87,7 +96,13 @@ export async function getAllPosts(): Promise<PostListItem[]> {
 /** A single post by slug, or null if not found. */
 export async function getPost(slug: string): Promise<Post | null> {
   return client.fetch(
-    `*[_type == "post" && slug.current == $slug][0] { ${listFields}, seoTitle, metaDescription, body }`,
+    `*[_type == "post" && slug.current == $slug][0] {
+      ${listFields},
+      seoTitle,
+      metaDescription,
+      body,
+      author->{ name, image, "bio": pt::text(bio) }
+    }`,
     { slug },
   );
 }

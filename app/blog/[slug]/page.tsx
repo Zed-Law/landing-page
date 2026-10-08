@@ -5,10 +5,13 @@ import { PortableText } from "@portabletext/react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { BlogCta } from "@/components/BlogCta";
+import { AuthorByline } from "@/components/AuthorByline";
 import { portableComponents } from "@/components/portableComponents";
-import { getPost, getPostSlugs } from "@/sanity";
+import { getPost, getPostSlugs, urlFor } from "@/sanity";
 
 export const revalidate = 60;
+
+const SITE_URL = "https://zed.law";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -45,6 +48,31 @@ export default async function BlogPostPage({ params }: Params) {
   const post = await getPost(slug);
   if (!post) notFound();
 
+  // Article structured data for search engines. Posts without an author fall
+  // back to the firm, so the Article always carries one.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.metaDescription ?? post.excerpt ?? undefined,
+    datePublished: post.publishedAt ?? undefined,
+    image: post.mainImage
+      ? urlFor(post.mainImage).width(1200).fit("max").auto("format").url()
+      : undefined,
+    mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+    author: post.author?.name
+      ? {
+          "@type": "Person",
+          name: post.author.name,
+          description: post.author.bio ?? undefined,
+          image: post.author.image
+            ? urlFor(post.author.image).width(512).height(512).fit("crop").url()
+            : undefined,
+        }
+      : { "@type": "Organization", name: "Zed Law", url: SITE_URL },
+    publisher: { "@type": "Organization", name: "Zed Law", url: SITE_URL },
+  };
+
   return (
     <>
       <Navbar forceSolid offHome />
@@ -75,7 +103,18 @@ export default async function BlogPostPage({ params }: Params) {
             <PortableText value={post.body ?? []} components={portableComponents} />
           </div>
 
+          <AuthorByline author={post.author} />
+
           <BlogCta />
+
+          {/* JSON-LD is data, not executable code, so a native <script> is right
+              here (next/script is for loading JS). */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+            }}
+          />
         </article>
       </main>
       <Footer />

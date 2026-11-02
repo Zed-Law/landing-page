@@ -37,6 +37,13 @@ const team = [
     linkedin: "https://www.linkedin.com/in/thilini-samarawickrama-60245b24/",
   },
   {
+    name: "Aloizio Ferreira Compart",
+    role: "Lawyer",
+    image: `${HEADSHOT_BASE}/alo-profile-charcoal.jpeg`,
+    bio: "Trained in both law and finance, Aloizio advises founders and investors on capital raising, M&A and Australia-to-US flip-ups, and works with clients in English and Portuguese. He looks at the legal terms and the numbers together, so nothing gets missed. Read the fine print and the balance sheet.",
+    linkedin: "https://www.linkedin.com/in/aloizioferreiracompart/",
+  },
+  {
     name: "Ryan Zahrai",
     role: "Founder",
     image: `${HEADSHOT_BASE}/ryan-charcoal.jpeg`,

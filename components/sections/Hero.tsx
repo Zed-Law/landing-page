@@ -41,7 +41,16 @@ type Logo = {
    * cropped to the row height — e.g. a wordmark sitting in a mostly-empty
    * square canvas, where scaling to the row height alone leaves it tiny. */
   imgClassName?: string;
+  /** The file has an opaque white background (e.g. a JPG), so `brightness-0`
+   * would blacken the whole canvas. Knock out the white via the
+   * #logo-knockout filter instead, which yields the same black artwork.
+   * Use the original raster, not an auto-traced SVG of it: traced files stack
+   * offset anti-aliasing shapes that this filter turns into doubled edges. */
+  knockout?: boolean;
 };
+
+const logoFilter = (logo: Logo) =>
+  logo.knockout ? "[filter:url(#logo-knockout)]" : "brightness-0";
 
 // Priority clients surface first, in the top row.
 const ROW_1: Logo[] = [
@@ -53,6 +62,12 @@ const ROW_1: Logo[] = [
   { name: "Beonic", file: "beonic.png" },
   { name: "CloudPay", file: "cloudpay.webp" },
   { name: "Kindling", file: "kindling-v2.png", imgClassName: "h-32 sm:h-36" },
+  {
+    name: "Tech Ready Women",
+    file: "Tech%20Ready%20Women%20Logo.jpg",
+    knockout: true,
+  },
+  { name: "Parachute", file: "parachute.svg", sizeClassName: "h-5 sm:h-6" },
 ];
 
 const ROW_2: Logo[] = [
@@ -64,6 +79,13 @@ const ROW_2: Logo[] = [
   { name: "Co Ventures", file: "co-ventures-v3.svg" },
   { name: "Rays", file: "rays.png" },
   { name: "Nakatomi", file: "nakatomi.svg", sizeClassName: "h-5 sm:h-6" },
+  {
+    name: "Fastlane",
+    file: "Fastlane-AI-Logo.jpg",
+    imgClassName: "h-12 sm:h-14",
+    knockout: true,
+  },
+  { name: "Surf Life Saving", file: "Surf-Life-Saving-v2.svg", knockout: true },
 ];
 
 // One copy of a logo row. Rendered twice per track so the -50% translate
@@ -82,7 +104,7 @@ function LogoGroup({ logos }: { logos: Logo[] }) {
             <img
               src={`${LOGO_BASE}/${logo.file}`}
               alt={logo.name}
-              className={`w-auto object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 ${logo.imgClassName}`}
+              className={`w-auto object-contain opacity-45 ${logoFilter(logo)} transition-opacity hover:opacity-75 ${logo.imgClassName}`}
             />
           </div>
         ) : (
@@ -90,7 +112,7 @@ function LogoGroup({ logos }: { logos: Logo[] }) {
             key={logo.name}
             src={`${LOGO_BASE}/${logo.file}`}
             alt={logo.name}
-            className={`w-auto shrink-0 object-contain opacity-45 brightness-0 transition-opacity hover:opacity-75 ${logo.sizeClassName ?? "h-7 sm:h-8"}`}
+            className={`w-auto shrink-0 object-contain opacity-45 ${logoFilter(logo)} transition-opacity hover:opacity-75 ${logo.sizeClassName ?? "h-7 sm:h-8"}`}
           />
         ),
       )}
@@ -207,6 +229,19 @@ export function Hero() {
             Trusted by 500+ companies across Australia and beyond
           </p>
 
+          {/* Maps each pixel's darkness to alpha: white -> transparent,
+              anything darker -> black, so logos with a baked-in white
+              background render like the transparent ones under brightness-0.
+              The final composite keeps the file's own transparency. */}
+          <svg aria-hidden className="absolute h-0 w-0">
+            <filter id="logo-knockout" colorInterpolationFilters="sRGB">
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -1.701 -5.722 -0.578 0 7.6"
+              />
+              <feComposite in2="SourceGraphic" operator="in" />
+            </filter>
+          </svg>
           <div className="mt-8 overflow-hidden" style={edgeFade}>
             <div className="flex w-max animate-marquee items-center">
               <LogoGroup logos={ROW_1} />
